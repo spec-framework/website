@@ -1,4 +1,4 @@
 website
 =======
 
-Since github does not supprt Jekyll website there are now two repo.
+Since github does not support Jekyll website there are now two repo.
