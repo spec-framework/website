@@ -1,0 +1,19 @@
+language: c
+install:
+- sudo gem install jekyll
+script: jekyll build
+after_success:
+- cd _site
+- git checkout master
+- git remote rm origin
+- git remote add origin https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git
+- git config user.email "${GIT_EMAIL}"
+- git config user.name "${GIT_NAME}"
+- git add --all *
+- git commit -am "Generation of the Jekyll website"
+- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git "${TRAVIS_BRANCH}"
+env:
+  global:
+  - secure: hrlMJ2D+F5pth+ZRq6frLZdSyW2ZFpPJLlJzj7Ox7zQqloJLGdPvKCDG6EvVIrHxXmnV4MBWjaO3f632lPtjnAg0vzMnU8Q38Md83QaMqvxss+OrLqq2GkpRhY5aodY64wxwxbdVoIf725sXQqujXspqKxUh5nerWRXdTaHAghY=
+  - secure: NsKYNrB+qfz8pyIpsPL4w9pFsJog5+5wTMKe1HT47MoHTDrV1cIgVWJQJq2wkui0bTqScRNOjqXZPLP7J7CHBan60VQn+MYkZ8FHBuVzaxDD30nMFYt1Jz7SApvUR1k5nOftIhq00XTU+T211eCRGPyHdEICj8HxtZUHD3s8Mxo=
+  - secure: q4dOauqVnxTHDRLeugSBBuYdizQsIjYeu24frl/qDiZurEg7peg/LP+rUbkuwozRLRzta7t7KVcqcEkcLtIsaZMp2xv3JDFPnJ68fLaKmOmSmOHQ5T9oqSiWGo20uYf5hluCF541hIq8izGG8sDYsjCuj8HmiUb0X367jmr+iCs=
