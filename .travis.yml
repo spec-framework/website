@@ -9,10 +9,10 @@ after_success:
 - cp _site/* ../jekyll/
 - cd ../jekyll
 - if grep -q "github.com" ~/.ssh/config
-then
-else
- echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-fi
+- then
+- else
+- echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+- fi
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
 - git add --all *
