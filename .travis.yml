@@ -9,14 +9,14 @@ after_success:
 - if [[ ! -f ~/.ssh/config ]]; then touch ~/.ssh/config; fi
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - cat ~/.ssh/config
-- git clone git@github.com:SpecForPharo/SpecForPharo.github.io.git ../jekyll
+- git clone https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git ../jekyll
 - cp _site/* ../jekyll/
 - cd ../jekyll
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
 - git add --all *
 - git commit -am "Generation of the Jekyll website"
-- git push
+- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git master
 env:
   global:
   - secure: Ple/yWUxwngx2qAetIUDfcUAaHZ0kURU1tmb1X88YLbgLwTKiPFbbd0ScHOSvgqoG61T9cBAOuu+HAN/RsI0r1X76hysoYGaQW8uSDPt4Mf9XYrJJcQov6hXPSQZ2LoTxSkMprEXTI2CbfPQYgYgY/5ybfw6Mbr7uaT1rML9YDI=
