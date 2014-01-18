@@ -1,5 +1,6 @@
 language: c
 install:
+- sudo apt-get install gem
 - sudo gem install jekyll
 script: jekyll build
 after_success:
