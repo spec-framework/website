@@ -5,6 +5,8 @@ install:
 - gem install jekyll
 script: jekyll build
 after_success:
+- if [[ ! -d ~/.ssh ]]; then mkdir ~/.ssh; fi
+- if [[ ! -f ~/.ssh/config ]]; then touch ~/.ssh/config; fi
 - if grep -q "github.com" ~/.ssh/config
 - then
 - else
