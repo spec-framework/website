@@ -5,16 +5,14 @@ install:
 - gem install jekyll
 script: jekyll build
 after_success:
-- cd _site
-- git checkout master
-- git remote rm origin
-- git remote add origin https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git
+- git clone git@github.com:SpecForPharo/SpecForPharo.github.io.git ../jekyll
+- cp _site/* ../jekyll/
+- cd ../jekyll
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
-- git add -f --all *
+- git add --all *
 - git commit -am "Generation of the Jekyll website"
-- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git
-  "${TRAVIS_BRANCH}"
+- git push 
 env:
   global:
   - secure: emUNS1gp5gIIZPzAapjpB3VbugyiQQ9kWBJyf2evAJ8pA1/I5EFAGSxEqAYEUrrvGqcFVdGEiBvNpp8XLJUJ5lRi46zx1o6/jxU4VJqo4j4RBW+Qm3t0cPeiu9IwvMLhPXmUyHbmZnjOQIIIHNw+rzGp78l3ejm+zYDgznoDmHI=
