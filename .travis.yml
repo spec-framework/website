@@ -5,14 +5,14 @@ install:
 - gem install jekyll
 script: jekyll build
 after_success:
-- git clone git@github.com:SpecForPharo/SpecForPharo.github.io.git ../jekyll
-- cp _site/* ../jekyll/
-- cd ../jekyll
 - if grep -q "github.com" ~/.ssh/config
 - then
 - else
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - fi
+- git clone git@github.com:SpecForPharo/SpecForPharo.github.io.git ../jekyll
+- cp _site/* ../jekyll/
+- cd ../jekyll
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
 - git add --all *
