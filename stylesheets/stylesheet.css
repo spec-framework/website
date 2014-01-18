@@ -343,12 +343,13 @@ dl dd {
 }
 
 footer {
-  background: transparent url('../images/hr.png') 0 0 no-repeat;
-  margin-top: 40px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  font-size: 13px;
-  color: #aaa;
+	padding-left: 100px;
+	width: 940px;
+	background: transparent;
+	margin-top: 40px;
+	padding-bottom: 30px;
+	font-size: 13px;
+	color: #aaa;
 }
 
 footer a {
@@ -484,6 +485,10 @@ footer a:hover {
 	
 /* My things*/
 	
+header {
+	padding-top: 15px
+}
+	
 .title {
   color: #FFFFFF;
 }
@@ -532,5 +537,94 @@ body > header > div > div > div > h1 > a:hover {
 }
 
 footer {
-	padding-left: 30px;
+	padding-left: 100px;
+	width: 940px;
+}
+
+#commentWrapper { 
+	left: 690px;
+	position: absolute;
+	margin-left: 50px;
+	width: 280px;
+}
+
+#comment {
+	position: absolute;
+	top: 0;
+	/* just used to show how to include the margin in the effect */
+	margin-top: 20px;
+	padding-top: 19px;
+}
+
+#comment.fixed {
+	position: fixed;
+	top: 0;
+}
+
+#thanks {
+	position: fixed;
+	bottom: 0;
+}
+
+#sidebar > h4::before {
+	content: '';	 
+}
+
+#sidebar > h4 {
+	background: url(../images/flake22.png) no-repeat left transparent;
+	padding-left: 100px;
+	font-size: 28px;
+}
+
+#main-content > div > article > div {
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+#main-content > div > article > div.highlight > pre > code{
+	color: #d3d3cd;
+	background-color: transparent;
+}
+
+#main-content > div > article > div.highlight > pre {
+	white-space: pre;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+	font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+	font-size: 14px;
+	padding: 0 .5em;
+	line-height: 1.8em;
+	background: #444;
+	padding-bottom: 1.5em;
+}
+
+#sidebar > ul > li {
+	list-style-type: none;
+}
+
+body > footer > div > div > p {
+	margin-bottom: -30px;
+	text-align: center;
+}
+
+#sidebar > ul > li {
+	list-style-type: none;
+	font-size: 16px;
+}
+
+#sidebar > ul > li.current:before {    
+	font-family: 'FontAwesome';
+	content: '\f0a4';
+	margin-left: -24px;
+	color: #317bcf;
+	font-size: 18px;
+	margin-right: 6px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+aside#sidebar {
+	width: initial;
 }

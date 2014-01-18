@@ -1,0 +1,10 @@
+<div class="section-nav">
+	<div class="btn-group">
+		<a class="btn btn-default {% if page.prev_section == null %}disabled{% endif %}" href="{{ site.url }}/docs/{{ page.prev_section }}/">Back
+		</a>
+		<a class="btn btn-default {% if page.next_section == null %}disabled{% endif %}" href="{{ site.url }}/docs/{{ page.next_section }}/">Next
+		</a>
+	</div>
+	<div class="clear">
+	</div>
+</div>

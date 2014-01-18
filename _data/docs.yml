@@ -1,0 +1,22 @@
+- title: Getting Started
+  docs:
+  - home
+  - quickstart
+  - installation
+  - usage
+  - structure
+
+- title: The Three Pillars
+  docs:
+  - frontmatter
+  - posts
+  - drafts
+  - pages
+  - variables
+  - datafiles
+  - migrations
+
+- title: Meta
+  docs:
+  - contributing
+  - history

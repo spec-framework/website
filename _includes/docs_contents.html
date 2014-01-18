@@ -1,0 +1,31 @@
+<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			{% for section in site.data.docs %}
+			<h4>{{ section.title }}</h4>
+			{% include docs_ul.html items=section.docs %}
+			{% endfor %}
+		</aside>
+	</div>
+</div>
+
+<script>
+$(document).ready(function () {  
+	var top = $('#comment').offset().top - parseFloat($('#comment').css('marginTop').replace(/auto/, 0));
+	$(window).scroll(function (event) {
+		// what the y position of the scroll is
+		var y = $(this).scrollTop();
+
+		// whether that's below the form
+		if (y >= top) {
+			// if so, ad the fixed class
+			$('#comment').addClass('fixed');
+			$('#thanks').addClass('fixed');
+		} else {
+			// otherwise remove it
+			$('#comment').removeClass('fixed');
+			$('#thanks').removeClass('fixed');
+		}
+	});
+});
+</script>
