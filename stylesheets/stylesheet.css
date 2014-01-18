@@ -65,7 +65,7 @@ a:hover {
 
 header {
   padding-top: 40px;
-  padding-bottom: 40px;
+  margin-bottom: 0px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
   background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
   border-bottom: solid 1px #275da1;
@@ -78,10 +78,6 @@ header h1 {
   line-height: 1;
   margin-bottom: 0.2em;
   width: 540px;
-}
-
-.title {
-  background: transparent url(../images/flake72.png) 180px 0 no-repeat;
 }
 
 header h2 {
@@ -148,8 +144,10 @@ a.button small {
 }
 header a.button {
   position: absolute;
+  height: 80px;
+  width: 202px;
   right: 0;
-  top: 0;
+  top: -2px;
   background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
 aside a.button {
@@ -481,3 +479,58 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {}
+	
+	
+	
+/* My things*/
+	
+.title {
+  color: #FFFFFF;
+}
+
+.flake{
+	vertical-align: middle;
+	margin-left: -20px;
+}	
+
+.nav {
+	padding-left: 100px;
+}
+
+.nav-pills > li > a {
+	color: #FFF;
+	background: #327bcf;
+	border: 1px solid #275da1;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	background-color: #fff;
+	color: #327bcf;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+	background-color: #fff;
+	color: #327bcf;
+	border: 1px solid #275da1;
+}
+
+.nav-pills > li.active > a, .nav-tabs > li.active > a:hover, .nav-pills > li.active > a:focus {
+	color: #275da1;
+	font-weight: bolder;
+	background-color: #e1c004;
+	border: 1px solid #e1c004;
+}
+
+body > header > div > div > div > ul {
+	position: absolute;
+	top: 15px;
+	right: 280px;
+}
+
+body > header > div > div > div > h1 > a:hover {
+	text-decoration: none;
+}
+
+footer {
+	padding-left: 30px;
+}

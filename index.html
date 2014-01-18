@@ -1,109 +1,84 @@
 ---
 layout: default
+overview: true
 title: coding with spice
 ---
+<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset='utf-8'>
-		<meta http-equiv="X-UA-Compatible" content="chrome=1">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-		<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-		<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-
-		<!--[if lt IE 9]>
-			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-			<![endif]-->
-
-	<title>Spec</title>
-	<head profile="http://www.w3.org/2005/10/profile">
-		<link rel="icon" 
-		type="image/png" 
-		href="https://raw.github.com/SpecForPharo/SpecForPharo.github.io/master/favicon.png">
-	</head>
-
-	<body>
-		<header>
-			<div class="inner">
-				<h1 class="title">Spec</h1>
-				<h2>A new framework for describing user interfaces</h2>
-				<a href="https://github.com/SpecForPharo" class="button"><small>Follow Spec on </small>GitHub</a>
-			</div>
-		</header>
-
-		<div id="content-wrapper">
-			<div class="inner clearfix">
-				<section id="main-content">
- 
-					{% for post in site.front_pages %}
-						<h2><a name={{ post.title | cgi_escape }} class="anchor"></a>{{ post.title }}</h2>
-						{{post.content}}
-					{% endfor %}
+			{% for post in site.front_pages %}
+				<h2><a name={{ post.title | cgi_escape }} class="anchor"></a>{{ post.title }}</h2>
+				{{post.content}}
+			{% endfor %}
 
 
-				</section>
+		</section>
 
-				<style>
-				/* required to avoid jumping */
-				#commentWrapper { 
-					left: 690px;
-					position: absolute;
-					margin-left: 35px;
-					width: 280px;
-				}
+		<style>
+		/* required to avoid jumping */
+		#commentWrapper { 
+			left: 690px;
+			position: absolute;
+			margin-left: 35px;
+			width: 280px;
+		}
 
-				#comment {
-					position: absolute;
-					top: 0;
-					/* just used to show how to include the margin in the effect */
-					margin-top: 20px;
-					padding-top: 19px;
-				}
+		#comment {
+			position: absolute;
+			top: 0;
+			/* just used to show how to include the margin in the effect */
+			margin-top: 20px;
+			padding-top: 19px;
+		}
 
-				#comment.fixed {
-					position: fixed;
-					top: 0;
-				}
-				</style>
+		#comment.fixed {
+			position: fixed;
+			top: 0;
+		}
+		
+		#thanks {
+			position: fixed;
+			bottom: 0;
+		}
+		
+/*				#thanks.fixed {
+			position: fixed;
+			bottom: 0;
+		}*/
+		</style>
 
-				<div id="commentWrapper">
-					<div id="comment">
-						<aside id="sidebar">
-							<u>
-								{% for post in site.front_pages %}
-									<li><a href=#{{ post.title | cgi_escape }}>{{ post.title }}</a></li>
-								{% endfor %}
-							</u>
-							<div class="Thanks">
-							Thanks to all the contributors to Spec: {% contributors SpecForPharo/spec %}.
-							Thanks also to all the contributors to the <i>Spec</i> documentation: {% contributors SpecForPharo/documentation %}.
-							</div>
-						</aside>
-					</div>
-				</div>
-				<script>
-				$(document).ready(function () {  
-					var top = $('#comment').offset().top - parseFloat($('#comment').css('marginTop').replace(/auto/, 0));
-					$(window).scroll(function (event) {
-						// what the y position of the scroll is
-						var y = $(this).scrollTop();
-
-						// whether that's below the form
-						if (y >= top) {
-							// if so, ad the fixed class
-							$('#comment').addClass('fixed');
-						} else {
-							// otherwise remove it
-							$('#comment').removeClass('fixed');
-						}
-					});
-				});
-				</script>
+		<div id="commentWrapper">
+			<div id="comment">
+				<aside id="sidebar">
+					<h4></h4>
+					<u>
+						{% for post in site.front_pages %}
+							<li><a href=#{{ post.title | cgi_escape }}>{{ post.title }}</a></li>
+						{% endfor %}
+					</u>
+				</aside>
 			</div>
 		</div>
-	</body>
-</html>
+		<script>
+		$(document).ready(function () {  
+			var top = $('#comment').offset().top - parseFloat($('#comment').css('marginTop').replace(/auto/, 0));
+			$(window).scroll(function (event) {
+				// what the y position of the scroll is
+				var y = $(this).scrollTop();
+
+				// whether that's below the form
+				if (y >= top) {
+					// if so, ad the fixed class
+					$('#comment').addClass('fixed');
+					$('#thanks').addClass('fixed');
+				} else {
+					// otherwise remove it
+					$('#comment').removeClass('fixed');
+					$('#thanks').removeClass('fixed');
+				}
+			});
+		});
+		</script>
+	</div>
+</div>

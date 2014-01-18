@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Introduction"
+title:  "Overview"
 front-page: 1
 date:   2014-01-17 20:41:09
-categories: jekyll update
+categories: front
 ---
 
 Writing user interfaces is notoriously a tedious task\.

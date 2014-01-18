@@ -1,0 +1,17 @@
+<!-- <ul class="nav nav-tabs">
+  <li class="{% if page.overview %}active{% endif %}">
+    <a href="{{ site.url }}/" data-toggle="pill">Overview</a>
+  </li>
+  <li class="{% if page.url contains '/docs/' %}active{% endif %}">
+    <a href="{{ site.url }}/docs/home/" data-toggle="pill">Documentation</a>
+  </li>
+  <li class="{% if page.author %}active{% endif %}">
+    <a href="{{ site.url }}/news/" data-toggle="pill">News</a>
+  </li>
+</ul> -->
+
+<ul class="nav nav-pills">
+  <li class="{% if page.overview %}active{% endif %}"><a href="{{ site.url }}" data-toggle="tab">Overview</a></li>
+  <li><a href="#profile" data-toggle="tab">Documentation</a></li>
+  <li><a href="#messages" data-toggle="tab">News</a></li>
+</ul>
