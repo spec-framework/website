@@ -16,12 +16,9 @@ after_success:
 - git config user.name "${GIT_NAME}"
 - git add --all *
 - git commit -am "Generation of the Jekyll website"
-- git push 
+- git push
 env:
   global:
-  - secure: emUNS1gp5gIIZPzAapjpB3VbugyiQQ9kWBJyf2evAJ8pA1/I5EFAGSxEqAYEUrrvGqcFVdGEiBvNpp8XLJUJ5lRi46zx1o6/jxU4VJqo4j4RBW+Qm3t0cPeiu9IwvMLhPXmUyHbmZnjOQIIIHNw+rzGp78l3ejm+zYDgznoDmHI=
-  - secure: Od1VFFgH9kq0RmuQ80leHNuc5EhN0Rc41X73Szxwawi2vor8x9bPTp86e/yWzKp81nIB53c/LUCUEbm0C0Bi/3xRoO6cRcOTfEt1TG59gzE/Ke3Da2/qmjPAJuyWmFZYEGeGwP+Oe3xw+qVqoFeEdstSz8ojxGDg/6eHxSPy6wA=
-  - secure: hhe5UW76IFGaLJ9iqAhKkRDmlVBwP2lfBtH2q+sHJMoEUlUZQ9KZBwvUeq2TlVFQV0zDX7u2TCxdwLSgQlTDoew7N8Jn5PLwkoCxLOQWwYMnm89nJw8+oTYUOasNTtqV1YxMG78WRh+JW7y6RtpzpYGhYEgMsF+XTeazh5XaLW8=
-  - secure: rE8NZuIjbVB7R4wMoP8EMGjUjIb2dp7lZSgGvk2uRGo3lGkX/Afz2iHic1dk/iNSWVNLfR9mT47dyRn1pm8+tbD5baUyfGWW+0C5DtLADpMoAu21MlVpp5U++vzKMXz5AHrBrUjvJ+uozCffl6GpVu8kjn8w42LdYfxVN+C6bA0=
-  - secure: Y/EMlaaUXyvbkL0WusgfF76QySJXacq/bS9ss8c+Hqi/lxKeRc+0X0++WjuhDYJzEuOXTFcFQEfbK1Z5d58DFhl1+d7ggbSD89J4nX9IgfxHwV4VIRTLhBsM5UuC3pYKzW79uLVZjyoREYM5ILq4C8LsM3VD0uT8HE3b2GNZQNY=
-  - secure: LO1jBAPmIe7HauiGny70XpswIHqzAPAfbtVjD8a/bg1ZfokuTwpcy+MtRFofeJZPUvrN8dZ00X+Gt5S1r1rWmEIiVbZcQMLOujEmkegCdmi0VjoR0aA8cWcCJQf/dwzXqYotojIpOgZQkB8sgqbROKrNo44OIVLXWYyGUm48jV0=
+  - secure: Ple/yWUxwngx2qAetIUDfcUAaHZ0kURU1tmb1X88YLbgLwTKiPFbbd0ScHOSvgqoG61T9cBAOuu+HAN/RsI0r1X76hysoYGaQW8uSDPt4Mf9XYrJJcQov6hXPSQZ2LoTxSkMprEXTI2CbfPQYgYgY/5ybfw6Mbr7uaT1rML9YDI=
+  - secure: ifRVpDsSCHBTDJxlz7cQQHikumTPa6f5rRyJFBdFiqbQU0frv8GBsjNwptX+s1nTFAsihGF9TKhJvXfTIsf/Zpx+qS/ZLzdVNZzVfVGYb0foX+te0AFmOulNHo3VpanhYXw9r9WtDAUbJ7WKCE+xp8MAJYtiRNWtQTCQIajSxlY=
+  - secure: GEmThaaJB5WSfnlQwsca+sLpZHIXRW9AWw+BmlSD6evi8GEa3TG6OfHvGKg4QqsSrkcFL4WJj1qI11HMC8Aj22VDsCorzKKP5sHraDZSsrKyWR2AKyLOwJC2D2ifqWtJ6J1esJ9D/9fmf0DdhuC9u6/+kny5iKHbztsFKw/lkhE=
