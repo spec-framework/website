@@ -1,0 +1,17 @@
+module Jekyll
+  
+  class TestPlugin < Liquid::Tag
+    
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text
+    end
+    def render(context)
+      txt = `curl -s #{@text}`
+      txt = txt.lines.to_a[3..-1].join
+      "#{txt}"
+    end
+  end
+end
+
+Liquid::Template.register_tag('testplugin', Jekyll::TestPlugin)
