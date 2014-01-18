@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.1.0
+- 2.1.0
 install:
 - gem install jekyll
 script: jekyll build
@@ -11,11 +11,15 @@ after_success:
 - git remote add origin https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
-- git add --all *
+- git add -f --all *
 - git commit -am "Generation of the Jekyll website"
-- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git "${TRAVIS_BRANCH}"
+- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git
+  "${TRAVIS_BRANCH}"
 env:
   global:
-  - secure: hrlMJ2D+F5pth+ZRq6frLZdSyW2ZFpPJLlJzj7Ox7zQqloJLGdPvKCDG6EvVIrHxXmnV4MBWjaO3f632lPtjnAg0vzMnU8Q38Md83QaMqvxss+OrLqq2GkpRhY5aodY64wxwxbdVoIf725sXQqujXspqKxUh5nerWRXdTaHAghY=
-  - secure: NsKYNrB+qfz8pyIpsPL4w9pFsJog5+5wTMKe1HT47MoHTDrV1cIgVWJQJq2wkui0bTqScRNOjqXZPLP7J7CHBan60VQn+MYkZ8FHBuVzaxDD30nMFYt1Jz7SApvUR1k5nOftIhq00XTU+T211eCRGPyHdEICj8HxtZUHD3s8Mxo=
-  - secure: q4dOauqVnxTHDRLeugSBBuYdizQsIjYeu24frl/qDiZurEg7peg/LP+rUbkuwozRLRzta7t7KVcqcEkcLtIsaZMp2xv3JDFPnJ68fLaKmOmSmOHQ5T9oqSiWGo20uYf5hluCF541hIq8izGG8sDYsjCuj8HmiUb0X367jmr+iCs=
+  - secure: emUNS1gp5gIIZPzAapjpB3VbugyiQQ9kWBJyf2evAJ8pA1/I5EFAGSxEqAYEUrrvGqcFVdGEiBvNpp8XLJUJ5lRi46zx1o6/jxU4VJqo4j4RBW+Qm3t0cPeiu9IwvMLhPXmUyHbmZnjOQIIIHNw+rzGp78l3ejm+zYDgznoDmHI=
+  - secure: Od1VFFgH9kq0RmuQ80leHNuc5EhN0Rc41X73Szxwawi2vor8x9bPTp86e/yWzKp81nIB53c/LUCUEbm0C0Bi/3xRoO6cRcOTfEt1TG59gzE/Ke3Da2/qmjPAJuyWmFZYEGeGwP+Oe3xw+qVqoFeEdstSz8ojxGDg/6eHxSPy6wA=
+  - secure: hhe5UW76IFGaLJ9iqAhKkRDmlVBwP2lfBtH2q+sHJMoEUlUZQ9KZBwvUeq2TlVFQV0zDX7u2TCxdwLSgQlTDoew7N8Jn5PLwkoCxLOQWwYMnm89nJw8+oTYUOasNTtqV1YxMG78WRh+JW7y6RtpzpYGhYEgMsF+XTeazh5XaLW8=
+  - secure: rE8NZuIjbVB7R4wMoP8EMGjUjIb2dp7lZSgGvk2uRGo3lGkX/Afz2iHic1dk/iNSWVNLfR9mT47dyRn1pm8+tbD5baUyfGWW+0C5DtLADpMoAu21MlVpp5U++vzKMXz5AHrBrUjvJ+uozCffl6GpVu8kjn8w42LdYfxVN+C6bA0=
+  - secure: Y/EMlaaUXyvbkL0WusgfF76QySJXacq/bS9ss8c+Hqi/lxKeRc+0X0++WjuhDYJzEuOXTFcFQEfbK1Z5d58DFhl1+d7ggbSD89J4nX9IgfxHwV4VIRTLhBsM5UuC3pYKzW79uLVZjyoREYM5ILq4C8LsM3VD0uT8HE3b2GNZQNY=
+  - secure: LO1jBAPmIe7HauiGny70XpswIHqzAPAfbtVjD8a/bg1ZfokuTwpcy+MtRFofeJZPUvrN8dZ00X+Gt5S1r1rWmEIiVbZcQMLOujEmkegCdmi0VjoR0aA8cWcCJQf/dwzXqYotojIpOgZQkB8sgqbROKrNo44OIVLXWYyGUm48jV0=
