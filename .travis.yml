@@ -16,6 +16,7 @@ after_success:
 - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - cat ~/.ssh/config
 - git clone https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git ../jekyll
+- rm -rf ../jekyll/*
 - cp -r _site/* ../jekyll/
 - cd ../jekyll
 - git config user.email "${GIT_EMAIL}"
