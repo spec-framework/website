@@ -692,3 +692,84 @@ aside#sidebar {
     font-size: 0;
     border: 0;
 }
+
+body > div > footer {
+	width: initial;
+	padding-left: initial;
+}
+
+body > div.footer > footer > div > div > p {
+	text-align: center;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+.home_title{
+	text-align: center;
+	font-size: 70px;
+	line-height: 1em;
+    background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
+    font-weight: 400;
+    color: #317bcf;
+}
+
+.home_boxes{
+	display: inline-block;
+	margin-top: 30px;
+}
+
+.home_box{
+	width: 310px;
+	display: inline-table;;
+	text-align: center;
+	height: 260px;
+	position: relative;
+	border-width: 1px;
+	border-color: #275da1;
+	border-style: solid;
+    background: #317bcf;
+}
+
+.home_wrapper {
+	text-align: center;
+}
+
+.box_title {
+	font-size: 32px;
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight: bold;
+	color: #fff;
+}
+
+.box_paragraph {
+	color: #fff;
+	text-align: left;
+	margin-top: 10px;
+	font-size: 16px;
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 1.5em;
+	word-spacing: .5em;
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight: bold;
+}
+
+.home_link {
+	bottom: 10px;
+	position: absolute;
+	color: #e1c004;
+	text-align: left;
+	margin-top: 10px;
+	font-size: 18px;
+	margin-left: 10px;
+	margin-right: 10px;
+	line-height: 1.5em;
+	word-spacing: .5em;
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight: bold;
+	left: 0;
+}
+.home_link:hover {
+	color: #e1c004;
+}

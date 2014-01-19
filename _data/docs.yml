@@ -6,15 +6,17 @@
   - usage
   - structure
 
+- title: Your UI
+  docs:
+  - composing
+  - customizing
+  
 - title: The Three Pillars
   docs:
-  - frontmatter
-  - posts
-  - drafts
-  - pages
-  - variables
-  - datafiles
-  - migrations
+
+- title: Inside Spec
+  docs:
+  - adapters
 
 - title: Meta
   docs:

@@ -1,17 +1,29 @@
 ---
-layout: default
+layout: home
 overview: true
 title: coding with spice
 ---
 <div id="content-wrapper">
-	<div class="inner clearfix">
-		<section id="main-content">
-
-			{% for post in site.front_pages %}
-				<h2><a name={{ post.title | cgi_escape }} class="anchor"></a>{{ post.title }}</h2>
-				{{post.content}}
-			{% endfor %}
-
-		</section>
+	<div class="inner clearfix home_wrapper">
+		<div class="home">
+			<p class="home_title">Quickly write and reuse your own user&nbsp;interfaces.</p>
+		</div>
+		<div class="home_boxes">
+			<div class="home_box">	
+				<h1 class="box_title">Composable</h1>
+				<p class="box_paragraph">Every single user&nbsp;interface made with Spec can be reused as easily as the basic widgets to compose and reuse as much as possible.</p>
+				<a href="{{ site.url }}/docs/composing/" class="home_link">How to reuse a model <i class="fa fa-hand-o-right"></i></a>
+			</div>
+			<div class="home_box">
+				<h1 class="box_title">Customizable</h1>
+				<p class="box_paragraph">The behaviour of the sub widgets as well as the behaviour of the sub widgets sub widgets can be tweaked to fit all the possible scenarios.</p>
+				<a href="{{ site.url }}/docs/customizing/" class="home_link">Customizing sub widgets <i class="fa fa-hand-o-right"></i></a>
+			</div>
+			<div class="home_box">
+				<h1 class="box_title">Portable</h1>
+				<p class="box_paragraph">Spec supports multiple rendering backends to define user&nbsp;interfaces once and for all, regardless of the final widget framework.</p>
+				<a href="{{ site.url }}/docs/adapters/" class="home_link">How the adapters work <i class="fa fa-hand-o-right"></i></a>
+			</div>
+		</div>		
 	</div>
 </div>
