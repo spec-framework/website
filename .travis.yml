@@ -9,6 +9,8 @@ install:
 - gem install jekyll
 - sudo chmod +x _pillar/downloadVM.sh
 - ./_pillar/downloadVM.sh
+- ls
+- ls _pillar
 script: jekyll build
 after_success:
 - if [[ ! -d ~/.ssh ]]; then mkdir ~/.ssh; fi
