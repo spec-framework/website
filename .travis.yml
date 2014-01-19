@@ -19,8 +19,10 @@ after_success:
 - rm -rf ../jekyll/*
 - cp -r _site/* ../jekyll/
 - cd ../jekyll
+- ls
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
+- git status
 - git add --all *
 - git commit -am "Generation of the Jekyll website"
 - git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/SpecForPharo/SpecForPharo.github.io.git master
