@@ -1,0 +1,17 @@
+---
+layout: news_item
+title:  "Test pillar converter"
+author: BenjaminVanRyseghem
+categories: tip top
+---
+
+!1
+!!2
+!!!3 Latest image
+The lastest version of the *Spec* source code can be found *here>https://github.com/SpecForPharo/spec*.
+
+""Spec""
+
+[[[label=label|caption=caption|language=Smalltalk 
+Test block
+]]]
