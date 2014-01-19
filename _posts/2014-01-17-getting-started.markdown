@@ -1,9 +1,9 @@
 ---
-layout: post
+layout: news_item
 title:  "Getting Started"
-front-page: 2
 date:   2014-01-17 20:42:09
-categories: front
+author: BenjaminVanRyseghem
+categories: tip top
 ---
 
 ### Latest image

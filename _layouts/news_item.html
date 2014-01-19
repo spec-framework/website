@@ -1,0 +1,33 @@
+---
+layout: news
+---
+<article>
+	<h2>{{ page.title }}
+		<a href="{{ page.url }}" class="permalink" title="Permalink">∞</a>
+	</h2>
+	<div class="post-date">
+		{{ page.date | date_to_string }}
+	</div>
+	<span class="post-category">
+		{% for category in page.categories %}
+		<span class="label">{{ category }}</span>
+		{% endfor %}
+	</span>
+	<div class="post-meta">
+		<div id="post_author">
+			<div class="post-avatar">
+				<a href="https://github.com/{{ page.author }}" class="post-author">
+					<img src="https://github.com/{{ page.author }}.png" class="avatar" alt="{{ page.author }}"/>
+				</a>
+			</div>
+			<div class="post-authorname">
+				<a href="https://github.com/{{ page.author }}" class="post-author">
+					{{ page.author }}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="post-content">
+		{{ page.content | markdownify }}
+	</div>
+</article>

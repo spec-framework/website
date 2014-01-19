@@ -594,7 +594,7 @@ footer {
 	padding: 0;
 	font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
 	font-size: 14px;
-	padding: 0 .5em;
+	padding: 0 1.5em;
 	line-height: 1.8em;
 	background: #444;
 	padding-bottom: 1.5em;
@@ -627,4 +627,68 @@ body > footer > div > div > p {
 
 aside#sidebar {
 	width: initial;
+}
+
+#main-content > div > article> div.post-content {
+	text-align: left;
+}
+
+#main-content > div > article> span > span {
+	color: #FFFFFF;
+	background: #317bcf;
+	border-color: #000000;
+	border-width: 1px;
+	border-radius: 1.25em;
+}
+
+#post_author {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+#main-content > div > article {
+	position: relative;
+}
+
+#main-content > div > article > div.post-date {
+	display: inline;
+}
+
+#main-content > div > article > span {
+	display: inline;
+}
+
+#main-content > div > article > span > span{
+	vertical-align: text-top;
+}
+
+#main-content > div > article > div.post-meta{
+	margin-bottom: -10px;
+}
+
+#main-content > div > article > div.post-content > div > pre > code{
+	color: #d3d3cd;
+	background-color: transparent;
+}
+
+#main-content > div > article > div.post-content > div > pre {
+	white-space: pre;
+	text-align: left;
+	padding: 0;
+	font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
+	font-size: 14px;
+	padding: 0 1.5em;
+	line-height: 1.8em;
+	background: #444;
+	padding-bottom: 1.5em;
+	padding-top: 1.5em;
+}
+
+#main-content > div > article > hr {
+	height: 1px;
+    color: #aaaaaa;
+    background: #aaaaaa;
+    font-size: 0;
+    border: 0;
 }

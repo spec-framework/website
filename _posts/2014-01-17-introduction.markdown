@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Overview"
-front-page: 1
+author: BenjaminVanRyseghem
 date:   2014-01-17 20:41:09
 categories: front
 ---

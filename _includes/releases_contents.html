@@ -1,0 +1,44 @@
+<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			<ul>
+				<li class="{% if page.title == 'News' %}current{% endif %}">
+					<a href="/news/">All News</a>
+				</li>
+				<li class="{% if page.title == 'Releases' %}current{% endif %}">
+					<a href="/news/releases/">Spec Releases</a>
+				</li>
+			</ul>
+			
+				<h4>Releases</h4>
+			<ul class="news_title">
+				{% for post in site.categories.release %}
+				<li class="{{ post.title | toJQuery }}">
+					<a href="#{{ post.title | uri_escape }}">{{ post.title }}</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</aside>
+	</div>
+</div>
+
+<script>
+$(document).ready(function () {  
+	var top = $('#comment').offset().top - parseFloat($('#comment').css('marginTop').replace(/auto/, 0));
+	$(window).scroll(function (event) {
+		// what the y position of the scroll is
+		var y = $(this).scrollTop();
+
+		// whether that's below the form
+		if (y >= top) {
+			// if so, ad the fixed class
+			$('#comment').addClass('fixed');
+			$('#thanks').addClass('fixed');
+		} else {
+			// otherwise remove it
+			$('#comment').removeClass('fixed');
+			$('#thanks').removeClass('fixed');
+		}
+	});
+});
+</script>

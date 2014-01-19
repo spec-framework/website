@@ -1,0 +1,39 @@
+<article>
+	
+	<a name="{{ post.title | uri_escape }}" class="hash"></a>
+	<h2>
+		<a href="{{ post.url }}">
+			{{ post.title }}
+			
+		</a>
+	</h2>
+	
+	<div class="post-date">
+		{{ post.date | date_to_string }}
+	</div>
+	
+	<span class="post-category">
+		{% for category in post.categories %}
+		<span class="label">{{ category }}</span>
+		{% endfor %}
+	</span>
+	
+	<div class="post-meta">
+		<div id="post_author">
+			<div class="post-avatar">
+				<a href="https://github.com/{{ post.author }}" class="post-author">
+					<img src="https://github.com/{{ post.author }}.png" class="avatar" alt="{{ post.author }}"/>
+				</a>
+			</div>
+			<div class="post-authorname">
+				<a href="https://github.com/{{ post.author }}" class="post-author">
+					{{ post.author }}
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="post-content">
+		{{ post.content }}
+	</div>
+	<hr>
+</article>

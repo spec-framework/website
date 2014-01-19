@@ -2,6 +2,7 @@
 layout: post
 title:  "Welcome to Jekyll!"
 date:   2014-01-17 17:56:09
+author: BenjaminVanRyseghem
 categories: jekyll update
 ---
 
