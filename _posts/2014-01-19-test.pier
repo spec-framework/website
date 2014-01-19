@@ -1,17 +1,13 @@
 ---
 layout: news_item
-title:  "Test pillar converter"
+title:  "Pillar converter"
 author: BenjaminVanRyseghem
-categories: tip top
+categories: website pillar
 ---
 
-!1
-!!2
-!!!3 Latest image
-The lastest version of the *Spec* source code can be found *here>https://github.com/SpecForPharo/spec*.
+I am glad to announce the implementation of a *Pillar>https://github.com/DamienCassou/pillar-documentation*.
 
-""Spec""
+This way, posts and documentation can be written using the Pillar syntax.
 
-[[[label=label|caption=caption|language=Smalltalk 
-Test block
-]]]
+
+Thank you Damien Cassou for your great work <i class="fa fa-smile-o"></i>!
