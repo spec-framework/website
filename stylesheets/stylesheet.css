@@ -740,7 +740,7 @@ body > div.footer > footer > div > div > p {
 	border-width: 1px;
 	border-color: #275da1;
 	border-style: solid;
-    background: #317bcf;
+    background: transparent url(../images/header-bg.jpg) 0 0
 }
 
 .home_wrapper {
@@ -784,4 +784,8 @@ body > div.footer > footer > div > div > p {
 }
 .home_link:hover {
 	color: #e1c004;
+}
+
+.footer footer {
+	padding-bottom: 0;
 }
