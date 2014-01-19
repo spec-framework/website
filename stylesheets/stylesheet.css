@@ -600,21 +600,33 @@ footer {
 	padding-bottom: 1.5em;
 }
 
-#sidebar > ul > li {
-	list-style-type: none;
-}
-
 body > footer > div > div > p {
 	margin-bottom: -30px;
 	text-align: center;
 }
 
-#sidebar > ul > li {
+.sidebar_category{
 	list-style-type: none;
 	font-size: 16px;
 }
 
-#sidebar > ul > li.current:before {    
+.sidebar_category.current:before {    
+	font-family: 'FontAwesome';
+	content: '\f0a4';
+	margin-left: -24px;
+	color: #317bcf;
+	font-size: 18px;
+	margin-right: 2px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.sidebar_item {
+	list-style-type: none;
+	font-size: 16px;
+}
+
+.sidebar_item.current:before {    
 	font-family: 'FontAwesome';
 	content: '\f0a4';
 	margin-left: -24px;
