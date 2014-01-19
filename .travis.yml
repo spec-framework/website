@@ -19,7 +19,6 @@ after_success:
 - rm -rf ../jekyll/*
 - cp -r _site/* ../jekyll/
 - cd ../jekyll
-- ls
 - git config user.email "${GIT_EMAIL}"
 - git config user.name "${GIT_NAME}"
 - git status
