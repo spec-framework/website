@@ -13,7 +13,7 @@ module Jekyll
     end
 
     def convert(content)
-      md = `cd _pillar ; echo "#{content}" | ./pharo Pharo.image export --to=markdown --configurationFile="conf.conf"`
+      md = `echo "#{content}" | _pillar/pharo _pillar/Pharo.image export --to=markdown --configurationFile="_pillar/conf.conf"`
       doc = Kramdown::Document.new(md, :input => 'markdown')
       doc.to_html
     end
