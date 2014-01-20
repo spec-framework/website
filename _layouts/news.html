@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: default_no_footer
 ---
 
 <div id="content-wrapper">
@@ -7,6 +7,7 @@ layout: default
 		<section id="main-content">
 			<div class="news">
 				{{ content }}
+				{% include footer.html %}
 			</div>		
 		</section>
 		{% include news_contents.html %}
@@ -16,7 +17,7 @@ layout: default
 
 <script>
 $(function () {
-    var currentHash = "#";
+	var currentHash = "#";
 	$(window).on('hashchange', function() {
 		var hash = window.location.hash;
 		var parent = $(".news_title");
@@ -36,22 +37,22 @@ $(function () {
 		}
 	});
 	
-    $(document).scroll(function () {
-        $('.hash').each(function () {
-            var top = window.pageYOffset;
-            var distance = top - $(this).offset().top;
-            var hash = $(this).attr('name');
-            // 30 is an arbitrary padding choice, 
-            // if you want a precise check then use distance===0
-            if (distance < 5 && distance > -5 && currentHash != hash) { 
+	$(document).scroll(function () {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 5 && distance > -5 && currentHash != hash) { 
 				if(hash === "remove_me"){
 					window.location.hash = ("");
 				} else {
 					window.location.hash = (hash);
 				}
-                currentHash = hash;
-            }
-        });
-    });
+				currentHash = hash;
+			}
+		});
+	});
 });
 </script>

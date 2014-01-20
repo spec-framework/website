@@ -6,3 +6,5 @@ exclude: [README.md]
 relative_permalinks: false
 category_dir: news/categories
 category_title_prefix: "Category: "
+name: Spec
+description: All the news about Spec

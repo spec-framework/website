@@ -42,8 +42,9 @@ li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:foc
 }
 
 footer {
-	padding-left: 100px;
-	width: 940px;
+	padding-left: initial;
+	width: initial;
+	margin-top: 80px;
 }
 
 #commentWrapper {
@@ -144,7 +145,7 @@ div.highlight > pre {
 }
 
 aside#sidebar {
-	width: initial;
+	width: 244px;
 }
 
 .post-content {
@@ -341,4 +342,8 @@ body > div.footer > footer > div > div > p {
 .escape-wrapper {
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+.nav-btn {
+	width: 60px;
 }
