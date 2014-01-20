@@ -1,0 +1,17 @@
+{% capture category %}{{ post.categories | size }}{% endcapture %}
+<article class="article">
+	<a name="{{ post.title | uri_escape }}" class="hash"></a>
+	<h2 class="archive-title">
+		<a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
+	</h2>
+
+	<div class="post-date">
+		{{ post.date | date_to_string }}
+	</div>
+
+	<span class="post-categories">
+		{% for category in post.categories %}
+		<span class="post-category">{{ category }}</span>
+		{% endfor %}
+	</span>
+</article>

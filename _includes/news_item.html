@@ -1,4 +1,4 @@
-<article>
+<article class="article">
 	
 	<a name="{{ post.title | uri_escape }}" class="hash"></a>
 	<h2>
@@ -8,17 +8,17 @@
 		</a>
 	</h2>
 	
-	<div class="post-date">
+	<div class="post post-date">
 		{{ post.date | date_to_string }}
 	</div>
 	
-	<span class="post-category">
+	<span class="post post-categories">
 		{% for category in post.categories %}
-		<span class="label">{{ category }}</span>
+		<span class="post-category">{{ category }}</span>
 		{% endfor %}
 	</span>
 	
-	<div class="post-meta">
+	<div class="post post-meta">
 		<div id="post_author">
 			<div class="post-avatar">
 				<a href="https://github.com/{{ post.author }}" class="post-author">
