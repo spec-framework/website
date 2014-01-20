@@ -1,6 +1,4 @@
-{% capture category %}{{ post.categories | size }}{% endcapture %}
 <article class="article">
-	<a name="{{ post.title | uri_escape }}" class="hash"></a>
 	<h2 class="archive-title">
 		<a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a>
 	</h2>
@@ -11,7 +9,7 @@
 
 	<span class="post-categories">
 		{% for category in post.categories %}
-		<span class="post-category">{{ category }}</span>
+			<span class="post-category {% if page.category == category%}active {% endif %}"><a href="{{ site.url }}/news/categories/{{ category }}" class="post-category-link">{{ category }}</a></span>
 		{% endfor %}
 	</span>
 </article>

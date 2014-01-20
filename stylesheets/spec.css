@@ -30,8 +30,8 @@ header {
 li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:focus {
 	color: #275da1;
 	font-weight: bolder;
-	background-color: #e1c004;
-	border: 1px solid #e1c004;
+	background-color: #f2c025;
+	border: 1px solid #f2c025;
 }
 
 .nav-pills {
@@ -59,7 +59,6 @@ footer {
 #comment {
 	position: absolute;
 	top: 0;
-	/* just used to show how to include the margin in the effect */
 	margin-top: 20px;
 	padding-top: 19px;
 }
@@ -159,15 +158,33 @@ aside#sidebar {
 }
 
 .post-category {
-	vertical-align: text-top;
+	vertical-align: middle;
 	color: #FFFFFF;
 	background: #317bcf;
 	border-color: #000000;
 	border-width: 1px;
 	border-radius: 1.25em;
-	padding: 1px 6px 2px 6px;
+	padding: 1px 6px 3px 6px;
 	font-size: 75%;
 	font-weight: bold;
+	line-height: 1em;
+}
+
+.post-category.active{
+	color: #275da1;
+	font-weight: bolder;
+	background-color: #f2c025;
+	border: 1px solid #f2c025;
+}
+
+.post-category.active > a, .post-category.active > a:hover {
+	color: #275da1;
+	text-decoration: none;
+}
+
+.post-category-link, .post-category-link:hover {
+   color: #FFFFFF;
+   text-decoration: none;
 }
 
 #post_author {
@@ -178,6 +195,18 @@ aside#sidebar {
 
 .article {
 	position: relative;
+}
+
+.archive-title {
+	display: inline;
+}
+
+.archive-year {
+	font-size: 44px;
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-weight: bold;
+	color: #666666;
+	margin-left: -60px;
 }
 
 .post-date {
@@ -285,7 +314,7 @@ body > div.footer > footer > div > div > p {
 .home_link {
 	bottom: 10px;
 	position: absolute;
-	color: #e1c004;
+	color: #f2c025;
 	text-align: left;
 	margin-top: 10px;
 	font-size: 18px;
@@ -298,7 +327,7 @@ body > div.footer > footer > div > div > p {
 	left: 0;
 }
 .home_link:hover {
-	color: #e1c004;
+	color: #f2c025;
 }
 
 .footer footer {

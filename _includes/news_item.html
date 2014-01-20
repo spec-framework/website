@@ -14,7 +14,7 @@
 	
 	<span class="post post-categories">
 		{% for category in post.categories %}
-		<span class="post-category">{{ category }}</span>
+		<span class="post-category"><a href="{{ site.url }}/news/categories/{{ category }}" class="post-category-link">{{ category }}</a></span>
 		{% endfor %}
 	</span>
 	

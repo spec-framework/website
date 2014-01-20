@@ -6,6 +6,7 @@ install:
 - sudo apt-get update
 - sudo apt-get install pharo-launcher:i386
 - gem install kramdown
+- gem install stringex
 - gem install jekyll
 - sudo chmod +x _pillar/downloadVM.sh
 - cd _pillar ; ./downloadVM.sh ; cd ..
