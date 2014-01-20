@@ -1,17 +1,16 @@
 header {
-	padding-top: 15px
-}
+	padding-top: 15px}
 	
 .title {
-  color: #FFFFFF;
+	color: #FFFFFF;
 }
 
 .flake{
 	vertical-align: middle;
 	margin-left: -20px;
-}	
+}
 
-.nav {
+	.nav {
 	padding-left: 100px;
 }
 
@@ -25,8 +24,6 @@ header {
 	background-color: #fff;
 	color: #327bcf;
 }
-
-
 li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:focus {
 	color: #275da1;
 	font-weight: bolder;
@@ -49,7 +46,7 @@ footer {
 	width: 940px;
 }
 
-#commentWrapper { 
+#commentWrapper {
 	left: 690px;
 	position: absolute;
 	margin-left: 50px;
@@ -74,7 +71,7 @@ footer {
 }
 
 #sidebar > h4::before {
-	content: '';	 
+	content: '';
 }
 
 #sidebar > h4 {
@@ -117,7 +114,7 @@ div.highlight > pre {
 	font-size: 16px;
 }
 
-.sidebar_category.current:before {    
+.sidebar_category.current:before {
 	font-family: 'FontAwesome';
 	content: '\f0a4';
 	margin-left: -24px;
@@ -133,7 +130,9 @@ div.highlight > pre {
 	font-size: 16px;
 }
 
-.sidebar_item.current:before {    
+.sidebar_item.current:before {
+
+    
 	font-family: 'FontAwesome';
 	content: '\f0a4';
 	margin-left: -24px;
@@ -152,7 +151,9 @@ aside#sidebar {
 	text-align: left;
 }
 
-.post-categories{ 
+.post-categories{
+
+ 
 	vertical-align: text-bottom;
 	display: inline;
 }
@@ -183,8 +184,8 @@ aside#sidebar {
 }
 
 .post-category-link, .post-category-link:hover {
-   color: #FFFFFF;
-   text-decoration: none;
+	color: #FFFFFF;
+	text-decoration: none;
 }
 
 #post_author {
@@ -243,10 +244,10 @@ aside#sidebar {
 
 #main-content > div > article > hr {
 	height: 1px;
-    color: #aaaaaa;
-    background: #aaaaaa;
-    font-size: 0;
-    border: 0;
+	color: #aaaaaa;
+	background: #aaaaaa;
+	font-size: 0;
+	border: 0;
 }
 
 body > div > footer {
@@ -264,10 +265,12 @@ body > div.footer > footer > div > div > p {
 	text-align: center;
 	font-size: 70px;
 	line-height: 1em;
-    background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
-    font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
-    font-weight: 400;
-    color: #317bcf;
+	background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+
+ 
+	font-weight: 400;
+	color: #317bcf;
 }
 
 .home_boxes{
@@ -277,15 +280,16 @@ body > div.footer > footer > div > div > p {
 
 .home_box{
 	width: 310px;
-	display: inline-table;;
+	display: inline-table;
+
+	;
 	text-align: center;
 	height: 260px;
 	position: relative;
 	border-width: 1px;
 	border-color: #275da1;
 	border-style: solid;
-    background: transparent url(../images/header-bg.jpg) 0 0
-}
+	background: transparent url(../images/header-bg.jpg) 0 0}
 
 .home_wrapper {
 	text-align: center;
@@ -326,10 +330,16 @@ body > div.footer > footer > div > div > p {
 	font-weight: bold;
 	left: 0;
 }
+
 .home_link:hover {
 	color: #f2c025;
 }
 
 .footer footer {
 	padding-bottom: 0;
+}
+
+.escape-wrapper {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
