@@ -348,3 +348,16 @@ body > div.footer > footer > div > div > p {
 .nav-btn {
 	width: 60px;
 }
+
+.rss-anchor {
+	color: #fca357;
+}
+
+.rss-anchor > i {
+	padding-left: 2px;
+}
+
+#sidebar > div {
+	position: absolute;
+	bottom: 0px;
+}
