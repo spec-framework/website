@@ -49,15 +49,15 @@ $(function () {
 			// if you want a precise check then use distance===0
 			if (distance < 30 && distance > -30 && currentHash != hash) { 
 				if(hash === "remove_me"){
-					if(history.pushState) {
-					    history.pushState(null, null, "#");
+					if(history.replaceState) {
+					    history.replaceState(null, null, "#");
 					}
 					else {
 					    location.hash = "";
 					}
 				} else {
-					if(history.pushState) {
-					    history.pushState(null, null, '#'+hash);
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
 					}
 					else {
 					    location.hash = hash;
