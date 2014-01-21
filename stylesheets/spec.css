@@ -253,6 +253,7 @@ aside#sidebar {
 body > div > footer {
 	width: initial;
 	padding-left: initial;
+	margin-top:50px;
 }
 
 body > div.footer > footer > div > div > p {
