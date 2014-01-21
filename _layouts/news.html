@@ -18,8 +18,7 @@ layout: default_no_footer
 <script>
 $(function () {
 	var currentHash = "#";
-	$(window).on('hashchange', function() {
-		var hash = window.location.hash;
+	function changeHash(hash){
 		var parent = $(".news_title");
 		var elt = parent.find(".current");
 		elt.removeClass('current');
@@ -35,6 +34,10 @@ $(function () {
 			elt = parent.find("."+id);
 			elt.addClass('current');
 		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
 	});
 	
 	$(document).scroll(function () {
@@ -44,13 +47,24 @@ $(function () {
 			var hash = $(this).attr('name');
 			// 30 is an arbitrary padding choice, 
 			// if you want a precise check then use distance===0
-			if (distance < 5 && distance > -5 && currentHash != hash) { 
+			if (distance < 30 && distance > -30 && currentHash != hash) { 
 				if(hash === "remove_me"){
-					window.location.hash = ("");
+					if(history.pushState) {
+					    history.pushState(null, null, "#");
+					}
+					else {
+					    location.hash = "";
+					}
 				} else {
-					window.location.hash = (hash);
+					if(history.pushState) {
+					    history.pushState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
 				}
 				currentHash = hash;
+				changeHash(hash);
 			}
 		});
 	});
