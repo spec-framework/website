@@ -87,7 +87,7 @@ footer {
 	padding-bottom: 40px;
 }
 
-div.highlight > pre > code{
+.bash {
 	color: #d3d3cd;
 	background-color: transparent;
 }
@@ -96,10 +96,9 @@ div.highlight > pre {
 	white-space: pre;
 	text-align: left;
 	margin: 0;
-	padding: 0;
 	font-family: Menlo, Consolas, "Courier New", Courier, "Liberation Mono", monospace;
 	font-size: 14px;
-	padding: 0 1.5em;
+	padding: 1.5em 1.5em;
 	line-height: 1.8em;
 	background: #444;
 	padding-bottom: 1.5em;
@@ -132,8 +131,6 @@ div.highlight > pre {
 }
 
 .sidebar_item.current:before {
-
-    
 	font-family: 'FontAwesome';
 	content: '\f0a4';
 	margin-left: -24px;
@@ -360,4 +357,25 @@ body > div.footer > footer > div > div > p {
 #sidebar > div {
 	position: absolute;
 	bottom: 0px;
+}
+
+.highlight {
+	padding-bottom: 20px;
+}
+
+.smalltalk {
+	color: #00FF00;
+	background: transparent;
+}
+
+.smalltalk .ss {
+	color: #e320f2;
+}
+
+.smalltalk .nc {
+	color: #2d9cee;
+}
+
+.smalltalk .nv {
+	color: #ffcf0d;
 }

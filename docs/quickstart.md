@@ -9,7 +9,7 @@ permalink: /docs/quickstart/
 For the impatient, Spec can be found in any Pharo 3.0 image.
 You can download ans run one with the following script:
 
-{% highlight bash %} 
+{% highlight bash %}
 ~ $ curl get.pharo.org/30+vm | bash
 ~ $ ./pharo-ui Pharo.image
 
@@ -17,4 +17,17 @@ You can download ans run one with the following script:
 {% endhighlight %}
 
 Here you are, you can now play with Spec.
-Where is starts to be really interesting is when you need to define your own user interface, or if you want to quickly prototype one. Then the magic happens and one line of code are enough to open a widget.
+Where is starts to be really interesting is when you need to define your own user interface, or if you want to quickly prototype one. Then the magic happens and a couple line of code is enough to open a widget.
+
+{% highlight smalltalk %}
+ButtonModel new 
+	label: 'Click me';
+	action: [ self halt ];
+	openWithSpec.
+	
+ListModel new 
+	items: Smalltalk classes
+	openWithSpec.	
+	
+"And many more are waiting for you!"
+{% endhighlight %}
