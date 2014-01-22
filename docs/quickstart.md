@@ -29,5 +29,5 @@ ListModel new
 	items: Smalltalk classes
 	openWithSpec.	
 	
-"And many more are waiting for you!"
+"And many more widgets are waiting for you!"
 {% endhighlight %}
