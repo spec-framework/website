@@ -20,9 +20,7 @@ Then open your image and execute the following script:
 
 repo := MCFileTreeRepository new directory: '/tmp/spec' asFileReference.
 
-currentVersions := MCWorkingCopy allManagers 
-	select: [ :e | (e ancestry ancestors) notEmpty ]
-	thenCollect: [ :e | e ancestry ancestors first name ].
+currentVersions := MCWorkingCopy allManagers select: [ :e | (e ancestry ancestors) notEmpty ] thenCollect: [ :e | e ancestry ancestors first name ].
 names := repo packageDescriptionsFromReadableFileNames.
 toLoad := names select: [ :e || currentVersion | 
 	currentVersion := e first , '-', e second , '.', e third asString.
