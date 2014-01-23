@@ -44,7 +44,7 @@ Specifying this method is **mandatory**, as without it the UI would show no widg
 {% endalert %}
 
 
-#### Layout Examples
+## Layout Examples
 
 As layouts can become quite complex, this section provides a list of examples of the construction of layouts.
 First two examples are given of the use of [rows and columns](#layout_rows_and_column_layout).
