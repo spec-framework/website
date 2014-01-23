@@ -382,3 +382,88 @@ body > div.footer > footer > div > div > p {
 .smalltalk .nv {
 	color: #ffcf0d;
 }
+
+em {
+	font-style: italic;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.hint {
+	background: #fff;
+	text-shadow: none;
+	overflow: auto;
+	border: solid 1px #f2f2f2;
+	padding: 0.5em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.hint-icon {
+	color: #4479d0;
+}
+
+.hint-overlay {
+	color: #FFFFFF;
+	font-size: 24px;
+}
+
+.hint-text > p {
+	display: inline;
+	vertical-align: middle;
+}
+
+.alert {
+	background: #fff;
+	text-shadow: none;
+	overflow: auto;
+	border: solid 1px #f2f2f2;
+	padding: 0.5em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.alert-icon {
+	color: #ff5c59;
+}
+
+.alert-text > p {
+	display: inline;
+	vertical-align: middle;
+}
+
+.alert-overlay {
+	color: #FFFFFF;
+	font-size: 24px;
+}
+
+.question {
+	background: #fff;
+	text-shadow: none;
+	overflow: auto;
+	border: solid 1px #f2f2f2;
+	padding: 0.5em;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.question-icon {
+	color: #4479d0;
+}
+
+.question-overlay {
+	color: #FFFFFF;
+	font-size: 24px;
+}
+
+.question-text > p {
+	display: inline;
+	vertical-align: middle;
+}
+
+h4 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

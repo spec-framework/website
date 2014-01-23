@@ -2,7 +2,7 @@
 layout: docs
 title: Installation
 prev_section: quickstart
-next_section: composing
+next_section: starting
 permalink: /docs/installation/
 ---
 

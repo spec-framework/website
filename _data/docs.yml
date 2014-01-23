@@ -8,8 +8,9 @@
 
 - title: Your UI
   docs:
-  - composing
-  - customizing
+  - starting
+  - initializing
+  - layout
   
 - title: Three Pillars
   docs:
