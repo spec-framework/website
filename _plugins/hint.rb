@@ -37,8 +37,7 @@ module Jekyll
     def render(context)
       html = '<div class="alert question">
 	<span class="fa-stack fa-lg question-icon">
-	  <i class="fa fa-circle fa-stack-2x"></i>
-	  <i class="fa fa-question fa-stack-1x question-overlay"></i>
+	  <i class="fa fa-question-circle fa-2x"></i>
 	</span>
 	<span class="question-text">'
       html += Kramdown::Document.new(super.strip, :input => 'markdown').to_html
