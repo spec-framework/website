@@ -6,7 +6,7 @@ next_section: layout
 permalink: /docs/initializing/
 ---
 
-This method is used to instantiate the different widgets that are part of the UI and store them in their respective instance variables.
+The method `initializeWidgets` is used to instantiate the different widgets that are part of the UI and store them in their respective instance variables.
 The configuration and default values of each widget are specified here as well.
 This focus in this method is to specify what the widgets will look like and what their self-contained behavior is.
 The behavior to update model state, e.g. when pressing a `Save` button, is described in this method as well.
@@ -33,6 +33,7 @@ initializeWidgets
 	theList := self newList.
 
 	theButton label: 'I am a button'.
+	theList items: #(1 2 3 4 5 6 7 8 9 0).
 	
 	self focusOrder
 		add: theButton;
@@ -53,3 +54,7 @@ The complete list of available widget creation methods can be found in the class
 
 Considering the second option, to reuse any composite widgets, i.e. a subclass of **ComposableModel**, the widget needs to be initialized using the `instantiate:` method.
 For example, to reuse a **MessageBrowser** widget, the code is `self instantiate: MessageBrowser`.
+
+{% info %}
+Do not forger to generate the accessors for your instance variables.
+{% endinfo %}

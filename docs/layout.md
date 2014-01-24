@@ -2,7 +2,7 @@
 layout: docs
 title: Defining the layout
 prev_section: initializing
-next_section: 
+next_section: open
 permalink: /docs/layout/
 ---
 
@@ -37,7 +37,7 @@ Note that by default, a widget will take all the space available.</p>
 
 <p>As said above, multiple layouts can be described for the same user interface.
 In order to retrieve the correct method to apply, these methods need to be flagged with a pragma.
-The pragma can be either <code>&lt; spec: default&gt;</code> for the layout to use by default, or <code>&lt;spec&gt;</code> for the other layouts.</p>
+The pragma can be either <code>&lt;spec: default&gt;</code> for the layout to use by default, or <code>&lt;spec&gt;</code> for the other layouts.</p>
 
 {% alert %}
 Specifying this method is **mandatory**, as without it the UI would show no widgets to the user.
@@ -203,10 +203,10 @@ All the methods seen in the previous examples come with a variant used to specif
 By example, for the `add:` method the variant is  `add:withSpec:`.
 
 For example, consider a widget **MyWidget** defining a first layout method `firstLayout` as the default layout and another layout method called `anotherLayout`.
-The following example shows how to add an instance of **MyWidget** using its `anotherLayout` layout method.
+The following example shows how to add an instance of **MyUserInterface** using its `anotherLayout` layout method.
 
 {% highlight smalltalk %}
 ^ SpecLayout composed
-	add: #myWidget withSpec: #anotherLayout;
+	add: #MyUserInterface withSpec: #anotherLayout;
 	yourself
 {% endhighlight %}
