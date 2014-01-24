@@ -24,10 +24,23 @@ MyUserInterface new openDialogWithSpec
 
 The dialog window is opened with a toolbar contening a **cancel** button and an **ok** button.
 To set the action to perform when ok is pressed, the hook method `initializeDialogWindow:` requires to be implemented.
-The following example shows how to open a debugger when ok is pressed.
+The following example shows how to change the toolbar and to make it opens a debugger when ok is pressed.
 
 {% highlight smalltalk%}
 initializeDialogWindow: aWindow
+    
+	aWindow
+		toolbar: OkToolbar new;
+	    okAction: [ self halt ].
+{% endhighlight %}
 
-	aWindow okAction: [ self halt ].
+## Morphic specific
+
+The morphic extension provides a new way to open a *Spec* model.
+Indeed thanks to the message `openWorldWithSpec`, the model is open taking 100% of the Pharo window.
+
+It is usefull to run a desktop application, simulating a native window by using the Pharo window.
+
+{% highlight smalltalk%}
+MyUserInterface new openWorldWithSpec
 {% endhighlight %}
