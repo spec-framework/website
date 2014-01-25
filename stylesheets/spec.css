@@ -367,26 +367,38 @@ body > div.footer > footer > div > div > p {
 
 .smalltalk {
 	margin-bottom: 20px;
-	color: #00FF00;
+	color: #86e98e;
 	white-space: pre;
 	display: inline-block;
 	background: transparent;
 }
 
 .smalltalk .ss {
-	color: #e320f2;
+	color: #fc87f3;
 }
 
 .smalltalk .err {
 	background-color: transparent;
 }
 
+.smalltalk .bp {
+	color: #e95c66;
+}
+
 .smalltalk .nc {
-	color: #2d9cee;
+	color: #39bfe9;
 }
 
 .smalltalk .nv {
 	color: #ffcf0d;
+}
+
+.smalltalk .c {
+	color: #9bc7d1;
+}
+
+.smalltalk .s {
+	color: #e6ce8b;
 }
 
 em {
