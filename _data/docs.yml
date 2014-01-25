@@ -13,11 +13,14 @@
   - layout
   - open
   - interactions
+  - dynamic
 
 - title: Inside Spec
   docs:
   - api
+  - own-model
   - adapters
+  - interpreter
 
 - title: Meta
   docs:

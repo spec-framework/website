@@ -43,17 +43,19 @@ The pragma can be either <code>&lt;spec: default&gt;</code> for the layout to us
 Specifying this method is **mandatory**, as without it the UI would show no widgets to the user.
 {% endalert %}
 
-
-## Layout Examples
+<a name="examples" class="hash"></a>
+## Layout Examples <a href="#examples" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 As layouts can become quite complex, this section provides a list of examples of the construction of layouts.
-First two examples are given of the use of [rows and columns](#layout_rows_and_column_layout).
-This is followed by two examples that explain how to set a [fixed size](#layout_set_size_pixels) for rows and columns.
-Next is an example that explains how to specify a widget [proportionally](#layout_percentage).
-The last example presents the [expert](#layout_expert) mode in case everything else fails.
-To conclude, this section ends with a little [explanation](#layout_specify_layout) of how to specify which layout to use and where to find the complete API.
+First two examples are given of the use of [rows and columns](#rows_columns).
+This is followed by two examples that explain how to set a [fixed size](#pixels) for rows and columns.
+Next is an example that explains how to specify a widget [proportionally](#percentage).
+The last example presents the [expert](#expert) mode in case everything else fails.
+To conclude, this section ends with a little [explanation](#specify_layout) of how to specify which layout to use and where to find the complete API.
 
-<a name="layout_rows_and_column_layout"></a>
+<a name="rows_columns" class="hash"></a>
+### Rows and Columns <a href="#rows_columns" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+
 Often the layout of user interfaces can be described in rows and columns, and **Spec** provides for an easy way to specify such layouts.
 The following example shows how to build a row of widgets.
 
@@ -112,9 +114,10 @@ This example also shows the `addSplitter` message, which adds a splitter between
 	yourself
 {% endhighlight %}
 
----
 
-<a name="layout_set_size_pixels"></a>
+<a name="pixels" class="hash"></a>
+### Set size in pixels <a href="#pixels" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+
 The height of rows as well as the width of columns can be specified, to prevent them to take all the available space.
 The first example shows how to specify the height of a row in pixels while the second example is about how to specify the column width.
 
@@ -142,9 +145,10 @@ Note that it is generally considered a bad habit to hardcode the size of the wid
 Methods are available on *ComposableModel* providing sensible default sizes, like the width of a button.
 When specifying custom widget sizes, care should be taken to take in account the current font size.
 
----
 
-<a name="layout_percentage"></a>
+<a name="percentage" class="hash"></a>
+### Set proportional size <a href="#percentage" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+
 It is also possible to specify the percentage of the container, e.g. the window, that a widget should occupy.
 As a result of this, the widget size will change accordingly when the container is resized.
 To do so, the proportional position of the four sides of a widget can be specified, as shown in this example.
@@ -163,9 +167,10 @@ For example, for the top edge, the percentage is counted from the top down: 0 is
 Also, the argument can be an integer if the offset has to be a fixed number of pixels.
 The number of pixels should be positive, as it indicates a distance from the corresponding edge, going to the opposite edge.
 
----
 
-<a name="layout_expert"></a>
+<a name="expert" class="hash"></a>
+### Expert layouting <a href="#expert" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+
 The previous examples should cover most of the cases of layout of widgets.
 For the remaining cases there is a last way to specify a widget by specifying its position.
 
@@ -190,9 +195,10 @@ It specifies that the widget in the `toolbar` instance variable should take all 
 	yourself
 {% endhighlight %}
 
----
 
-<a name="layout_specify_layout"></a>
+<a name="specify_layout" class="hash"></a>
+### Specify the layout <a href="#specify_layout" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+
 All the methods for adding sub widgets can be found in the *commands* and *commands-advanced* protocols of **SpecLayout**.
 
 

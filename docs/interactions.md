@@ -2,7 +2,7 @@
 layout: docs
 title: Sub&nbsp;widgets interaction
 prev_section: open
-next_section: api
+next_section: dynamic
 permalink: /docs/interactions/
 ---
 

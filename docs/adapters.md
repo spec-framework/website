@@ -1,8 +1,8 @@
 ---
 layout: docs
 title: Adapters
-prev_section: api
-next_section: 
+prev_section: own-model
+next_section: interpreter
 permalink: /docs/adapters/
 ---
 

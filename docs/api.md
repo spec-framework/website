@@ -1,8 +1,8 @@
 ---
 layout: docs
 title: Where to find what I want
-prev_section: interactions
-next_section: adapters
+prev_section: dynamic
+next_section: own-model
 permalink: /docs/api/
 ---
 
