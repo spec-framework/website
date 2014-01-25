@@ -89,6 +89,7 @@ footer {
 
 .bash {
 	color: #d3d3cd;
+	margin-bottom: 20px;
 	white-space: pre;
 	display: inline-block;
 	background-color: transparent;
@@ -365,6 +366,7 @@ body > div.footer > footer > div > div > p {
 }
 
 .smalltalk {
+	margin-bottom: 20px;
 	color: #00FF00;
 	white-space: pre;
 	display: inline-block;
@@ -402,6 +404,8 @@ strong {
 }
 
 .hint-icon {
+	float: left;
+	margin-right: 4px;
 	color: #4479d0;
 }
 
@@ -426,6 +430,8 @@ strong {
 }
 
 .alert-icon {
+	float: left;
+	margin-right: 4px;
 	color: #ff5c59;
 }
 
@@ -450,6 +456,8 @@ strong {
 }
 
 .question-icon {
+	float: left;
+	margin-right: 4px;
 	color: #4479d0;
 }
 

@@ -2,7 +2,7 @@
 layout: docs
 title: Open your UI
 prev_section: layout
-next_section: 
+next_section: interactions
 permalink: /docs/open/
 ---
 

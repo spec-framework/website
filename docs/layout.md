@@ -128,7 +128,7 @@ The first example shows how to specify the height of a row in pixels while the s
 	yourself
 {% endhighlight %}
 
-{% highlight smalltalk %} 
+{% highlight smalltalk %}
 ^ SpecLayout composed
 	newColumn: [ :column |
 		column

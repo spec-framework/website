@@ -12,12 +12,11 @@
   - initializing
   - layout
   - open
-  
-- title: Three Pillars
-  docs:
+  - interactions
 
 - title: Inside Spec
   docs:
+  - api
   - adapters
 
 - title: Meta

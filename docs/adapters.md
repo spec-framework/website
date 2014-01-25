@@ -1,7 +1,8 @@
 ---
 layout: docs
 title: Adapters
-
+prev_section: api
+next_section: 
 permalink: /docs/adapters/
 ---
 
