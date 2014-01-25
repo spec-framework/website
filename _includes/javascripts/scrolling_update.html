@@ -1,6 +1,6 @@
 <script>
 $(function () {
-	var currentHash = "#";
+	var currentHash = "remove_me";
 	
 	function changeHash(hash){
 		var parent = $(".news_title");
@@ -24,17 +24,18 @@ $(function () {
 		changeHash(window.location.hash);
 	});
 	
-	$(document).scroll(function () {
+	$(document).scroll(function (e) {
 		$('.hash').each(function () {
 			var top = window.pageYOffset;
 			var distance = top - $(this).offset().top;
 			var hash = $(this).attr('name');
 			// 30 is an arbitrary padding choice, 
 			// if you want a precise check then use distance===0
-			if (distance < 30 && distance > -30 && currentHash != hash) { 
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
 				if(hash === "remove_me"){
 					if(history.replaceState) {
-					    history.replaceState(null, null, "#");
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
 					}
 					else {
 					    location.hash = "";
