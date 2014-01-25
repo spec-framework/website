@@ -18,7 +18,8 @@ It gathers all the methods that are used to register to a state change.
 All the meta-information of public API methods is documented through the use of pragmas that start with *api:*.
 There are three types of public API methods: getters, setters and registration methods.
 
-## Meta information for getters
+<a name="getters" class="hash"></a>
+## Meta information for getters <a href="#getters" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 The pragma for getters is always `<api: #inspect>`.
 For example, the following code shows how the *action*  method in **ButtonModel** is implemented.
@@ -31,7 +32,8 @@ action
 	^ actionHolder value
 {% endhighlight %}
 
-## Meta information for setters
+<a name="setters" class="hash"></a>
+## Meta information for setters <a href="#setters" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 The pragma for setters is a bit more complex.
 The pattern of the pragma is `<api: typeOfState getter: getterSelector registration: registrationMethodSelector>`.
@@ -61,7 +63,8 @@ action: aBlock
 	actionHolder value: aBlock
 {% endhighlight %}
 
-## Meta information for registration methods
+<a name="events" class="hash"></a>
+## Meta information for registration methods <a href="#events" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 The pragma for registration methods information always is *&lt;api: #event&gt;*.
 For example, the incoming code shows how the method *whenActionChangedDo:* is implemented in **ButtonModel**.
@@ -74,7 +77,8 @@ whenActionChangedDo: aBlock
 	actionHolder whenChangedDo: aBlock
 {% endhighlight %}
 
-## Meta information for behavioural method
+<a name="behavior" class="hash"></a>
+## Meta information for behavioral method <a href="#behavior" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 The other methods should be mainly behavioural methods.
 The pragma for these methods is *&lt;api: #do&gt;*.
