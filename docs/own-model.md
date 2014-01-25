@@ -37,7 +37,7 @@ This is this framework-specific widget that will be added to the widget containe
 Figure [1.1](#model_adapter_uielement) shows the relationship between those objects.
 
 
-<a name="model_adapter_uielement"></a>![model_adapter_uielement]({{ site.url }}/figures/Model-Adapter-UIElement.png "Relationship between the model, the adapter, and the UI element")
+<a name="model_adapter_uielement"></a><p class="figure">![model_adapter_uielement]({{ site.url }}/figures/Model-Adapter-UIElement.png "Relationship between the model, the adapter, and the UI element")</p>
 
 
 <a name="the_model" class="hash"></a>
