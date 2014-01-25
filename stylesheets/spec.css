@@ -377,6 +377,10 @@ body > div.footer > footer > div > div > p {
 	color: #e320f2;
 }
 
+.smalltalk .err {
+	background-color: transparent;
+}
+
 .smalltalk .nc {
 	color: #2d9cee;
 }
