@@ -42,14 +42,14 @@ The *registrationMethodSelector* states the name of the method (a Symbol) that n
 *typeOfState*  gives the type of the state being set by this setter.
 The possible types are as follows:
 
-- #block indicates a block, 
-- #boolean indicates a boolean,
-- #color indicates a Color,
-- #image indicates a Form,
-- #integer indicates an integer,
-- #point indicates a Point,
-- #string indicates a String,
-- #st indicates any other type of *Smalltalk* object.
+- *block* indicates a block, 
+- *boolean* indicates a boolean,
+- *color* indicates a Color,
+- *image* indicates a Form,
+- *integer* indicates an integer,
+- *point* indicates a Point,
+- *string* indicates a String,
+- *st* indicates any other type of *Smalltalk* object.
 
 For example, the following code shows how *actions:* is implemented in **ButtonModel**.
 
