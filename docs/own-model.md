@@ -99,52 +99,59 @@ The symbol should be composed of the basic concept of the widget, e.g. list or b
 <p>The communication from the UI model to the adapter is performed using the dependents mechanism.
 This mechanism is used to to handle the fact that a same model can have multiple UI elements concurrently displayed.
 In fact the message 
-<code>change: with:</code> is used to send the message 
+<code>changed: with:</code> is used to send the message 
 <emph>selector</emph> with the arguments 
 <emph>aCollection</emph> to the adapter.</p>
 
+<p>Then each adapter can convert this <emph>Spec</emph> message into a framework specific message. 
+By example, the method #filterWith: send by <strong>TreeModel</strong> via <code>changed: with:</code> is then implemented as following:</p>
+ 
+{% highlight smalltalk %}
+filterWith: aFilter
+       
+   self widgetDo: [ :w || nodes |
+           nodes := w model rootNodes.
+           nodes do: [:r | r nodeModel updateAccordingTo: aFilter].
+   
+           self removeRootsSuchAs: [:n | (aFilter keepTreeNode: n) not and: [n isEmpty]].
 
-{% question %}
-Note: For Ben. I still don't understand it. Please explain to me tomorrow.
-{% endquestion %}
-
+           self changed: #rootNodes ].
+{% endhighlight %}
 
 
 <a name="the_adapter" class="hash"></a>
-## The Adapter <a href="#the_adapter" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+<h2>The Adapter <a href="#the_adapter" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
 
 
-An adapter must be a subclass of 
-**AbstractAdapter**.
+<p>An adapter must be a subclass of <strong>AbstractAdapter</strong>.
 The adapter name should be composed of the UI framework name, e.g. Morphic, and the name of the adapter it is implementing, e.g. ListAdapter.
-The adapter is an object used to connect a UI framework specific element and the framework independent model.
+The adapter is an object used to connect a UI framework specific element and the framework independent model.</p>
 
 
-The only mandatory method for an adapter is 
-`defaultSpec` on the class side.
-This method has the responsibility to instantiate the corresponding UI element.
+<p>The only mandatory method for an adapter is <code>defaultSpec</code> on the class side.
+This method has the responsibility to instantiate the corresponding UI element.</p>
 
 
-The next example shows how **MorphicButtonAdapter** instantiates its UI element.
+<p>The next example shows how <strong>MorphicButtonAdapter</strong> instantiates its UI element.</p>
 
 {% highlight smalltalk %}
 defaultSpec
     <spec>
 
-	^ {#PluggableButtonMorph.
- 		#color:. Color white.
-		#on:getState:action:label:menu:. 	#model. #state. #action. #label. nil.
-   		#getEnabledSelector:. 				#enabled.
-   		#getMenuSelector:.					#menu:.
-   		#hResizing:. 						#spaceFill.
-   		#vResizing:. 						#spaceFill.
-   		#borderWidth:.						#(model borderWidth).
-   		#borderColor:.						#(model borderColor).
-   		#askBeforeChanging:.					#(model askBeforeChanging).
-   		#setBalloonText:.					#(model help).
-   		#dragEnabled:.						#(model dragEnabled).
-   		#dropEnabled:.						#(model dropEnabled).	
-   		#eventHandler:.						#(EventHandler on:send:to: keyStroke keyStroke:fromMorph: model)}
+	^ #(PluggableButtonMorph
+			#color:								#(model color)
+	    	#on:getState:action:label:menu: 	#model #state #action #label nil
+			#getEnabledSelector: 				#enabled
+			#getMenuSelector:					#menu:
+			#hResizing: 						#spaceFill
+			#vResizing: 						#spaceFill
+			#borderWidth:						#(model borderWidth)
+			#borderColor:						#(model borderColor)
+			#askBeforeChanging:					#(model askBeforeChanging)
+			#setBalloonText:					#(model help)
+			#dragEnabled:						#(model dragEnabled)
+			#dropEnabled:						#(model dropEnabled)	
+			#eventHandler:						#(EventHandler on:send:to: keyStroke keyStroke:fromMorph: model))
 {% endhighlight %}
 
 
@@ -191,23 +198,91 @@ It requires to update two methods:
 <code>initializeBindings</code> in the framework specific adapter class, e.g. 
 <strong>MorphicAdapterBindings</strong> for Morphic.</p>
 
+<p>The method <code>SpecAdapterBindings>>#initializeBinding</code> is present only to expose the whole set of adapters required.
+It fills up a dictionary as shown in the code:</p>
+
+{% highlight smalltalk %}
+initializeBindings
+       "This implementation is stupid, but it exposes all the container which need to be bound"
+       
+       bindings
+	       at: #ButtonAdapter            put: #ButtonAdapter;
+	       at: #CheckBoxAdapter          put: #CheckBoxAdapter;
+	       at: #ContainerAdapter         put: #ContainerAdapter;
+	       at: #DiffAdapter              put: #MorphicDiffAdapter;
+	       at: #ImageAdapter             put: #ImageAdapter;
+	       at: #LabelAdapter             put: #LabelAdapter;
+	       at: #ListAdapter              put: #ListAdapter;
+	       at: #IconListAdapter          put: #IconListAdapter;
+	       at: #DropListAdapter          put: #DropListAdapter;
+	       at: #MultiColumnListAdapter   put: #MultiColumnListAdapter;
+	       at: #MenuAdapter              put: #MenuAdapter;
+	       at: #MenuGroupAdapter         put: #MenuGroupAdapter;
+	       at: #MenuItemAdapter          put: #MenuItemAdapter;  
+	       at: #NewListAdapter           put: #NewListAdapter;
+	       at: #RadioButtonAdapter       put: #RadioButtonAdapter;
+	       at: #SliderAdapter            put: #SliderAdapter;
+	       at: #TabManagerAdapter        put: #TabManagerAdapter;
+	       at: #TabAdapter               put: #TabAdapter;
+	       at: #TextAdapter              put: #TextAdapter;
+	       at: #TextInputFieldAdapter    put: #TextInputFieldAdapter;
+	       at: #TreeAdapter              put: #TreeAdapter;
+	       at: #TreeColumnAdapter        put: #TreeColumnAdapter;
+	       at: #TreeNodeAdapter          put: #TreeNodeAdapter;          
+	       at: #WindowAdapter            put: #WindowAdapter;
+	       at: #DialogWindowAdapter      put: #DialogWindowAdapter;
+           yourself
+{% endhighlight %}
+
+<p>Then each framework specific adapters set should define its own binding.
+To implement a new binding, a subclass of <strong>SpecAdapterBindings</strong> must be defined that overrides the method <code>initializeBindings</code>.
+This method will now binds <emph>Spec</emph> adapter names with framework specific adapter class names.
+The following example shows how the morphic binding implements the method <code>initializeBindings</code>.</p>
+
+{% highlight smalltalk %}
+initializeBindings
+       
+       bindings
+           at: #ButtonAdapter            put: #MorphicButtonAdapter;
+           at: #CheckBoxAdapter          put: #MorphicCheckBoxAdapter;
+           at: #ContainerAdapter         put: #MorphicContainerAdapter;
+           at: #DiffAdapter              put: #MorphicDiffAdapter;
+           at: #DropListAdapter          put: #MorphicDropListAdapter;
+           at: #LabelAdapter             put: #MorphicLabelAdapter;
+           at: #ListAdapter              put: #MorphicListAdapter;
+           at: #IconListAdapter          put: #MorphicIconListAdapter;
+           at: #ImageAdapter             put: #MorphicImageAdapter;
+           at: #MultiColumnListAdapter   put: #MorphicMultiColumnListAdapter;
+           at: #MenuAdapter              put: #MorphicMenuAdapter;
+           at: #MenuGroupAdapter         put: #MorphicMenuGroupAdapter;
+           at: #MenuItemAdapter          put: #MorphicMenuItemAdapter;
+           at: #NewListAdapter           put: #MorphicNewListAdapter;
+           at: #RadioButtonAdapter       put: #MorphicRadioButtonAdapter;
+           at: #SliderAdapter            put: #MorphicSliderAdapter;
+           at: #TabManagerAdapter        put: #MorphicTabManagerAdapter;
+           at: #TabAdapter               put: #MorphicTabAdapter;
+           at: #TextAdapter              put: #MorphicTextAdapter;
+           at: #TextInputFieldAdapter    put: #MorphicTextInputFieldAdapter;
+           at: #TreeAdapter              put: #MorphicTreeAdapter;
+           at: #TreeColumnAdapter        put: #MorphicTreeColumnAdapter;
+           at: #TreeNodeAdapter          put: #MorphicTreeNodeAdapter;
+           at: #WindowAdapter            put: #MorphicWindowAdapter;
+           at: #DialogWindowAdapter      put: #MorphicDialogWindowAdapter;
+           yourself
+{% endhighlight %}
 
 
-{% question %}
-For Ben: Give an example here.
-{% endquestion %}
+<p>Once this is done, the bindings should be re-initialized by running the following snippet of code: 
+<code>SpecInterpreter hardResetBindings</code>.
 
 
-Once this is done, the bindings should be re-initialized by running the following snippet of code: 
-`SpecInterpreter hardResetBindings`.
+<p>For creating a specific binding, the class 
+<strong>SpecAdapterBindings</strong> needs to be overriden as well as its method 
+<code>initializeBindings</code>.
 
-
-For creating a specific binding, the class 
-**SpecAdapterBindings** needs to be overriden as well as its method 
-`initializeBindings`.
-It can then be used during a spec interpretation by setting it as the bindings to use for the 
-**SpecInterpreter**.
-The next example shows how to do so.
+<p>Then during the process of computing a <emph>Spec</emph> model and its layout into a framework specific UI element, the binding can be changed to change the output framework.
+The binding is managed by the <strong>SpecInterpreter</strong>.
+The next example shows how to do so.</p>
 
 {% highlight smalltalk %}
 SpecInterpreter bindings: MyOwnBindingClass new.
