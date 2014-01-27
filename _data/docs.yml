@@ -19,7 +19,7 @@
   docs:
   - api
   - own-model
-  - adapters
+ # - adapters
   - interpreter
 
 - title: Meta
