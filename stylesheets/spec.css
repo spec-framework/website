@@ -27,8 +27,8 @@ header {
 li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:focus {
 	color: #275da1;
 	font-weight: bolder;
-	background-color: #f2c025;
-	border: 1px solid #f2c025;
+	background-color: #edc51e;
+	border: 1px solid #edb700;
 }
 
 .nav-pills {
@@ -151,8 +151,6 @@ aside#sidebar {
 }
 
 .post-categories{
-
- 
 	vertical-align: text-bottom;
 	display: inline;
 }
@@ -173,8 +171,8 @@ aside#sidebar {
 .post-category.active{
 	color: #275da1;
 	font-weight: bolder;
-	background-color: #f2c025;
-	border: 1px solid #f2c025;
+	background-color: #edc51e;
+	border: 1px solid #edb700;
 }
 
 .post-category.active > a, .post-category.active > a:hover {
