@@ -1,6 +1,6 @@
 ---
 layout: news_item
-title:  Sprint Chileno
+title:  El Sprint Chileno
 author: BenjaminVanRyseghem
 date:   2014-01-24 15:26:32
 categories: sprint chile

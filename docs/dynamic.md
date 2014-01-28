@@ -50,12 +50,12 @@ This leads to the replacement of the content of the current container instead of
 Third, the rebuilding of the user interface is performed.
 
 {% highlight smalltalk %}
-    rebuildWithNewLayout
-    	| newLayout |
-    
-    	newLayout := self newLayoutCreatedDynamically.
-    	self needRebuild: false. "tells the interpreter to keep my current UI element"
-    	self buildWithSpecLayout: newLayout. "rebuilds me with the new layout"
+rebuildWithNewLayout
+	| newLayout |
+
+	newLayout := self newLayoutCreatedDynamically.
+	self needRebuild: false. "tells the interpreter to keep my current UI element"
+	self buildWithSpecLayout: newLayout. "rebuilds me with the new layout"
 {% endhighlight %}
 
 
@@ -70,14 +70,14 @@ To prevent this, the message
 
 
 {% highlight smalltalk %}
-    rebuildWithNewLayout
-    	| newLayout |
-    
-    	newLayout := self newLayoutCreatedDynamically.
-    	self needRebuild: false.
-    	theButton needRebuild: false.
-    	theList needRebuild: false.
-    	self buildWithSpecLayout: newLayout.
+rebuildWithNewLayout
+	| newLayout |
+
+	newLayout := self newLayoutCreatedDynamically.
+	self needRebuild: false.
+	theButton needRebuild: false.
+	theList needRebuild: false.
+	self buildWithSpecLayout: newLayout.
 {% endhighlight %}
 
 
@@ -142,9 +142,9 @@ First we create a simple model with two sub widgets, a label and a text field, a
 
 
 {% highlight smalltalk %}
-    view := DynamicComposableModel new
-    	instantiateModels: #(label LabelModel text TextInputFieldModel);
-    	yourself.
+view := DynamicComposableModel new
+	instantiateModels: #(label LabelModel text TextInputFieldModel);
+	yourself.
 {% endhighlight %}
 
 
@@ -154,8 +154,8 @@ We can then specify the title and the initial size of the widget, adding the fol
 
 
 {% highlight smalltalk %}
-    view extent: 300@90;
-    	title: 'Choose your project'.
+view extent: 300@90;
+	title: 'Choose your project'.
 {% endhighlight %}
 
 
@@ -167,9 +167,9 @@ The following snippet shows the layout definition.
 
 
 {% highlight smalltalk %}
-    layout := SpecLayout composed
-    	newRow: [ :r | r add: #label width: 75; add: #text ];
-    	yourself.
+layout := SpecLayout composed
+	newRow: [ :r | r add: #label width: 75; add: #text ];
+	yourself.
 {% endhighlight %}
 
 
@@ -187,12 +187,12 @@ This is shown in the code:
 
 
 {% highlight smalltalk %}
-    view label text: 'Packages:'.
-    
-    view text
-    	autoAccept: true;
-    	entryCompletion: nil;
-    	ghostText: '.*'.
+view label text: 'Packages:'.
+
+view text
+	autoAccept: true;
+	entryCompletion: nil;
+	ghostText: '.*'.
 {% endhighlight %}
 
 
@@ -213,9 +213,9 @@ The following code shows how to do it.
 
 
 {% highlight smalltalk %}
-    toolbar := OkToolbar new
-    	okAction: [ regex := view text text ];
-    	yourself.
+toolbar := OkToolbar new
+	okAction: [ regex := view text text ];
+	yourself.
 {% endhighlight %}
 
 
@@ -228,9 +228,9 @@ The following code illustrates how to set up such a shortcut.
 
 
 {% highlight smalltalk %}
-    view text 
-    	bindKeyCombination: Character cr asKeyCombination 
-    	toAction: [ toolbar triggerOkAction ].
+view text 
+	bindKeyCombination: Character cr asKeyCombination 
+	toAction: [ toolbar triggerOkAction ].
 {% endhighlight %}
 
 
@@ -242,35 +242,35 @@ The final version of the code is:
 
 
 {% highlight smalltalk %}
-    view := DynamicComposableModel new
-    	instantiateModels: #(label LabelModel text TextInputFieldModel);
-    	extent: 300@90;
-    	title: 'Choose your project'
-    	yourself.
-    	
-    view label text: 'Packages:'.
-    
-    layout := SpecLayout composed
-    	newRow: [ :r | r add: #label width: 75; add: #text ];
-    	yourself.
-    
-    view text
-    	autoAccept: true;
-    	entryCompletion: nil;
-    	ghostText: '.*'.
-    	
-    toolbar := OkToolbar new
-    	okAction: [ regex := view text text ];
-    	yourself.
-    	
-    view text 
-    	bindKeyCombination: Character cr asKeyCombination 
-    	toAction: [ toolbar triggerOkAction ].
-    	
-    (view openDialogWithSpecLayout: layout)
-    	toolbar: toolbar;
-    	centered;
-    	modalRelativeTo: World.
+view := DynamicComposableModel new
+	instantiateModels: #(label LabelModel text TextInputFieldModel);
+	extent: 300@90;
+	title: 'Choose your project'
+	yourself.
+	
+view label text: 'Packages:'.
+
+layout := SpecLayout composed
+	newRow: [ :r | r add: #label width: 75; add: #text ];
+	yourself.
+
+view text
+	autoAccept: true;
+	entryCompletion: nil;
+	ghostText: '.*'.
+	
+toolbar := OkToolbar new
+	okAction: [ regex := view text text ];
+	yourself.
+	
+view text 
+	bindKeyCombination: Character cr asKeyCombination 
+	toAction: [ toolbar triggerOkAction ].
+	
+(view openDialogWithSpecLayout: layout)
+	toolbar: toolbar;
+	centered;
+	modalRelativeTo: World.
 {% endhighlight %}
 
 
@@ -293,13 +293,13 @@ First a simple list widget is created displaying all the subclasses of AstractWi
 
 
 {% highlight smalltalk %}
-    m := DynamicComposableModel new.
-    m instantiateModels: #( list ListModel ).
-    m list items: (AbstractWidgetModel allSubclasses sorted: [:a :b | a name < b name ]).
-    m layout: (SpecLayout composed
-    	add: #list;
-    	yourself).
-    m openWithSpec.
+m := DynamicComposableModel new.
+m instantiateModels: #( list ListModel ).
+m list items: (AbstractWidgetModel allSubclasses sorted: [:a :b | a name < b name ]).
+m layout: (SpecLayout composed
+	add: #list;
+	yourself).
+m openWithSpec.
 {% endhighlight %}
 
 
@@ -309,17 +309,17 @@ Then the list widget is reused to build a viewer widget displaying the protocol 
 
 
 {% highlight smalltalk %}
-    m2 := DynamicComposableModel new.
-    m2 assign: m to: #classes.
-    m2 instantiateModels: #( methods ListModel ).
-    m list whenSelectedItemChanged: [ :item | 
-    	item 
-    		ifNil: [ m2 methods: #() ]
-    		ifNotNil: [ m2 methods items: ((item selectorsInProtocol: 'protocol') sorted) ] ].
-    m2 layout: (SpecLayout composed
-    	newRow: [ :r | r add: #classes; add: #methods ];
-    	yourself).
-    m2 openWithSpec.
+m2 := DynamicComposableModel new.
+m2 assign: m to: #classes.
+m2 instantiateModels: #( methods ListModel ).
+m list whenSelectedItemChanged: [ :item | 
+	item 
+		ifNil: [ m2 methods: #() ]
+		ifNotNil: [ m2 methods items: ((item selectorsInProtocol: 'protocol') sorted) ] ].
+m2 layout: (SpecLayout composed
+	newRow: [ :r | r add: #classes; add: #methods ];
+	yourself).
+m2 openWithSpec.
 {% endhighlight %}
 
 
@@ -330,17 +330,17 @@ In addition, a text zone is edited to show the selected method source code.
 
 
 {% highlight smalltalk %}
-    m3 := DynamicComposableModel new.
-    m3 assign: m2 to: #top.
-    m3 instantiateModels: #( text TextModel ).
-    m2 methods whenSelectedItemChanged: [ :selector | 
-    	selector ifNil: [ m3 text text: '' ] ifNotNil: [ m3 text text: (m list selectedItem >> selector ) sourceCode ] ].
-    m3 layout: (SpecLayout composed
-    	newColumn: [ :c | c add: #top; add: #text ];
-    	yourself).
-    	
-    m3 openWithSpec.
-    m3 title: 'Protocol browser'
+m3 := DynamicComposableModel new.
+m3 assign: m2 to: #top.
+m3 instantiateModels: #( text TextModel ).
+m2 methods whenSelectedItemChanged: [ :selector | 
+	selector ifNil: [ m3 text text: '' ] ifNotNil: [ m3 text text: (m list selectedItem >> selector ) sourceCode ] ].
+m3 layout: (SpecLayout composed
+	newColumn: [ :c | c add: #top; add: #text ];
+	yourself).
+	
+m3 openWithSpec.
+m3 title: 'Protocol browser'
 {% endhighlight %}
 
 
