@@ -1,5 +1,9 @@
 header {
 	padding-top: 15px}
+
+header a.button{
+	text-decoration: none;
+}
 	
 .title {
 	color: #FFFFFF;
@@ -10,7 +14,7 @@ header {
 	margin-left: -20px;
 }
 
-	.nav {
+.nav {
 	padding-left: 100px;
 }
 
@@ -24,6 +28,7 @@ header {
 	background-color: #fff;
 	color: #327bcf;
 }
+
 li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:focus {
 	color: #275da1;
 	font-weight: bolder;

@@ -1,8 +1,9 @@
 ---
 layout: docs
-title: More
+title: Repositories
+prev_section: interpreter
 
-permalink: /docs/more/
+permalink: /docs/repositories/
 ---
 
 ### Latest image

@@ -2,7 +2,7 @@
 layout: docs
 title: Spec Interpreter
 prev_section: adapters
-next_section: more
+next_section: repositories
 permalink: /docs/interpreter/
 ---
 

@@ -22,7 +22,6 @@
  # - adapters
   - interpreter
 
-- title: Meta
+- title: More
   docs:
-  - more
-  - history
+  - repositories
