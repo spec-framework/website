@@ -1,17 +1,23 @@
+#main-content h2 {
+	font-weight: initial;
+}
+
 header {
 	padding-top: 15px}
 
 header a.button{
 	text-decoration: none;
+	top: 1px;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 	
 .title {
 	color: #FFFFFF;
+	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 
 .flake{
 	vertical-align: middle;
-	margin-left: -20px;
 }
 
 .nav {
@@ -20,8 +26,8 @@ header a.button{
 
 .nav-a {
 	color: #FFF;
-	background: #327bcf;
-	border: 1px solid #275da1;
+	background: transparent;
+	border: 2px solid #FFF;
 }
 
 .nav-a:hover, .nav-a:focus {
@@ -29,17 +35,26 @@ header a.button{
 	color: #327bcf;
 }
 
+.nav-pills>li>a {
+	border-radius: 6px;
+}
+
 li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:focus {
 	color: #275da1;
-	font-weight: bolder;
 	background-color: #edc51e;
-	border: 1px solid #edb700;
+	border: 2px solid #edb700;
+}
+
+.nav > li > a {
+	font-family: 'Lobster';
+	font-size: 28px;
+	padding: 0px 6px;
 }
 
 .nav-pills {
 	position: absolute;
-	top: 15px;
-	right: 280px;
+	top: 18px;
+	right: 240px;
 }
 
 .spec-header:hover {
@@ -81,8 +96,9 @@ footer {
 }
 
 #sidebar > h4 {
-	background: url(../images/flake22.png) no-repeat left transparent;
-	padding-left: 100px;
+	padding-bottom: 0px;
+	padding-left: 64px;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 	font-size: 28px;
 }
 
@@ -206,7 +222,7 @@ aside#sidebar {
 
 .archive-year {
 	font-size: 44px;
-	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 	font-weight: bold;
 	color: #666666;
 	margin-left: -60px;
@@ -268,7 +284,7 @@ body > div.footer > footer > div > div > p {
 	font-size: 70px;
 	line-height: 1em;
 	background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
-	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 
  
 	font-weight: 400;
@@ -298,10 +314,11 @@ body > div.footer > footer > div > div > p {
 }
 
 .box_title {
-	font-size: 32px;
-	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
+	font-size: 42px;
+	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
 	font-weight: bold;
 	color: #fff;
+	padding-top: 10px;
 }
 
 .box_paragraph {
@@ -313,8 +330,7 @@ body > div.footer > footer > div > div > p {
 	margin-right: 10px;
 	line-height: 1.5em;
 	word-spacing: .5em;
-	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-	font-weight: bold;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 
 .home_link {
@@ -323,13 +339,12 @@ body > div.footer > footer > div > div > p {
 	color: #f2c025;
 	text-align: left;
 	margin-top: 10px;
-	font-size: 18px;
+	font-size: 20px;
 	margin-left: 10px;
 	margin-right: 10px;
 	line-height: 1.5em;
 	word-spacing: .5em;
-	font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
-	font-weight: bold;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 	left: 0;
 }
 
