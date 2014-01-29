@@ -21,8 +21,8 @@ Where is starts to be really interesting is when you need to define your own use
 
 {% highlight smalltalk %}
 ButtonModel new 
-	label: 'Click me';
-	action: [ self halt ];
+	label: 'Browse me';
+	action: [ Smalltalk tools browser openOnClass: ButtonModel ];
 	openWithSpec.
 	
 ListModel new 
