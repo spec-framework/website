@@ -98,13 +98,10 @@ The symbol should be composed of the basic concept of the widget, e.g. list or b
 
 <p>The communication from the UI model to the adapter is performed using the dependents mechanism.
 This mechanism is used to to handle the fact that a same model can have multiple UI elements concurrently displayed.
-In fact the message 
-<code>changed: with:</code> is used to send the message 
-<emph>selector</emph> with the arguments 
-<emph>aCollection</emph> to the adapter.</p>
 
-<p>Then each adapter can convert this <emph>Spec</emph> message into a framework specific message. 
-By example, the method #filterWith: send by <strong>TreeModel</strong> via <code>changed: with:</code> is then implemented as following:</p>
+<p>The message <code>changed: with:</code> is used to send the message <emph>selector</emph> with the arguments <emph>aCollection</emph> to the adapters.
+Each adapter can then convert this <emph>Spec</emph> message into a framework specific message. 
+For example, the method <code>#filterWith:</code> sent by <strong>TreeModel</strong> via <code>changed: with:</code> is implemented as:
  
 {% highlight smalltalk %}
 filterWith: aFilter
@@ -199,11 +196,11 @@ It requires to update two methods:
 <strong>MorphicAdapterBindings</strong> for Morphic.</p>
 
 <p>The method <code>SpecAdapterBindings>>#initializeBinding</code> is present only to expose the whole set of adapters required.
-It fills up a dictionary as shown in the code:</p>
+It fills a dictionary as shown in the code:</p>
 
 {% highlight smalltalk %}
 initializeBindings
-       "This implementation is stupid, but it exposes all the container which need to be bound"
+       "This implementation is stupid, but it exposes all the containers which need to be bound"
        
        bindings
 	       at: #ButtonAdapter            put: #ButtonAdapter;
@@ -234,9 +231,9 @@ initializeBindings
            yourself
 {% endhighlight %}
 
-<p>Then each framework specific adapters set should define its own binding.
+<p>Each framework specific adapters set should define its own binding.
 To implement a new binding, a subclass of <strong>SpecAdapterBindings</strong> must be defined that overrides the method <code>initializeBindings</code>.
-This method will now binds <emph>Spec</emph> adapter names with framework specific adapter class names.
+This method must binds <emph>Spec</emph> adapter names with framework specific adapter class names.
 The following example shows how the morphic binding implements the method <code>initializeBindings</code>.</p>
 
 {% highlight smalltalk %}
