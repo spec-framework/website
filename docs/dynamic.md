@@ -346,4 +346,4 @@ m3 title: 'Protocol browser'
 The final result looks like the Figure 
 [1.2](#ex_browser).
 
-<a name="ex_browser"></a><p class="figure">![ex_browser]({{ site.url }}/figures/Protocol_Browser.png "Prototype of Protocol Browser")</p>
+<a name="ex_browser"></a><p class="figure">![ex_browser]({{ site.url }}/figures/Dyn_Protocol_Browser.png "Prototype of Protocol Browser")</p>
