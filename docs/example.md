@@ -506,7 +506,7 @@ title
 {% endhighlight %}
 
 
-This finished the protocol browser.
+This finishes the protocol browser.
 The final user interface can be opened with the following snippet: 
 `ProtocolBrowser new openWithSpec`.
 The result can be seen in figure 
