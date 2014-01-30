@@ -18,21 +18,14 @@ In this section we do not detail the different parts of
 
 
 The example is structured in four parts.
-First a list UI dedicated to render the subclasses of the 
-*AbstractWidgetModel* class is created and is called 
-**ModelList**.
-Second a UI composed of a list and a label is defined and named 
-**ProtocolList**.
-Third a protocol viewer is defined by combining a 
-**ModelList** with two 
-**ProtocolList** to browse the 
-*protocol* and 
-*protocol-events* methods.
-Finally a protocol browser is made by reusing a protocol viewer with a text zone in addition.
+First, a list UI named  **ModelList** that is dedicated to render the subclasses of the *AbstractWidgetModel* class is created.
+Second, a UI composed of a list and a label is defined and named **ProtocolList**.
+Third, a protocol viewer is defined by combining a **ModelList** with two **ProtocolList** to browse the *protocol* and *protocol-events* methods.
+Finally a protocol browser is made by reusing a protocol viewer and adding a text zone.
 
 
-<a name="methodList" class="hash"></a>
-## The MethodList <a href="#methodList" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+<a name="modelList" class="hash"></a>
+## The ModelList <a href="#modelList" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
 
 
 Creating a specific UI always starts with the subclassing of 
@@ -111,7 +104,7 @@ whenSelectedItemChanged: aBlock
 
 
 The first UI is now done.
-The result can be seen by performing the following snippet: 
+The result can be seen by executing the following snippet of code: 
 `ModelList new openWithSpec`.
 
 
@@ -215,8 +208,7 @@ whenSelectedItemChanged: aBlock
 
 
 The 
-**ProtocolList** UI can be seen by evaluating the snippet 
-`ProtocolList new openWithSpec`.
+**ProtocolList** UI can be seen by evaluating `ProtocolList new openWithSpec`.
 
 
 <a name="protocolViewer" class="hash"></a>
@@ -257,7 +249,7 @@ ComposableModel subclass: #ProtocolViewer
 
 The 
 `initializeWidgets` method now uses a different way to initialize the sub-widgets of the UI. 
-This is because it does not use basic widgets but instead reuses the user interfaces we defines previously as sub widgets.
+This is because it does not use basic widgets but instead reuses the user interfaces we defines previously.
 The remainder of the method is quite similar to the previous implementation:
 
 
@@ -330,7 +322,7 @@ initializePresenter
 
 
 The remaining methods are getters, methods to delegate to sub widgets, one method to compute the methods in a specific class for a specific protocol, and methods to register to sub widget events.
-Those methods are summed up in this code:
+Those methods are given in this code:
 
 
 
@@ -386,7 +378,7 @@ whenProtocolChangedDo: aBlock
 {% endhighlight %}
 
 
-As previously the result can be seen by executing the following snippet: 
+As previously, the result can be seen by executing the following snippet of code: 
 `ProtocolViewer new openWithSpec`.
 
 
@@ -428,7 +420,7 @@ initializeWidgets
 
 
 The layout is more complex than the previous layouts.
-Now the user interface mainly lays out sub widgets of its sub widgets.
+Now the user interface mainly lays out widgets that are contained in its `viewer` sub widget (the list of models and the two protocol browsers).
 The layout is based on a column whose first row is divided in columns.
 The implementation of this method is shown in the following code:
 
