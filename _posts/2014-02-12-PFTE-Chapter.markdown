@@ -10,7 +10,7 @@ I am happy to announce that Johan Fabry and I finished the documentation of Spec
 This documentation is up-to-date with the latest version of Spec, and is focused towards people wanting to use it and even extend it.
 We hope that this text will help all the people that are building UIs in Pharo, and it will clear up any doubts that they may have.
 
-The chapter is available in source form from the GitHub project of the [PFTE book](https://github.com/SquareBracketAssociates/PharoForTheEnterprise-english).
+The chapter is available in source form from the GitHub project of the [Pharo For The Enterprise book](https://github.com/SquareBracketAssociates/PharoForTheEnterprise-english).
 
 The easiest way to read the chapter is from the continuous integration server, which produces a html file of the chapter [here](https://ci.inria.fr/pharo-contribution/job/PharoForTheEnterprise/lastSuccessfulBuild/artifact/Spec/Spec.pier.html).
 
