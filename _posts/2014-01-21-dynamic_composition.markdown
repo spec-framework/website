@@ -18,6 +18,6 @@ The first problem was actually just a method missing since the `DynamicComposabl
 
 The second problem was slighty more tedious. To work, it requires from the embedded sub widget to have a layout defined. A new instance variable `layout` has been introduce to hold the **SpecLayout** instance used to position the sub widgets. This way, when a layout is requested for the dynamic model, this layout is returned (*regardless of the selector requested*).
 
-These two fixes add support for a better composition in the dynamic context  <i class='fa fa-smile-o fa-2x'></i>.
+These two fixes add support for a better composition in the dynamic context <i class='fa fa-smile-o fa-2x'></i>.
 
 If you want to try, this [snippet](https://gist.github.com/BenjaminVanRyseghem/cd02f2dc61f350a6495f) gives you an example of how to build such unser interface.
