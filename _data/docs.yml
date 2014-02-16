@@ -15,6 +15,7 @@
   - open
   - interactions
   - dynamic
+  - use_pharo_window
 
 - title: Inside Spec
   docs:
