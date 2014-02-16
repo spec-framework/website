@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Where to find what I want
-prev_section: dynamic
+prev_section: use-pharo-window
 next_section: own-model
 permalink: /docs/api/
 ---

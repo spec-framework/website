@@ -2,7 +2,7 @@
 layout: docs
 title: Dynamic UI
 prev_section: interactions
-next_section: use_pharo_window
+next_section: use-pharo-window
 permalink: /docs/dynamic/
 ---
 

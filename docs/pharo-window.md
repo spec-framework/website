@@ -3,7 +3,7 @@ layout: docs
 title: Use Pharo window
 prev_section: dynamic
 next_section: api
-permalink: /docs/use_pharo_window/
+permalink: /docs/use-pharo-window/
 ---
 
 *Spec* provides a hook for any application to open in the Pharo window.
