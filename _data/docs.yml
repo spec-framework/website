@@ -16,6 +16,7 @@
   - interactions
   - dynamic
   - use-pharo-window
+  - insert-morph
 
 - title: Inside Spec
   docs:

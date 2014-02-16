@@ -2,7 +2,7 @@
 layout: docs
 title: Use Pharo window
 prev_section: dynamic
-next_section: api
+next_section: insert-morph
 permalink: /docs/use-pharo-window/
 ---
 
