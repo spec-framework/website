@@ -3,7 +3,7 @@ layout: news_item
 title:  Improvements in DynamicComposableModel
 author: BenjaminVanRyseghem
 date:   2014-01-21 11:52:52
-categories: dynamic composition
+categories: improvement dynamic composition
 ---
 
 Right now it is easy to prototype a UI in a workspace or to dynamically build a model on demand at run time, but this prototype can not be reused for composition.
