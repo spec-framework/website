@@ -1,12 +1,12 @@
 ---
 layout: news_item
 title:  PFTE Release
-author: BenjaminVanRyseghem
+author: jfabry
 date:   2014-02-12 17:27:32
 categories: documentation release chile
 ---
 
-I am happy to announce that Johan Fabry and I finished the documentation of Spec for the Pharo For The Enterprise book.
+I am happy to announce that [Benjamin Van Ryseghem](benjamin.vanryseghem.com) and I finished the documentation of Spec for the Pharo For The Enterprise book.
 This documentation is up-to-date with the latest version of Spec, and is focused towards people wanting to use it and even extend it.
 We hope that this text will help all the people that are building UIs in Pharo, and it will clear up any doubts that they may have.
 
