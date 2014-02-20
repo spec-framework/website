@@ -15,6 +15,8 @@ So now, a **MenuModel** can be used in two cases: to define a toolbar, or to def
 
 An example can be opened via
 
-    ApplicationWithToolbar new openWithSpec
+{% highlight smalltalk %}
+ApplicationWithToolbar new openWithSpec
+{% endhighlight %}
 
 <a name="fig_ApplicationWithToolbar"></a><p class="figure">![fig_ApplicationWithToolbar]({{ site.url }}/figures/ApplicationWithToolbar.png "An example of application with a toolbar")</p>
