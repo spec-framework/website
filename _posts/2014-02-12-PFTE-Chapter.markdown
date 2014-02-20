@@ -19,4 +19,4 @@ You can find the pier files on GitHub<sup><a href="https://github.com/spec-frame
 
 Now it's time to build some cool user interfaces! <i class='fa fa-smile-o fa-2x'></i>
 
-PS: I would like to personally thank [Sean P. DeNigris](http://seandenigris.com) for his surprise pull requests.
+PS from Ben: I would like to personally thank [Sean P. DeNigris](http://seandenigris.com) for his surprise pull requests.
