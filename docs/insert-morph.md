@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: Insert a Morph
+title: Inserting a Morph
 prev_section: use-pharo-window
 next_section: api
 permalink: /docs/insert-morph/
