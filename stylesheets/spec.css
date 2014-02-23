@@ -10,7 +10,17 @@ header a.button{
 	top: 1px;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 }
-	
+
+.navbar {
+	background: transparent !important;
+	border: 0 none;
+	box-shadow: 0 0 0 0;
+}
+
+.spec-container {
+	max-width: 940px !important;
+}
+
 .title {
 	color: #FFFFFF;
 	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
@@ -286,28 +296,17 @@ body > div.footer > footer > div > div > p {
 	line-height: 1em;
 	background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
-
- 
-	font-weight: 400;
+	font-weight: normal;
 	color: #317bcf;
 }
 
-.home_boxes{
-	display: inline-block;
-	margin-top: 30px;
-}
-
-.home_box{
-	width: 310px;
-	display: inline-table;
-
-	;
+.home_box {
+	margin: 15px 0;
 	text-align: center;
-	height: 260px;
-	position: relative;
 	border-width: 1px;
 	border-color: #275da1;
 	border-style: solid;
+	
 	background: transparent url(../images/header-bg.jpg) 0 0}
 
 .home_wrapper {
@@ -317,7 +316,7 @@ body > div.footer > footer > div > div > p {
 .box_title {
 	font-size: 42px;
 	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
-	font-weight: bold;
+	font-weight: normal;
 	color: #fff;
 	padding-top: 10px;
 }
@@ -330,27 +329,17 @@ body > div.footer > footer > div > div > p {
 	margin-left: 10px;
 	margin-right: 10px;
 	line-height: 1.5em;
-	word-spacing: .5em;
-	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 
 .home_link {
-	bottom: 10px;
-	position: absolute;
-	color: #f2c025;
-	text-align: left;
-	margin-top: 10px;
-	font-size: 20px;
-	margin-left: 10px;
-	margin-right: 10px;
-	line-height: 1.5em;
-	word-spacing: .5em;
-	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
-	left: 0;
+	color: #FDBB2E;
+	margin: 10px;
+	font-size: 16px;
+	display: inline-block;
 }
 
 .home_link:hover {
-	color: #f2c025;
+	color: #FDBB2E;
 }
 
 .footer footer {

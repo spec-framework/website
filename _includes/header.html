@@ -1,17 +1,19 @@
-<a name="remove_me" class="hash">
+<a name="remove_me" class="hash"></a>
 <header>
-	<div class="grid">
-		<div class="unit one-third center-on-mobiles">
-			<div class="inner">
-				<h1>
-					<a href="{{ site.url }}/" class="spec-header">
-						<span class="title">Spec</span>
-						<img class="flake" src="{{ site.url }}/images/flake72.png" width="72" height="72" alt="">
-					</a>
-				</h1>
-				{% include primary-nav-items.html %}
-				<a href="https://github.com/SpecForPharo" class="button"><small>Follow Spec on </small>GitHub</a></div>
-			</div>
-		</div>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="container spec-container">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+	  </button>
+	  <a href="{{ site.url }}/" class="navbar-brand">
+		<span class="title">Spec</span>
+		<img class="flake" src="{{ site.url }}/images/flake72.png" width="72" height="72" alt="">
+	  </a>
+	  {% include primary-nav-items.html %}
+	  <a href="https://github.com/SpecForPharo" class="button"><small>Follow Spec on </small>GitHub</a>
 	</div>
+  </nav>
 </header>
