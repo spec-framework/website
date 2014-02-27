@@ -535,3 +535,11 @@ h4 {
 .figure {
 	text-align: center;
 }
+
+#post_author > div.post-avatar > a > img {
+  width: 80px;
+}
+
+#post_author > div.post-avatar {
+  text-align: right;
+}
