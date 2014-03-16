@@ -2,19 +2,10 @@
 	font-weight: initial;
 }
 
-header {
-	padding-top: 15px}
-
-header a.button{
+header a.button {
 	text-decoration: none;
 	top: 1px;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
-}
-
-.navbar {
-	background: transparent !important;
-	border: 0 none;
-	box-shadow: 0 0 0 0;
 }
 
 .spec-container {
@@ -28,6 +19,14 @@ header a.button{
 
 .flake{
 	vertical-align: middle;
+}
+
+.navbar-toggle {
+	background: white;
+}
+
+.navbar-toggle .icon-bar {
+	background: #275da1;
 }
 
 .nav {

@@ -1,11 +1,9 @@
-<ul class="nav nav-pills">
-  <li class="nav-item {% if page.overview %}active{% endif %}">
-	  <a href="{{ site.url }}/" data-toggle="tab" class="nav-a">Overview</a>
+  <li class="{% if page.overview %}active{% endif %}">
+	<a href="{{ site.url }}/" data-toggle="tab" class="nav-a">Overview</a>
   </li>
-   <li class="nav-item {% if page.url contains '/docs/' %}active{% endif %}">
-	   <a href="{{ site.url }}/docs/home" data-toggle="tab" class="nav-a">Documentation</a>
-   </li>
-  <li class="nav-item {% if page.author %}active{% endif %}">
-	  <a href="{{ site.url }}/news" data-toggle="tab" class="nav-a">News</a>
+  <li class="{% if page.url contains '/docs/' %}active{% endif %}">
+	<a href="{{ site.url }}/docs/home" data-toggle="tab" class="nav-a">Documentation</a>
   </li>
-</ul>
+  <li class="{% if page.author %}active{% endif %}">
+	<a href="{{ site.url }}/news" data-toggle="tab" class="nav-a">News</a>
+  </li>
