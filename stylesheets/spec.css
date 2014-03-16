@@ -84,15 +84,12 @@ header {
 	padding: 20px 0;
 }
 
-header .navbar-nav-right a.button {
+header .navbar.nav-right a.button {
+	color: white;
 	text-decoration: none;
 	top: 1px;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
-	position: absolute;
-	height: 80px;
-	width: 202px;
-	right: 0px;
-	top: -2px;
+	top: -20px;
 	padding-left: 80px;
 	padding-top: 20px;
 	background: url('../images/github-button.png') no-repeat scroll 0px 0px transparent;
