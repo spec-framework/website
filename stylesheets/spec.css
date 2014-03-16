@@ -35,7 +35,7 @@
 }
 
 .nav {
-	padding-left: 100px;
+	padding-left: 50px;
 	padding-top: 16px;
 }
 
@@ -84,6 +84,10 @@ header {
 	padding: 20px 0;
 }
 
+header .navbar.nav-right {
+	float: right;
+}
+
 header .navbar.nav-right a.button {
 	color: white;
 	text-decoration: none;
@@ -95,9 +99,40 @@ header .navbar.nav-right a.button {
 	background: url('../images/github-button.png') no-repeat scroll 0px 0px transparent;
 }
 
+@media only screen and (max-width: 991px) {
+	header .navbar.nav-right a.button {
+		min-height: 40px;
+		margin-top: 21px;
+		background-image: none;
+		width: 100px;
+		height: auto;
+		display: inline-block;
+		padding: 5px 10px;
+		text-align: center;
+		font-size: 13px;
+		line-height: 1;
+		background-color: transparent;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+		border-color: white;
+		border-style: solid;
+		border-width: 2px;
+		font-weight: bold;
+		padding-top: 7px;
+	}
+	a.button small {
+		font-weight: normal;
+	}
+	.nav {
+		padding-left: 12px;
+	}
+}
+
 .spec-header:hover {
 	text-decoration: none;
 }
+
 
 footer {
 	padding-left: initial;
