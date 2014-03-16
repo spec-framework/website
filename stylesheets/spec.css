@@ -2,18 +2,14 @@
 	font-weight: initial;
 }
 
-header a.button {
-	text-decoration: none;
-	top: 1px;
-	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
-}
-
 .spec-container {
 	max-width: 940px !important;
 }
 
 .title {
 	color: #FFFFFF;
+	letter-spacing: -1px;
+	font-size: 72px;
 	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 
@@ -21,8 +17,17 @@ header a.button {
 	vertical-align: middle;
 }
 
+.navbar.navbar-static-top {
+	margin: 0;
+}
+
 .navbar-toggle {
 	background: white;
+}
+
+.navbar-brand {
+	padding: 0;
+	font-size: 72px;
 }
 
 .navbar-toggle .icon-bar {
@@ -31,6 +36,7 @@ header a.button {
 
 .nav {
 	padding-left: 100px;
+	padding-top: 16px;
 }
 
 .nav-a {
@@ -57,13 +63,39 @@ li.nav-item.active > a, li.nav-item.active > a:hover, li.nav-item.active > a:foc
 .nav > li > a {
 	font-family: 'Lobster';
 	font-size: 28px;
-	padding: 0px 6px;
+	padding: 8px;
+	margin: 2px;
+	border-radius: 6px;
+}
+
+.nav > li.active > a {
+	color: #275DA1;
+	background-color: #EDC51E;
+	border: 2px solid #EDB700;
 }
 
 .nav-pills {
 	position: absolute;
 	top: 18px;
 	right: 240px;
+}
+
+header {
+	padding: 20px 0;
+}
+
+header .navbar-nav-right a.button {
+	text-decoration: none;
+	top: 1px;
+	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
+	position: absolute;
+	height: 80px;
+	width: 202px;
+	right: 0px;
+	top: -2px;
+	padding-left: 80px;
+	padding-top: 20px;
+	background: url('../images/github-button.png') no-repeat scroll 0px 0px transparent;
 }
 
 .spec-header:hover {
