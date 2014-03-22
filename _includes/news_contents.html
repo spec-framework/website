@@ -1,28 +1,31 @@
 <div id="commentWrapper">
-	<div id="comment">
-		<aside id="sidebar">
-			<ul>
-				<li class="sidebar_category {% if page.title == 'News' %}current{% endif %}">
-					<a href="/news/">All News</a>
-				</li>
-				<li class="sidebar_category {% if page.title == 'Releases' %}current{% endif %}">
-					<a href="/news/releases/">Spec Releases</a>
-				</li>
-			</ul>
-			
-				<h4>News</h4>
-			<ul class="news_title">
-				{% for post in site.posts %}
-				<li class="sidebar_item {{ post.title | toJQuery }}">
-					<a href="#{{ post.title | uri_escape }}">{{ post.title }}</a>
-				</li>
-				{% endfor %}
-			</ul>
-			<div class="side-footer">
-				This site provides a <a href="{{ site.feed_url }}/feed.xml" class="rss-anchor"><i class='fa fa-rss-square fa-2x'></i></a> channel.
-			</div>
-		</aside>
-	</div>
+  <div id="comment">
+	<aside id="sidebar">
+
+	  <div class="side-footer">
+		This site provides a <a href="{{ site.feed_url }}/feed.xml" class="rss-anchor"><i class='fa fa-rss-square fa-2x'></i></a> channel.
+	  </div>	  
+
+	  <ul>
+		<li class="sidebar_category {% if page.title == 'News' %}current{% endif %}">
+		  <a href="/news/">All News</a>
+		</li>
+		<li class="sidebar_category {% if page.title == 'Releases' %}current{% endif %}">
+		  <a href="/news/releases/">Spec Releases</a>
+		</li>
+	  </ul>
+
+	  <h4>News</h4>
+	  <ul class="news_title">
+		{% for post in site.posts %}
+		<li class="sidebar_item {{ post.title | toJQuery }}">
+		  <a href="#{{ post.title | uri_escape }}">{{ post.title }}</a>
+		</li>
+		{% endfor %}
+	  </ul>
+
+	</aside>
+  </div>
 </div>
 
 {% include javascripts/floating_sidebar.html %}

@@ -178,6 +178,7 @@ footer {
 }
 
 #commentWrapper {
+	max-width: 250px;
 	display: inline-block;
 }
 
@@ -205,6 +206,10 @@ footer {
 	padding-left: 64px;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 	font-size: 28px;
+}
+
+.side-footer {
+	margin-bottom: 20px;
 }
 
 .post{
@@ -441,11 +446,6 @@ body > div.footer > footer > div > div > p {
 
 .rss-anchor > i {
 	padding-left: 2px;
-}
-
-#sidebar > div {
-	position: absolute;
-	bottom: 0px;
 }
 
 .highlight {
