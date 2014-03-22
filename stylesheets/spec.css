@@ -174,18 +174,12 @@ header .navbar.nav-right a.button {
 footer {
 	padding-left: initial;
 	width: initial;
-	margin-top: 80px;
+	padding: 20px 0;
 }
 
 #commentWrapper {
+	max-width: 250px;
 	display: inline-block;
-}
-
-#comment {
-	position: absolute;
-	top: 0;
-	margin-top: 20px;
-	padding-top: 19px;
 }
 
 #comment.fixed {
@@ -207,6 +201,10 @@ footer {
 	padding-left: 64px;
 	font-family: 'Vollkorn', 'Helvetica Neue', Helvetica, Arial, serif;
 	font-size: 28px;
+}
+
+.side-footer {
+	margin-bottom: 20px;
 }
 
 .post{
@@ -364,14 +362,12 @@ aside#sidebar {
 body > div > footer {
 	width: initial;
 	padding-left: initial;
-	margin-top:50px;
 }
 
 body > div.footer > footer > div > div > p {
 	text-align: center;
 	margin-bottom: 0px;
 	padding-bottom: 0px;
-	margin-top: -4px;
 }
 
 .home_title{
@@ -445,11 +441,6 @@ body > div.footer > footer > div > div > p {
 
 .rss-anchor > i {
 	padding-left: 2px;
-}
-
-#sidebar > div {
-	position: absolute;
-	bottom: 0px;
 }
 
 .highlight {
