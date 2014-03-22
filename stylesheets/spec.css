@@ -182,11 +182,6 @@ footer {
 	display: inline-block;
 }
 
-#comment {
-	margin-top: 20px;
-	padding-top: 20px;
-}
-
 #comment.fixed {
 	position: fixed;
 	top: 0;
