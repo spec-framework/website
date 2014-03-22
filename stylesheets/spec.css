@@ -11,6 +11,7 @@
 	letter-spacing: -1px;
 	font-size: 72px;
 	font-family: 'Lobster', 'Helvetica Neue', Helvetica, Arial, serif;
+	margin-left: 12px;
 }
 
 .flake{
@@ -23,6 +24,7 @@
 
 .navbar-toggle {
 	background: white;
+	margin-top: 22px;
 }
 
 .navbar-brand {
@@ -37,6 +39,7 @@
 .nav {
 	padding-left: 50px;
 	padding-top: 16px;
+
 }
 
 .nav-a {
@@ -100,6 +103,10 @@ header .navbar.nav-right a.button {
 }
 
 @media only screen and (max-width: 991px) {
+	header .navbar.nav-right {
+		margin-right: -20px;
+	}
+
 	header .navbar.nav-right a.button {
 		min-height: 40px;
 		margin-top: 21px;
@@ -133,37 +140,22 @@ header .navbar.nav-right a.button {
 	}
 }
 
-@media only screen and (max-width: 991px) {
-	header .navbar.nav-right a.button {
-		min-height: 40px;
-		margin-top: 21px;
-		background-image: none;
-		width: 100px;
-		height: auto;
-		display: inline-block;
-		padding: 5px 10px;
-		text-align: center;
-		font-size: 13px;
-		line-height: 1;
-		background-color: transparent;
-		-moz-border-radius: 6px;
-		-webkit-border-radius: 6px;
-		border-radius: 6px;
-		border-color: white;
-		border-style: solid;
-		border-width: 2px;
-		font-weight: bold;
-		padding-top: 7px;
-	}
-	a.button small {
-		font-weight: normal;
-	}
-	.nav {
-		padding-left: 12px;
+@media only screen and (max-width: 767px) {
+	ul.nav {
+		padding: 10px;
 	}
 
-	p.home_title {
-		font-size: 52px;
+	ul.nav.nav-right {
+		padding: 0 10px;
+		margin: 0 -15px; 
+	}
+
+	#commentWrapper {
+		display: none !important;
+	}
+
+	.avatar {
+		display: none !important;
 	}
 }
 
@@ -186,10 +178,7 @@ footer {
 }
 
 #commentWrapper {
-	left: 690px;
-	position: absolute;
-	margin-left: 50px;
-	width: 280px;
+	display: inline-block;
 }
 
 #comment {
@@ -249,40 +238,27 @@ div.highlight > pre {
 	text-align: center;
 }
 
-.sidebar_category{
+#sidebar ul li {
 	list-style-type: none;
-	font-size: 16px;
+	display: block;
+	font-size: 14px;
 }
 
-.sidebar_category.current:before {
+#sidebar ul li.current:before {
 	font-family: 'FontAwesome';
 	content: '\f0a4';
-	margin-left: -24px;
+	margin-left: -20px;
 	color: #317bcf;
-	font-size: 18px;
-	margin-right: 2px;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-.sidebar_item {
-	list-style-type: none;
-	font-size: 16px;
-}
-
-.sidebar_item.current:before {
-	font-family: 'FontAwesome';
-	content: '\f0a4';
-	margin-left: -24px;
-	color: #317bcf;
-	font-size: 18px;
+	font-size: 14px;
 	margin-right: 6px;
 	margin-top: 0;
 	margin-bottom: 0;
+	float: left;
 }
 
 aside#sidebar {
-	width: 244px;
+	width: auto;
+	margin-left: 20px;
 }
 
 .post-content {
