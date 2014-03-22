@@ -1,14 +1,21 @@
 {% include top.html %}
 
 <body class="home">
-  {% include header.html %}
+  <div class="wrapper">
+
+	{% include header.html %}
 
 	<div class="container-fluid">
 	  {{ content }}
+
 	</div>
 
-	<div class="footer">
-		{% include footer.html %}
-	</div>
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	{% include footer.html %}
+  </div>
+
 </body>
 </html>

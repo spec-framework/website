@@ -174,7 +174,7 @@ header .navbar.nav-right a.button {
 footer {
 	padding-left: initial;
 	width: initial;
-	margin-top: 80px;
+	padding: 20px 0;
 }
 
 #commentWrapper {
@@ -364,14 +364,12 @@ aside#sidebar {
 body > div > footer {
 	width: initial;
 	padding-left: initial;
-	margin-top:50px;
 }
 
 body > div.footer > footer > div > div > p {
 	text-align: center;
 	margin-bottom: 0px;
 	padding-bottom: 0px;
-	margin-top: -4px;
 }
 
 .home_title{
