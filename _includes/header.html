@@ -1,17 +1,35 @@
 <a name="remove_me" class="hash">
 <header>
-	<div class="grid">
-		<div class="unit one-third center-on-mobiles">
-			<div class="inner">
-				<h1>
-					<a href="{{ site.url }}/" class="spec-header">
-						<span class="title">Spec</span>
-						<img class="flake" src="{{ site.url }}/images/flake72.png" width="72" height="72" alt="">
-					</a>
-				</h1>
-				{% include primary-nav-items.html %}
-				<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a></div>
-			</div>
-		</div>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="{{ site.url }}/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="{{ site.url }}/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		  {% include primary-nav-items.html %}
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
 	</div>
+  </nav>
+
 </header>
