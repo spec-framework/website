@@ -7,6 +7,7 @@ $(function () {
 		var elt = parent.find(".current");
 		elt.removeClass('current');
 		if(hash){
+			hash = decodeURI(hash);
 			var id = "";
 			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
 			for ( var i = 0; i < hash.length; i++ ){

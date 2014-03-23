@@ -4,9 +4,7 @@ module Jekyll
       iChars = "~`!#$\%^&*+=-[]\\\';,/{}|\":<>?";
       result = ""
       input.each_char{ | c | 
-        if( c == ' ')
-          result += '20'
-           else 
+        if( c != ' ')
            if(!iChars.include?(c))
              result += c
            end
