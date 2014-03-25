@@ -24,7 +24,7 @@ The flow diagram
 [1.1](#fig_flow_diagram) shows a different steps of the interpretation of a model.
 
 
-<a name="fig_flow_diagram"></a>![fig_flow_diagram](figures/Interpretation_Chart.png "Spec interpretation flow chart")
+<a name="fig_flow_diagram"></a>![fig_flow_diagram]({{ site.url }}/figures/Interpretation_Chart.png "Spec interpretation flow chart")
 
 <a name="collect_the_data" class="hash"></a>
 ## Collect the data <a href="#collect_the_data" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
