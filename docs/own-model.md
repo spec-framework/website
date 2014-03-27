@@ -2,7 +2,7 @@
 layout: docs
 title: Creating new basic widgets
 prev_section: api
-next_section: adapters
+next_section: interpreter
 permalink: /docs/own-model/
 ---
 

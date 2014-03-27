@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Spec Interpreter
-prev_section: adapters
+prev_section: own-model
 next_section: repositories
 permalink: /docs/interpreter/
 ---
