@@ -44,7 +44,7 @@ initializeWidgets
 Specifying this method is **mandatory**, as without it the UI would have no widgets
 {% endalert %}
 
-#### Widget instantiation
+## Widget instantiation
 
 The instantiation of a widget can be done in two ways: through the use of an creation method or through the use of the `instantiate:` method.
 
