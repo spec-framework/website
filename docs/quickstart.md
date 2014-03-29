@@ -26,7 +26,7 @@ ButtonModel new
 	openWithSpec.
 	
 ListModel new 
-	items: Smalltalk classes
+	items: Smalltalk allClasses;
 	openWithSpec.	
 	
 "And many more widgets are waiting for you!"
