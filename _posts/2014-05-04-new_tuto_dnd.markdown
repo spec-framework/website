@@ -1,6 +1,6 @@
 ---
 layout: news_item
-title:  New Section&#x3a; Tutorials
+title:  New Section Tutorials
 author: BenjaminVanRyseghem
 date:   2014-05-04 20:24:32
 categories: tuto drag drop
