@@ -22,8 +22,11 @@
   docs:
   - api
   - own-model
- # - adapters
   - interpreter
+
+- title: Tutorials
+  docs:
+  - drag_n_drop
 
 - title: More
   docs:

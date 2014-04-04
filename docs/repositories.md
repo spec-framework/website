@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Repositories
-prev_section: interpreter
+prev_section: drag_n_drop_
 
 permalink: /docs/repositories/
 ---
