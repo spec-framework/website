@@ -9,7 +9,7 @@ install:
 - gem install albino
 - sudo easy_install pygments
 - gem install stringex
-- gem install jekyll
+- gem install jekyll -v 1.4.3
 - sudo chmod +x _pillar/downloadVM.sh
 - cd _pillar ; ./downloadVM.sh ; cd ..
 script: jekyll build
