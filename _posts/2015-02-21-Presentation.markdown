@@ -9,7 +9,7 @@ categories: presentation reuse
 A couple of days ago, [Johan Fabry](http://pleiad.cl/people/jfabry) did an amazing presentation
 about Spec and its key principle **reuse**.
 
-Before I spoil the fun, go watch the video <a href="http://youtu.be/OL23s9ZUIR0?list=PL4actYd6bfnz98ngrKALwwStl3C3odEKG"><i class='fa fa-youtube-play'></i></a>.
+Before I spoil the fun, go watch the video on YouTube<sup><a href="http://youtu.be/OL23s9ZUIR0"><i class='fa fa-youtube-play'></i></a></sup>.
 
 The slides of the presentation can be found on SlideShare<sup><a href="http://www.slideshare.net/pharoproject/pharodays-2015-spec"><i class='fa fa-slideshare'></i></a></sup>.
 
