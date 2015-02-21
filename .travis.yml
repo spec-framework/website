@@ -23,7 +23,7 @@ after_success:
 - git status
 - git add --all *
 - git commit -am "Generation of the Jekyll website"
-- git push https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/spec-framework/spec-framework.github.io.git master
+- git push --quiet https://BenjaminVanRyseghem:${GH_TOKEN}@github.com/spec-framework/spec-framework.github.io.git master > /dev/null 2>&1
 env:
   global:
   - secure: Ple/yWUxwngx2qAetIUDfcUAaHZ0kURU1tmb1X88YLbgLwTKiPFbbd0ScHOSvgqoG61T9cBAOuu+HAN/RsI0r1X76hysoYGaQW8uSDPt4Mf9XYrJJcQov6hXPSQZ2LoTxSkMprEXTI2CbfPQYgYgY/5ybfw6Mbr7uaT1rML9YDI=
