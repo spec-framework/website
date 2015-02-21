@@ -1,4 +1,0 @@
-*.changes
-*.log
-pharo*
-!Pharo.image
