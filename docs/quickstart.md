@@ -7,7 +7,7 @@ permalink: /docs/quickstart/
 ---
 
 For the impatient, Spec can be found in any Pharo 3.0 image.
-You can download ans run one with the following script:
+You can download and run one with the following script:
 
 {% highlight bash %}
 ~ $ curl get.pharo.org/30+vm | bash
