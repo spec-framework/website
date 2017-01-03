@@ -41,8 +41,8 @@
 # <pre><code>&lt;sarcasm> Ooooh, sarcasm... How original!&lt;/sarcasm></code></pre>
 # </figure>
 #
-require './_plugins/pygments_code'
-require './_plugins/raw'
+require_relative './pygments_code'
+require_relative './raw'
 
 module Jekyll
 

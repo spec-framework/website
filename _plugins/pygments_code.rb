@@ -1,5 +1,5 @@
-require './_plugins/raw'
-require './_plugins/config'
+require_relative './raw'
+require_relative './config'
 require 'albino'
 require 'pygments'
 require 'fileutils'

@@ -1,6 +1,5 @@
 highlighter: pygments
 markdown: redcarpet
-pygments: true
 exclude: [README.md]
 relative_permalinks: false
 category_dir: news/categories
