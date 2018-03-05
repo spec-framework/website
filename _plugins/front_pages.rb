@@ -8,7 +8,7 @@ module Jekyll
     safe true
   
     def generate(site)
-      tmp = site.posts.select { |num| num.data['front-page'] }
+      tmp = site.posts.docs.select { |num| num.data['front-page'] }
       site.config['front_pages'] = tmp.sort_by { |a| a.data['front-page'] }
     end
   
