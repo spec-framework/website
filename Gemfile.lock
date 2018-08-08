@@ -33,7 +33,7 @@ GEM
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
     posix-spawn (0.3.13)
-    public_suffix (3.0.0)
+    public_suffix (3.0.2)
     pygments.rb (1.2.0)
       multi_json (>= 1.0.0)
     rb-fsevent (0.10.2)
