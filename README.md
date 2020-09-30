@@ -1,4 +1,4 @@
-##An amazing website
+## An amazing website
 =======
 
 Since github does not support Jekyll website there are now two repo.
