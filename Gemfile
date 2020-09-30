@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# A sample Gemfile
+# A sample Gemfile is here
 source "https://rubygems.org"
 
 gem 'jekyll', '3.4.3'
