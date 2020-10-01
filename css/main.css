@@ -17,13 +17,16 @@ body {
   font: 13.34px Helvetica, Arial, sans-serif;
   font-size: small;
   text-align: center;
+  font-weight:Normal;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: 100%; }
+  font-size: 100%; 
+  text-decoration:underline;}
 
 h1 { 
 	margin-bottom: 1em; 
+	font-style:italic;
 	title {
 		background: transparent url(../images/flake72.png) 180 0 no-repeat;	
 	}
