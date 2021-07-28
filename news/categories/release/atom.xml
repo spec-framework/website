@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: release | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/release/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Spec 2.0.0 release]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/release/2014/08/30/Spec2.0.0.html"/>
+    <updated>2014-08-30T16:58:09+02:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/release/2014/08/30/Spec2.0.0</id>
+    <content type="html"><![CDATA[<p>I am glad to announce a new major release for Spec <i class="fa fa-smile-o"></i>.</p>
+
+<h2>Backward compatibility breaker</h2>
+
+<ul>
+<li>ListModel menus: now the <code>ListModel</code> instances use an instance of <code>MenuModel</code> as argument instead of a Morphic object. An example is provided in <code>ListModel class&gt;&gt;#example</code></li>
+</ul>
+
+<h2>Changes</h2>
+
+<ul>
+<li>Removes unrelated to Spec core packages (i.e. <code>Spec-Tools</code>)</li>
+<li>Adds <code>SpecTableLayout</code>, thanks @webwarrior-ws </li>
+<li>Removes hardcoded colours, thanks @Uko </li>
+</ul>
+
+<p>In addition, some bug fixes and clean ups.</p>
+
+<p>This version has been tested with Pharo 4.0 - build 167</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PFTE Release]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/documentation/release/chile/2014/02/12/PFTE-Chapter.html"/>
+    <updated>2014-02-12T18:27:32+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/documentation/release/chile/2014/02/12/PFTE-Chapter</id>
+    <content type="html"><![CDATA[<p>I am happy to announce that <a href="benjamin.vanryseghem.com">Benjamin Van Ryseghem</a> and I finished the documentation of Spec for the Pharo For The Enterprise book.
+This documentation is up-to-date with the latest version of Spec, and is focused towards people wanting to use it and even extend it.
+We hope that this text will help all the people that are building UIs in Pharo, and it will clear up any doubts that they may have.</p>
+
+<p>The chapter is available in source form from the GitHub project of the <a href="https://github.com/SquareBracketAssociates/PharoForTheEnterprise-english">Pharo For The Enterprise book</a>.</p>
+
+<p>The easiest way to read the chapter is from the continuous integration server, which produces a html file of the chapter <a href="https://ci.inria.fr/pharo-contribution/job/PharoForTheEnterprise/lastSuccessfulBuild/artifact/Spec/Spec.pier.html">here</a>.</p>
+
+<p>We tried our best to make it understandable and complete, but if you have any doubts or comments please do not hesitate to let us know !!
+You can find the pier files on GitHub<sup><a href="https://github.com/spec-framework/documentation"><i class='fa fa-github-alt'></i></a></sup>, where you can also report issues or propose fixes.</p>
+
+<p>Now it&#39;s time to build some cool user interfaces! <i class='fa fa-smile-o fa-2x'></i></p>
+
+<p>PS from Ben: I would like to personally thank <a href="http://seandenigris.com">Sean P. DeNigris</a> for his surprise pull requests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[First Release]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/release/website/2014/01/17/first_release.html"/>
+    <updated>2014-01-17T21:41:09+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/release/website/2014/01/17/first_release</id>
+    <content type="html"><![CDATA[<p>I am glad to announce this super website dedicated to Spec and the things related to this cool framework <i class="fa fa-smile-o"></i>.</p>
+
+<p>You will find here the Spec documentation as well as a news feed about Spec progresses.</p>
+
+<p>If you want to collaborate, the website can be found on <a href="https://github.com/SpecForPharo/website"><i class="fa fa-github-alt fa-2x"></i></a>.</p>
+
+<p>Thank you all!</p>
+]]></content>
+  </entry>
+  
+</feed>

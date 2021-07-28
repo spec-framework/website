@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tuto | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/tuto/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[New Section Tutorials]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/tuto/drag/drop/2014/05/04/new_tuto_dnd.html"/>
+    <updated>2014-05-04T22:24:32+02:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/tuto/drag/drop/2014/05/04/new_tuto_dnd</id>
+    <content type="html"><![CDATA[<p>The discussions about Spec in the mailing list, 
+I came out with the idea that a <code>tutorial</code> section 
+could be useful <i class='fa fa-smile-o'></i>.</p>
+
+<p>The first tutorial is about <a href="%7B%7B%20site.url%20%7D%7D/docs/drag_n_drop/">drag and drop</a>.</p>
+
+<p>Hope it will be hopeful.</p>
+]]></content>
+  </entry>
+  
+</feed>

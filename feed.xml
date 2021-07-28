@@ -1,21 +1,209 @@
----
-layout: none
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
         <channel>
-                <title>{{ site.name | xml_escape }}</title>
-                <description>{{ site.description | xml_escape }}</description>
-                <link>{{ site.feed_url }}</link>
-                <atom:link href="{{ site.feed_url }}/feed.xml" rel="self" type="application/rss+xml" />
-                {% for post in site.posts limit:10 %}
+                <title>Spec</title>
+                <description>All the news about Spec</description>
+                <link>http://spec.st</link>
+                <atom:link href="http://spec.st/feed.xml" rel="self" type="application/rss+xml" />
+                
                         <item>
-                                <title>{{ post.title | xml_escape }}</title>
-                                <description>{{ post.content | xml_escape }}</description>
-                                <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
-                                <link>{{ site.feed_url }}/{{ post.url }}</link>
-                                <guid isPermaLink="true">{{ site.feed_url }}/{{ post.url }}</guid>
+                                <title>Spec presentation</title>
+                                <description>&lt;p&gt;A couple of days ago, &lt;a href=&quot;http://pleiad.cl/people/jfabry&quot;&gt;Johan Fabry&lt;/a&gt; did an amazing presentation
+about Spec and its key principle &lt;strong&gt;reuse&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before I spoil the fun, go watch the video on YouTube&lt;sup&gt;&lt;a href=&quot;http://youtu.be/OL23s9ZUIR0&quot;&gt;&lt;i class='fa fa-youtube-play'&gt;&lt;/i&gt;&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;The slides of the presentation can be found on SlideShare&lt;sup&gt;&lt;a href=&quot;http://www.slideshare.net/pharoproject/pharodays-2015-spec&quot;&gt;&lt;i class='fa fa-slideshare'&gt;&lt;/i&gt;&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thanks again Johan &lt;i class=&quot;fa fa-smile-o&quot;&gt;&lt;/i&gt;!&lt;/p&gt;
+</description>
+                                <pubDate>Sat, 21 Feb 2015 01:15:29 +0000</pubDate>
+                                <link>http://spec.st//presentation/reuse/2015/02/21/Presentation.html</link>
+                                <guid isPermaLink="true">http://spec.st//presentation/reuse/2015/02/21/Presentation.html</guid>
                         </item>
-                {% endfor %}
+                
+                        <item>
+                                <title>Spec 2.0.0 release</title>
+                                <description>&lt;p&gt;I am glad to announce a new major release for Spec &lt;i class=&quot;fa fa-smile-o&quot;&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Backward compatibility breaker&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ListModel menus: now the &lt;code&gt;ListModel&lt;/code&gt; instances use an instance of &lt;code&gt;MenuModel&lt;/code&gt; as argument instead of a Morphic object. An example is provided in &lt;code&gt;ListModel class&amp;gt;&amp;gt;#example&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Changes&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Removes unrelated to Spec core packages (i.e. &lt;code&gt;Spec-Tools&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Adds &lt;code&gt;SpecTableLayout&lt;/code&gt;, thanks @webwarrior-ws &lt;/li&gt;
+&lt;li&gt;Removes hardcoded colours, thanks @Uko &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In addition, some bug fixes and clean ups.&lt;/p&gt;
+
+&lt;p&gt;This version has been tested with Pharo 4.0 - build 167&lt;/p&gt;
+</description>
+                                <pubDate>Sat, 30 Aug 2014 14:58:09 +0000</pubDate>
+                                <link>http://spec.st//release/2014/08/30/Spec2.0.0.html</link>
+                                <guid isPermaLink="true">http://spec.st//release/2014/08/30/Spec2.0.0.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>Spec license change</title>
+                                <description>&lt;p&gt;Today, Spec is changing its license.&lt;/p&gt;
+
+&lt;p&gt;Until today, Spec was released under the MIT license.&lt;/p&gt;
+
+&lt;p&gt;But after a disagreement with the Pharo direction, and in order to keep control of Spec future
+it has been decided to change Spec license.&lt;/p&gt;
+
+&lt;p&gt;Now Spec is released under a dual license:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GPL v3 license when shipped as part of a programming language, its core libraries and frameworks, or its Integrated Development Environment. For more information about the lincense, see &lt;a href=&quot;https://github.com/spec-framework/spec/blob/master/LICENSE-GPL3&quot;&gt;LICENSE-GPL&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MIT license for other cases. For more information about the license, see &lt;a href=&quot;https://github.com/spec-framework/spec/blob/master/LICENSE-MIT&quot;&gt;LICENSE-MIT&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+                                <pubDate>Fri, 15 Aug 2014 21:52:09 +0000</pubDate>
+                                <link>http://spec.st//license/gpl/mit/2014/08/15/Spec_change_license.html</link>
+                                <guid isPermaLink="true">http://spec.st//license/gpl/mit/2014/08/15/Spec_change_license.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>New Section Tutorials</title>
+                                <description>&lt;p&gt;The discussions about Spec in the mailing list, 
+I came out with the idea that a &lt;code&gt;tutorial&lt;/code&gt; section 
+could be useful &lt;i class='fa fa-smile-o'&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;The first tutorial is about &lt;a href=&quot;//benjamin.vanryseghem.com/projects/spec/docs/drag_n_drop/&quot;&gt;drag and drop&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Hope it will be hopeful.&lt;/p&gt;
+</description>
+                                <pubDate>Sun, 04 May 2014 20:24:32 +0000</pubDate>
+                                <link>http://spec.st//tuto/drag/drop/2014/05/04/new_tuto_dnd.html</link>
+                                <guid isPermaLink="true">http://spec.st//tuto/drag/drop/2014/05/04/new_tuto_dnd.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>Fix splitters</title>
+                                <description>&lt;p&gt;Glad to announce that with the help of &lt;a href=&quot;http://seandenigris.com&quot;&gt;Sean P. DeNigris&lt;/a&gt; the problem
+of splitters in Spec has been tackled.&lt;/p&gt;
+
+&lt;p&gt;The problem was revealed when multiple morphs were present after a splitter.
+In this configuration the two morphs moved in a really strange way.&lt;/p&gt;
+
+&lt;p&gt;The fix&lt;sup&gt;&lt;a href=&quot;https://github.com/spec-framework/spec/commit/b59dcf9e9cd0ca3bc2850f4b54aaeb394b9517a4&quot;&gt;&lt;i class='fa fa-github-alt'&gt;&lt;/i&gt;&lt;/a&gt;&lt;/sup&gt; provides a 
+new algorithm to retrieve the morphs which should be attached to each splitters.&lt;/p&gt;
+
+&lt;p&gt;The fix should be into Pharo as soon as the &lt;a href=&quot;https://pharo.fogbugz.com/default.asp?13163&quot;&gt;slice&lt;/a&gt; is integrated.&lt;/p&gt;
+</description>
+                                <pubDate>Thu, 01 May 2014 14:46:32 +0000</pubDate>
+                                <link>http://spec.st//fix/splitters/2014/05/01/fix_splitter.html</link>
+                                <guid isPermaLink="true">http://spec.st//fix/splitters/2014/05/01/fix_splitter.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>Menu Toolbar</title>
+                                <description>&lt;p&gt;Spec provides today a new missing feature: a menu toolbar.&lt;/p&gt;
+
+&lt;p&gt;As recently suggested in the mailing list, a menu toolbar is often a requirement to build an application.
+In order to provide an easy way to add a menu toolbar, Spec reuse &lt;strong&gt;MenuModel&lt;/strong&gt; to generate the toolbar entries.&lt;/p&gt;
+
+&lt;p&gt;So now, a &lt;strong&gt;MenuModel&lt;/strong&gt; can be used in two cases: to define a toolbar, or to define a contextual menu.&lt;/p&gt;
+
+&lt;p&gt;An example can be opened via&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-smalltalk&quot; data-lang=&quot;smalltalk&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ApplicationWithToolbar&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;openWithSpec&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;a name=&quot;fig_ApplicationWithToolbar&quot;&gt;&lt;/a&gt;&lt;p class=&quot;figure&quot;&gt;&lt;img src=&quot;//benjamin.vanryseghem.com/projects/spec/figures/ApplicationWithToolbar.png&quot; alt=&quot;fig_ApplicationWithToolbar&quot; title=&quot;An example of application with a toolbar&quot;&gt;&lt;/p&gt;&lt;/p&gt;
+</description>
+                                <pubDate>Wed, 19 Feb 2014 00:01:32 +0000</pubDate>
+                                <link>http://spec.st//improvement/menu/toolbar/2014/02/19/Menu_Toolbar.html</link>
+                                <guid isPermaLink="true">http://spec.st//improvement/menu/toolbar/2014/02/19/Menu_Toolbar.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>PFTE Release</title>
+                                <description>&lt;p&gt;I am happy to announce that &lt;a href=&quot;benjamin.vanryseghem.com&quot;&gt;Benjamin Van Ryseghem&lt;/a&gt; and I finished the documentation of Spec for the Pharo For The Enterprise book.
+This documentation is up-to-date with the latest version of Spec, and is focused towards people wanting to use it and even extend it.
+We hope that this text will help all the people that are building UIs in Pharo, and it will clear up any doubts that they may have.&lt;/p&gt;
+
+&lt;p&gt;The chapter is available in source form from the GitHub project of the &lt;a href=&quot;https://github.com/SquareBracketAssociates/PharoForTheEnterprise-english&quot;&gt;Pharo For The Enterprise book&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The easiest way to read the chapter is from the continuous integration server, which produces a html file of the chapter &lt;a href=&quot;https://ci.inria.fr/pharo-contribution/job/PharoForTheEnterprise/lastSuccessfulBuild/artifact/Spec/Spec.pier.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We tried our best to make it understandable and complete, but if you have any doubts or comments please do not hesitate to let us know !!
+You can find the pier files on GitHub&lt;sup&gt;&lt;a href=&quot;https://github.com/spec-framework/documentation&quot;&gt;&lt;i class='fa fa-github-alt'&gt;&lt;/i&gt;&lt;/a&gt;&lt;/sup&gt;, where you can also report issues or propose fixes.&lt;/p&gt;
+
+&lt;p&gt;Now it&amp;#39;s time to build some cool user interfaces! &lt;i class='fa fa-smile-o fa-2x'&gt;&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;PS from Ben: I would like to personally thank &lt;a href=&quot;http://seandenigris.com&quot;&gt;Sean P. DeNigris&lt;/a&gt; for his surprise pull requests.&lt;/p&gt;
+</description>
+                                <pubDate>Wed, 12 Feb 2014 17:27:32 +0000</pubDate>
+                                <link>http://spec.st//documentation/release/chile/2014/02/12/PFTE-Chapter.html</link>
+                                <guid isPermaLink="true">http://spec.st//documentation/release/chile/2014/02/12/PFTE-Chapter.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>El Sprint Chileno</title>
+                                <description>&lt;p&gt;After a cool sprint yesterday, a couple of &lt;em&gt;Spec&lt;/em&gt; issues has been tackled &lt;i class='fa fa-smile-o fa-2x'&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pharo.fogbugz.com/default.asp?12695&quot;&gt;&lt;strong&gt;Case 12695&lt;/strong&gt;&lt;/a&gt;: Fix &lt;em&gt;InputWidget&lt;/em&gt; example and add a new one. These examples are showing how to set up a window modality. Thanks Samir Saleh and &lt;a href=&quot;http://seandenigris.com&quot;&gt;Sean P. DeNigris&lt;/a&gt; for this fix.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pharo.fogbugz.com/default.asp?12683&quot;&gt;&lt;strong&gt;Case 12683&lt;/strong&gt;&lt;/a&gt;: The labels background is changing when the containing model is open as world (with &lt;code&gt;openWorldWithSpec&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://pharo.fogbugz.com/default.asp?12684&quot;&gt;&lt;strong&gt;Case 12684&lt;/strong&gt;&lt;/a&gt;: Renaming &lt;strong&gt;NewValueHolder&lt;/strong&gt; into &lt;strong&gt;ReactiveVariable&lt;/strong&gt;. But since Pharo 3 is already in beta phase, changing the API was not possible. So instead two hooks were introduced to allow the integration of code from Spec bleeding edge to Pharo 3. For new code (and all code in future versions of Pharo), use the following two hook methods:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;asReactiveVariable&lt;/code&gt;: use wherever you would have used &lt;code&gt;asValueHolder&lt;/code&gt;, which will soon be deprecated. For now, it returns a &lt;strong&gt;NewValueHolder&lt;/strong&gt;. In the future it will return a (polymorphic) &lt;strong&gt;ReactiveVariable&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;selectionReactiveVariable&lt;/code&gt;: as above, returns a &lt;strong&gt;SelectionValueHolder&lt;/strong&gt; for now. This extension method allows the two different packages to coexist without having direct references from the Spec model.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thanks a lot &lt;a href=&quot;http://seandenigris.com&quot;&gt;Sean P. DeNigris&lt;/a&gt; for you help and energy.&lt;/p&gt;
+</description>
+                                <pubDate>Fri, 24 Jan 2014 15:26:32 +0000</pubDate>
+                                <link>http://spec.st//sprint/chile/2014/01/24/sprint_chileno.html</link>
+                                <guid isPermaLink="true">http://spec.st//sprint/chile/2014/01/24/sprint_chileno.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>Improvements in DynamicComposableModel</title>
+                                <description>&lt;p&gt;Right now it is easy to prototype a UI in a workspace or to dynamically build a model on demand at run time, but this prototype can not be reused for composition.&lt;/p&gt;
+
+&lt;p&gt;Because of this, the prototyping is quite limited.&lt;/p&gt;
+
+&lt;p&gt;But the latest Spec commit&lt;sup&gt;&lt;a href=&quot;https://github.com/SpecForPharo/spec/commit/5d28c1f293bb1654e7395c18a2ea733fbd551d10&quot;&gt;&lt;i class='fa fa-github-alt'&gt;&lt;/i&gt;&lt;/a&gt;&lt;/sup&gt; introduces few changes on &lt;code&gt;DynamicComposableModel&lt;/code&gt; to tackle this issue.&lt;/p&gt;
+
+&lt;p&gt;The problem was double: no way to add an instanciated model as a sub widget, and the lookup for the layout was looking for a selector on class side.&lt;/p&gt;
+
+&lt;p&gt;The first problem was actually just a method missing since the &lt;code&gt;DynamicComposableModel&lt;/code&gt; class manage the widgets in a dictionary.&lt;/p&gt;
+
+&lt;p&gt;The second problem was slighty more tedious. To work, it requires from the embedded sub widget to have a layout defined. A new instance variable &lt;code&gt;layout&lt;/code&gt; has been introduce to hold the &lt;strong&gt;SpecLayout&lt;/strong&gt; instance used to position the sub widgets. This way, when a layout is requested for the dynamic model, this layout is returned (&lt;em&gt;regardless of the selector requested&lt;/em&gt;).&lt;/p&gt;
+
+&lt;p&gt;These two fixes add support for a better composition in the dynamic context &lt;i class='fa fa-smile-o fa-2x'&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you want to try, this &lt;a href=&quot;https://gist.github.com/BenjaminVanRyseghem/cd02f2dc61f350a6495f&quot;&gt;snippet&lt;/a&gt; gives you an example of how to build such unser interface.&lt;/p&gt;
+</description>
+                                <pubDate>Tue, 21 Jan 2014 11:52:52 +0000</pubDate>
+                                <link>http://spec.st//improvement/dynamic/composition/2014/01/21/dynamic_composition.html</link>
+                                <guid isPermaLink="true">http://spec.st//improvement/dynamic/composition/2014/01/21/dynamic_composition.html</guid>
+                        </item>
+                
+                        <item>
+                                <title>First Release</title>
+                                <description>&lt;p&gt;I am glad to announce this super website dedicated to Spec and the things related to this cool framework &lt;i class=&quot;fa fa-smile-o&quot;&gt;&lt;/i&gt;.&lt;/p&gt;
+
+&lt;p&gt;You will find here the Spec documentation as well as a news feed about Spec progresses.&lt;/p&gt;
+
+&lt;p&gt;If you want to collaborate, the website can be found on &lt;a href=&quot;https://github.com/SpecForPharo/website&quot;&gt;&lt;i class=&quot;fa fa-github-alt fa-2x&quot;&gt;&lt;/i&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Thank you all!&lt;/p&gt;
+</description>
+                                <pubDate>Fri, 17 Jan 2014 20:41:09 +0000</pubDate>
+                                <link>http://spec.st//release/website/2014/01/17/first_release.html</link>
+                                <guid isPermaLink="true">http://spec.st//release/website/2014/01/17/first_release.html</guid>
+                        </item>
+                
         </channel>
 </rss>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mit | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/mit/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Spec license change]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/license/gpl/mit/2014/08/15/Spec_change_license.html"/>
+    <updated>2014-08-15T23:52:09+02:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/license/gpl/mit/2014/08/15/Spec_change_license</id>
+    <content type="html"><![CDATA[<p>Today, Spec is changing its license.</p>
+
+<p>Until today, Spec was released under the MIT license.</p>
+
+<p>But after a disagreement with the Pharo direction, and in order to keep control of Spec future
+it has been decided to change Spec license.</p>
+
+<p>Now Spec is released under a dual license:</p>
+
+<ul>
+<li>GPL v3 license when shipped as part of a programming language, its core libraries and frameworks, or its Integrated Development Environment. For more information about the lincense, see <a href="https://github.com/spec-framework/spec/blob/master/LICENSE-GPL3">LICENSE-GPL</a></li>
+<li>MIT license for other cases. For more information about the license, see <a href="https://github.com/spec-framework/spec/blob/master/LICENSE-MIT">LICENSE-MIT</a></li>
+</ul>
+]]></content>
+  </entry>
+  
+</feed>

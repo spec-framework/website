@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sprint | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/sprint/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[El Sprint Chileno]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/sprint/chile/2014/01/24/sprint_chileno.html"/>
+    <updated>2014-01-24T16:26:32+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/sprint/chile/2014/01/24/sprint_chileno</id>
+    <content type="html"><![CDATA[<p>After a cool sprint yesterday, a couple of <em>Spec</em> issues has been tackled <i class='fa fa-smile-o fa-2x'></i>.</p>
+
+<p><a href="https://pharo.fogbugz.com/default.asp?12695"><strong>Case 12695</strong></a>: Fix <em>InputWidget</em> example and add a new one. These examples are showing how to set up a window modality. Thanks Samir Saleh and <a href="http://seandenigris.com">Sean P. DeNigris</a> for this fix.</p>
+
+<p><a href="https://pharo.fogbugz.com/default.asp?12683"><strong>Case 12683</strong></a>: The labels background is changing when the containing model is open as world (with <code>openWorldWithSpec</code>).</p>
+
+<p><a href="https://pharo.fogbugz.com/default.asp?12684"><strong>Case 12684</strong></a>: Renaming <strong>NewValueHolder</strong> into <strong>ReactiveVariable</strong>. But since Pharo 3 is already in beta phase, changing the API was not possible. So instead two hooks were introduced to allow the integration of code from Spec bleeding edge to Pharo 3. For new code (and all code in future versions of Pharo), use the following two hook methods:</p>
+
+<ul>
+<li><code>asReactiveVariable</code>: use wherever you would have used <code>asValueHolder</code>, which will soon be deprecated. For now, it returns a <strong>NewValueHolder</strong>. In the future it will return a (polymorphic) <strong>ReactiveVariable</strong></li>
+<li><code>selectionReactiveVariable</code>: as above, returns a <strong>SelectionValueHolder</strong> for now. This extension method allows the two different packages to coexist without having direct references from the Spec model.</li>
+</ul>
+
+<p>Thanks a lot <a href="http://seandenigris.com">Sean P. DeNigris</a> for you help and energy.</p>
+]]></content>
+  </entry>
+  
+</feed>

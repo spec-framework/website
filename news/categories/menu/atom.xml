@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: menu | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/menu/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Menu Toolbar]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/improvement/menu/toolbar/2014/02/19/Menu_Toolbar.html"/>
+    <updated>2014-02-19T01:01:32+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/improvement/menu/toolbar/2014/02/19/Menu_Toolbar</id>
+    <content type="html"><![CDATA[<p>Spec provides today a new missing feature: a menu toolbar.</p>
+
+<p>As recently suggested in the mailing list, a menu toolbar is often a requirement to build an application.
+In order to provide an easy way to add a menu toolbar, Spec reuse <strong>MenuModel</strong> to generate the toolbar entries.</p>
+
+<p>So now, a <strong>MenuModel</strong> can be used in two cases: to define a toolbar, or to define a contextual menu.</p>
+
+<p>An example can be opened via</p>
+
+<p><figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ApplicationWithToolbar</span> <span class="nb">new</span> <span class="nf">openWithSpec</span></code></pre></figure></p>
+
+<p><a name="fig_ApplicationWithToolbar"></a><p class="figure"><img src="%7B%7B%20site.url%20%7D%7D/figures/ApplicationWithToolbar.png" alt="fig_ApplicationWithToolbar" title="An example of application with a toolbar"></p></p>
+]]></content>
+  </entry>
+  
+</feed>

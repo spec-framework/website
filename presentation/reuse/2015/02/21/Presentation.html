@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/jquery-1.11.0.js"></script>
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/bootstrap.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/spec.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/figures.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stickyfooter.css">
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/ArchitectsDaughter.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Vollkorn.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Lobster.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/OpenSans.css">
+		
+		<link rel="alternate" type="application/rss+xml" title="Spec" href="//benjamin.vanryseghem.com/projects/spec/feed.xml"> 
+		
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+
+	<title>Spec • A new Smalltalk framework</title>
+	<head profile="http://www.w3.org/2005/10/profile">
+		<link rel="icon" type="image/png" href="//benjamin.vanryseghem.com/projects/spec/favicon.png">
+	</head>
+
+
+<body>
+  <div class="wrapper">
+
+	<a name="remove_me" class="hash">
+<header>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="//benjamin.vanryseghem.com/projects/spec/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="//benjamin.vanryseghem.com/projects/spec/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/" class="nav-a">Overview</a>
+  </li>
+  <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/docs/home" class="nav-a">Documentation</a>
+  </li>
+  <li class="active">
+	<a href="//benjamin.vanryseghem.com/projects/spec/news" class="nav-a">News</a>
+  </li>
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
+	</div>
+  </nav>
+
+</header>
+
+
+	<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
+			<div class="news">
+				<article class="article">
+	<h2>
+		Spec presentation
+		<a href="/presentation/reuse/2015/02/21/Presentation.html" class="permalink" title="Permalink"><i class='fa fa-link'></i></a>
+	</h2>
+	
+	<div class="post post-date">
+		21 Feb 2015
+	</div>
+	
+	<span class="post post-categories">
+		
+		<span class="post-category"><a href="//benjamin.vanryseghem.com/projects/spec/news/categories/presentation" class="post-category-link">presentation</a></span>
+		
+		<span class="post-category"><a href="//benjamin.vanryseghem.com/projects/spec/news/categories/reuse" class="post-category-link">reuse</a></span>
+		
+	</span>
+	
+	<div class="post post-meta">
+		<div id="post_author">
+			<div class="post-avatar">
+				<a href="https://github.com/BenjaminVanRyseghem" class="post-author">
+					<img src="https://github.com/BenjaminVanRyseghem.png" class="avatar" alt="BenjaminVanRyseghem"/>
+				</a>
+			</div>
+			<div class="post-authorname">
+				<a href="https://github.com/BenjaminVanRyseghem" class="post-author">
+					BenjaminVanRyseghem
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="post-content">
+		<p>A couple of days ago, <a href="http://pleiad.cl/people/jfabry">Johan Fabry</a> did an amazing presentation
+about Spec and its key principle <strong>reuse</strong>.</p>
+
+<p>Before I spoil the fun, go watch the video on YouTube<sup><a href="http://youtu.be/OL23s9ZUIR0"><i class='fa fa-youtube-play'></i></a></sup>.</p>
+
+<p>The slides of the presentation can be found on SlideShare<sup><a href="http://www.slideshare.net/pharoproject/pharodays-2015-spec"><i class='fa fa-slideshare'></i></a></sup>.</p>
+
+<p>Thanks again Johan <i class="fa fa-smile-o"></i>!</p>
+
+	</div>
+</article>
+			</div>		
+		</section>
+		<div id="commentWrapper">
+  <div id="comment">
+	<aside id="sidebar">
+
+	  <div class="side-footer">
+		This site provides a <a href="http://spec.st/feed.xml" class="rss-anchor"><i class='fa fa-rss-square fa-2x'></i></a> channel.
+	  </div>	  
+
+	  <ul>
+		<li class="sidebar_category ">
+		  <a href="/news/">All News</a>
+		</li>
+		<li class="sidebar_category ">
+		  <a href="/news/releases/">Spec Releases</a>
+		</li>
+	  </ul>
+
+	  <h4>News</h4>
+	  <ul class="news_title">
+		
+		<li class="sidebar_item current">
+		  <a href="/presentation/reuse/2015/02/21/Presentation.html">Spec presentation</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/release/2014/08/30/Spec2.0.0.html">Spec 2.0.0 release</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/license/gpl/mit/2014/08/15/Spec_change_license.html">Spec license change</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/tuto/drag/drop/2014/05/04/new_tuto_dnd.html">New Section Tutorials</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/fix/splitters/2014/05/01/fix_splitter.html">Fix splitters</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/improvement/menu/toolbar/2014/02/19/Menu_Toolbar.html">Menu Toolbar</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/documentation/release/chile/2014/02/12/PFTE-Chapter.html">PFTE Release</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/sprint/chile/2014/01/24/sprint_chileno.html">El Sprint Chileno</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/improvement/dynamic/composition/2014/01/21/dynamic_composition.html">Improvements in DynamicComposableModel</a>
+		</li>
+		
+		<li class="sidebar_item ">
+		  <a href="/release/website/2014/01/17/first_release.html">First Release</a>
+		</li>
+		
+	  </ul>
+
+	</aside>
+  </div>
+</div>
+
+<script>
+$(document).ready(function () {  
+	var top = $('#comment').offset().top - parseFloat($('#comment').css('marginTop').replace(/auto/, 0));
+	$(window).scroll(function (event) {
+		// what the y position of the scroll is
+		var y = $(this).scrollTop();
+
+		// whether that's below the form
+		if (y >= top) {
+			// if so, ad the fixed class
+			$('#comment').addClass('fixed');
+			$('#thanks').addClass('fixed');
+		} else {
+			// otherwise remove it
+			$('#comment').removeClass('fixed');
+			$('#thanks').removeClass('fixed');
+		}
+	});
+});
+</script>
+
+		<div class="clear"></div>
+	</div>
+</div>
+
+<script>
+$(function () {
+	var currentHash = "remove_me";
+	
+	function changeHash(hash){
+		var parent = $(".news_title");
+		var elt = parent.find(".current");
+		elt.removeClass('current');
+		if(hash){
+			hash = decodeURI(hash);
+			var id = "";
+			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+			for ( var i = 0; i < hash.length; i++ ){
+				var each = hash.charAt(i);
+				if ((each !== ' ') && (iChars.indexOf(each) === -1)){
+					id += each;
+				}
+			};
+			elt = parent.find("."+id);
+			elt.addClass('current');
+		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
+	});
+	
+	$(document).scroll(function (e) {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
+				if(hash === "remove_me"){
+					if(history.replaceState) {
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
+					}
+					else {
+					    location.hash = "";
+					}
+				} else {
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
+				}
+				currentHash = hash;
+				changeHash(hash);
+			}
+		});
+	});
+});
+</script>
+
+
+
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	<footer id="footer">
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p class="footer-text">
+		  The contents of this website are &copy;&nbsp;2014 <a href="http://benjamin.vanryseghem.com">Benjamin Van Ryseghem</a><br/>
+		  under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)</a>.
+	  </p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+</body>
+</html>

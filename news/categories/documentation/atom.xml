@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: documentation | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/documentation/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PFTE Release]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/documentation/release/chile/2014/02/12/PFTE-Chapter.html"/>
+    <updated>2014-02-12T18:27:32+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/documentation/release/chile/2014/02/12/PFTE-Chapter</id>
+    <content type="html"><![CDATA[<p>I am happy to announce that <a href="benjamin.vanryseghem.com">Benjamin Van Ryseghem</a> and I finished the documentation of Spec for the Pharo For The Enterprise book.
+This documentation is up-to-date with the latest version of Spec, and is focused towards people wanting to use it and even extend it.
+We hope that this text will help all the people that are building UIs in Pharo, and it will clear up any doubts that they may have.</p>
+
+<p>The chapter is available in source form from the GitHub project of the <a href="https://github.com/SquareBracketAssociates/PharoForTheEnterprise-english">Pharo For The Enterprise book</a>.</p>
+
+<p>The easiest way to read the chapter is from the continuous integration server, which produces a html file of the chapter <a href="https://ci.inria.fr/pharo-contribution/job/PharoForTheEnterprise/lastSuccessfulBuild/artifact/Spec/Spec.pier.html">here</a>.</p>
+
+<p>We tried our best to make it understandable and complete, but if you have any doubts or comments please do not hesitate to let us know !!
+You can find the pier files on GitHub<sup><a href="https://github.com/spec-framework/documentation"><i class='fa fa-github-alt'></i></a></sup>, where you can also report issues or propose fixes.</p>
+
+<p>Now it&#39;s time to build some cool user interfaces! <i class='fa fa-smile-o fa-2x'></i></p>
+
+<p>PS from Ben: I would like to personally thank <a href="http://seandenigris.com">Sean P. DeNigris</a> for his surprise pull requests.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/jquery-1.11.0.js"></script>
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/bootstrap.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/spec.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/figures.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stickyfooter.css">
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/ArchitectsDaughter.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Vollkorn.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Lobster.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/OpenSans.css">
+		
+		<link rel="alternate" type="application/rss+xml" title="Spec" href="//benjamin.vanryseghem.com/projects/spec/feed.xml"> 
+		
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+
+	<title>Spec • A new Smalltalk framework</title>
+	<head profile="http://www.w3.org/2005/10/profile">
+		<link rel="icon" type="image/png" href="//benjamin.vanryseghem.com/projects/spec/favicon.png">
+	</head>
+
+
+<body>
+  <div class="wrapper">
+
+	<a name="remove_me" class="hash">
+<header>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="//benjamin.vanryseghem.com/projects/spec/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="//benjamin.vanryseghem.com/projects/spec/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/" class="nav-a">Overview</a>
+  </li>
+  <li class="active">
+	<a href="//benjamin.vanryseghem.com/projects/spec/docs/home" class="nav-a">Documentation</a>
+  </li>
+  <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/news" class="nav-a">News</a>
+  </li>
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
+	</div>
+  </nav>
+
+</header>
+
+
+	<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
+			<div>
+				<article>
+					<h1>Creating new basic widgets</h1>
+					<p><em>Spec</em> provides for a large amount and wide variety of basic widgets. 
+In the rare case that a basic widget is missing, the 
+<em>Spec</em> framework will need to be extended to add this new widget.
+In this section we will explain how to create such a new basic widget.</p>
+
+<p>We will first explain the applicable part of how the widget build process is performed.
+This will reveal the different actors in the process and provide a clearer understanding of their responsibilities.
+We then present the three steps of widget creation: writing a new model, writing an adapter, and updating or creating an individual UI framework binding.</p>
+
+<p><a name="one_step" class="hash"></a></p>
+
+<h2>One step in the building process of a widget <a href="#one_step" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>The UI building process does not make a distinction between basic and composed widgets.
+Hence, at a specific point in the building process of a basic widget the default spec method of the widget is called, just as if it would be a composed widget.
+However in this case, instead of providing a layout for multiple widgets that comprise the UI, this method builds an adapter to the underlying UI framework.
+Depending of the underlying UI framework that is currently used, this method can provide different kind of adapters, for example an adapter for Morphic, or an adapter for Seaside, etc.</p>
+
+<p>The adapter, when instantiated by the UI model, will in turn instantiate a widget that is specific to the UI framework being used.</p>
+
+<p>For example, when using a List in the Morphic UI, the adaptor will be a MorphicListAdapter and it will contain a PluggableListMorph.
+This is this framework-specific widget that will be added to the widget container.</p>
+
+<p>Figure <a href="#model_adapter_uielement">1.1</a> shows the relationship between those objects.</p>
+
+<p><a name="model_adapter_uielement"></a><p class="figure"><img src="//benjamin.vanryseghem.com/projects/spec/figures/Model-Adapter-UIElement.png" alt="model_adapter_uielement" title="Relationship between the model, the adapter, and the UI element"></p></p>
+
+<p><a name="the_model" class="hash"></a></p>
+
+<h2>The Model <a href="#the_model" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>The new model needs to be a subclass of 
+<strong>AbstractWidgetModel</strong> and its name should be composed of the new basic widget concept, e.g. list or button, and of the word 
+<em>Model</em>.
+The responsibility of the model is to store all the state of the widget.
+Examples of widget-specific state are:</p>
+
+<ul>
+<li> the index of a list</li>
+<li> the label of a button</li>
+<li> the action block for when a text is validated in a text field</li>
+</ul>
+
+<p>The state is wrapped in reactive variables and kept in instance variables.
+For example, the code following shows how to wrap the state 
+<code>0</code> in a reactive variable and keep it as an instance variable.
+reactive variables are needed because they are later used to propagate state changes and thus create the interaction flow of the user interface, as discussed in the page <a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub&nbsp;widgets interaction</a>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">index</span> <span class="o">:=</span> <span class="m">0</span> <span class="nf">asValueHolder</span><span class="p">.</span></code></pre></figure>
+
+<p>For each instance variable that holds state three methods should be defined: the getter, the setter, and the registration method.
+The first two should classified in the protocol named 
+<strong>protocol</strong> while the registration method should be in 
+<strong>protocol-events</strong>.</p>
+
+<p>For example, the methods to define for the previous example can be implemented as following:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="c">&quot;in protocol: protocol&quot;</span>
+<span class="nf">index</span>
+    <span class="o">^</span><span class="nv">index</span> <span class="nf">value</span>
+ 
+<span class="c">&quot;in protocol: protocol&quot;</span>
+<span class="nf">index:</span> <span class="nv">anInteger</span>
+    <span class="nf">index</span> <span class="nf">value:</span> <span class="nv">anInteger</span>
+   
+<span class="c">&quot;in protocol: protocol-events&quot;</span>
+<span class="nf">whenIndexChanged:</span> <span class="nv">aBlock</span>
+    <span class="nf">index</span> <span class="nf">whenChangedDo:</span> <span class="nv">aBlock</span></code></pre></figure>
+
+<p>The last step to define a new model is to implement a method 
+<code>adapterName</code> at the class side.
+The method should be in the protocol named 
+*spec* and should return a symbol.
+The symbol should be composed of the basic concept of the widget, e.g. list or button, and the word <strong>Adapter</strong> like <strong>ListAdapter</strong>.</p>
+
+<p>The communication from the UI model to the adapter is performed using the dependents mechanism.
+This mechanism is used to to handle the fact that a same model can have multiple UI elements concurrently displayed.
+
+<p>The message <code>changed: with:</code> is used to send the message <emph>selector</emph> with the arguments <emph>aCollection</emph> to the adapters.
+Each adapter can then convert this <emph>Spec</emph> message into a framework specific message. 
+For example, the method <code>#filterWith:</code> sent by <strong>TreeModel</strong> via <code>changed: with:</code> is implemented as:
+ 
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">filterWith:</span> <span class="nv">aFilter</span>
+       
+   <span class="bp">self</span> <span class="nf">widgetDo:</span> [ <span class="o">:</span><span class="nv">w</span> <span class="o">||</span><span class="nv"> nodes </span><span class="o">|</span>
+           <span class="nv">nodes</span> <span class="o">:=</span> <span class="nv">w</span> <span class="nf">model</span> <span class="nf">rootNodes</span><span class="p">.</span>
+           <span class="nv">nodes</span> <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">nodeModel</span> <span class="nf">updateAccordingTo:</span> <span class="nv">aFilter</span> ]<span class="p">.</span>
+   
+           <span class="bp">self</span> <span class="nf">removeRootsSuchAs:</span> [ <span class="o">:</span><span class="nv">n</span> <span class="o">|</span> (<span class="nv">aFilter</span> <span class="nf">keepTreeNode:</span> <span class="nv">n</span>) <span class="nf">not</span> <span class="nf">and:</span> [ <span class="nv">n</span> <span class="nf">isEmpty</span> ] ]<span class="p">.</span>
+
+           <span class="bp">self</span> <span class="nf">changed:</span> <span class="ss">#rootNodes</span> ]<span class="p">.</span></code></pre></figure>
+
+
+
+<a name="the_adapter" class="hash"></a>
+<h2>The Adapter <a href="#the_adapter" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+
+<p>An adapter must be a subclass of <strong>AbstractAdapter</strong>.
+The adapter name should be composed of the UI framework name, e.g. Morphic, and the name of the adapter it is implementing, e.g. ListAdapter.
+The adapter is an object used to connect a UI framework specific element and the framework independent model.</p>
+
+<p>The only mandatory method for an adapter is <code>defaultSpec</code> on the class side.
+This method has the responsibility to instantiate the corresponding UI element.</p>
+
+<p>The next example shows how <strong>MorphicButtonAdapter</strong> instantiates its UI element.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">defaultSpec</span>
+    <span class="err">&lt;</span><span class="nv">spec</span><span class="nf">&gt;</span>
+
+    <span class="o">^</span> <span class="ss">#(PluggableButtonMorph</span>
+            <span class="ss">#color:</span>                             <span class="ss">#(model</span> <span class="ss">color)</span>
+            <span class="ss">#on:getState:action:label:menu:</span>     <span class="ss">#model</span> <span class="ss">#state</span> <span class="ss">#action</span> <span class="ss">#label</span> <span class="ss">nil</span>
+            <span class="ss">#getEnabledSelector:</span>                <span class="ss">#enabled</span>
+            <span class="ss">#getMenuSelector:</span>                   <span class="ss">#menu:</span>
+            <span class="ss">#hResizing:</span>                         <span class="ss">#spaceFill</span>
+            <span class="ss">#vResizing:</span>                         <span class="ss">#spaceFill</span>
+            <span class="ss">#borderWidth:</span>                       <span class="ss">#(model</span> <span class="ss">borderWidth)</span>
+            <span class="ss">#borderColor:</span>                       <span class="ss">#(model</span> <span class="ss">borderColor)</span>
+            <span class="ss">#askBeforeChanging:</span>                 <span class="ss">#(model</span> <span class="ss">askBeforeChanging)</span>
+            <span class="ss">#setBalloonText:</span>                    <span class="ss">#(model</span> <span class="ss">help)</span>
+            <span class="ss">#dragEnabled:</span>                       <span class="ss">#(model</span> <span class="ss">dragEnabled)</span>
+            <span class="ss">#dropEnabled:</span>                       <span class="ss">#(model</span> <span class="ss">dropEnabled)</span>    
+            <span class="ss">#eventHandler:</span>                      <span class="ss">#(EventHandler</span> <span class="ss">on:send:to:</span> <span class="ss">keyStroke</span> <span class="ss">keyStroke:fromMorph:</span> <span class="ss">model))</span></code></pre></figure>
+
+<p>Since the adapter is bridging the gap between the element of the UI framework and the model, the adapter also needs to forward the queries from the UI element to the model.
+Seen from the other way around: since the model is holding the state, the adapter is used to update the UI element state of the model.</p>
+
+<p>The methods involved in the communication from the model to the adapter as well as the methods involved in the communication from the adapter to the UI model should be in the protocol 
+<emph>spec protocol</emph>.
+On the other hand the methods involved in the communication from the adapter to the UI element and vice versa should be categorized in the protocol 
+<emph>widget API</emph>.</p>
+
+<p>To communicate with the UI element, the adapter methods use the method 
+<code>widgetDo:</code>.
+This method executes the block provided as argument, which will only happen after the UI element has already been created.</p>
+
+<p>The follwoing example shows how 
+<strong>MorphicLabelAdapter</strong> propagates the modification of the emphasis from the adapter to the UI element.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">emphasis:</span> <span class="nv">aTextEmphasis</span>
+
+    <span class="bp">self</span> <span class="nf">widgetDo:</span> [ <span class="o">:</span><span class="nv">w</span> <span class="o">|</span> <span class="nv">w</span> <span class="nf">emphasis:</span> <span class="nv">aTextEmphasis</span> ]</code></pre></figure>
+
+<p><a name="the_binding" class="hash"></a>
+<h2>The UI Framework binding <a href="#the_binding" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2></p>
+
+<p>The bindings is an object that is used to resolve the name of the adapter at run time.
+This allows for the same model to be used with several UI frameworks.</p>
+
+<p>Adding the new adapter to the default binding is quite simple.
+It requires to update two methods: 
+<code>initializeBindings</code> in 
+<strong>SpecAdapterBindings</strong> and 
+<code>initializeBindings</code> in the framework specific adapter class, e.g. 
+<strong>MorphicAdapterBindings</strong> for Morphic.</p>
+
+<p>The method <code>SpecAdapterBindings>>#initializeBinding</code> is present only to expose the whole set of adapters required.
+It fills a dictionary as shown in the code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeBindings</span>
+       <span class="c">&quot;This implementation is stupid, but it exposes all the containers which need to be bound&quot;</span>
+       
+       <span class="nv">bindings</span>
+           <span class="nf">at:</span> <span class="ss">#ButtonAdapter</span>            <span class="nf">put:</span> <span class="ss">#ButtonAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#CheckBoxAdapter</span>          <span class="nf">put:</span> <span class="ss">#CheckBoxAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ContainerAdapter</span>         <span class="nf">put:</span> <span class="ss">#ContainerAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DiffAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicDiffAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ImageAdapter</span>             <span class="nf">put:</span> <span class="ss">#ImageAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#LabelAdapter</span>             <span class="nf">put:</span> <span class="ss">#LabelAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ListAdapter</span>              <span class="nf">put:</span> <span class="ss">#ListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#IconListAdapter</span>          <span class="nf">put:</span> <span class="ss">#IconListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DropListAdapter</span>          <span class="nf">put:</span> <span class="ss">#DropListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MultiColumnListAdapter</span>   <span class="nf">put:</span> <span class="ss">#MultiColumnListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuAdapter</span>              <span class="nf">put:</span> <span class="ss">#MenuAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuGroupAdapter</span>         <span class="nf">put:</span> <span class="ss">#MenuGroupAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuItemAdapter</span>          <span class="nf">put:</span> <span class="ss">#MenuItemAdapter</span><span class="p">;</span>  
+           <span class="nf">at:</span> <span class="ss">#NewListAdapter</span>           <span class="nf">put:</span> <span class="ss">#NewListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#RadioButtonAdapter</span>       <span class="nf">put:</span> <span class="ss">#RadioButtonAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#SliderAdapter</span>            <span class="nf">put:</span> <span class="ss">#SliderAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TabManagerAdapter</span>        <span class="nf">put:</span> <span class="ss">#TabManagerAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TabAdapter</span>               <span class="nf">put:</span> <span class="ss">#TabAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TextAdapter</span>              <span class="nf">put:</span> <span class="ss">#TextAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TextInputFieldAdapter</span>    <span class="nf">put:</span> <span class="ss">#TextInputFieldAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeAdapter</span>              <span class="nf">put:</span> <span class="ss">#TreeAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeColumnAdapter</span>        <span class="nf">put:</span> <span class="ss">#TreeColumnAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeNodeAdapter</span>          <span class="nf">put:</span> <span class="ss">#TreeNodeAdapter</span><span class="p">;</span>          
+           <span class="nf">at:</span> <span class="ss">#WindowAdapter</span>            <span class="nf">put:</span> <span class="ss">#WindowAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DialogWindowAdapter</span>      <span class="nf">put:</span> <span class="ss">#DialogWindowAdapter</span><span class="p">;</span>
+           <span class="nf">yourself</span></code></pre></figure>
+
+<p>Each framework specific adapters set should define its own binding.
+To implement a new binding, a subclass of <strong>SpecAdapterBindings</strong> must be defined that overrides the method <code>initializeBindings</code>.
+This method must binds <emph>Spec</emph> adapter names with framework specific adapter class names.
+The following example shows how the morphic binding implements the method <code>initializeBindings</code>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeBindings</span>
+       
+       <span class="nv">bindings</span>
+           <span class="nf">at:</span> <span class="ss">#ButtonAdapter</span>            <span class="nf">put:</span> <span class="ss">#MorphicButtonAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#CheckBoxAdapter</span>          <span class="nf">put:</span> <span class="ss">#MorphicCheckBoxAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ContainerAdapter</span>         <span class="nf">put:</span> <span class="ss">#MorphicContainerAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DiffAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicDiffAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DropListAdapter</span>          <span class="nf">put:</span> <span class="ss">#MorphicDropListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#LabelAdapter</span>             <span class="nf">put:</span> <span class="ss">#MorphicLabelAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ListAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#IconListAdapter</span>          <span class="nf">put:</span> <span class="ss">#MorphicIconListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#ImageAdapter</span>             <span class="nf">put:</span> <span class="ss">#MorphicImageAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MultiColumnListAdapter</span>   <span class="nf">put:</span> <span class="ss">#MorphicMultiColumnListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicMenuAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuGroupAdapter</span>         <span class="nf">put:</span> <span class="ss">#MorphicMenuGroupAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#MenuItemAdapter</span>          <span class="nf">put:</span> <span class="ss">#MorphicMenuItemAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#NewListAdapter</span>           <span class="nf">put:</span> <span class="ss">#MorphicNewListAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#RadioButtonAdapter</span>       <span class="nf">put:</span> <span class="ss">#MorphicRadioButtonAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#SliderAdapter</span>            <span class="nf">put:</span> <span class="ss">#MorphicSliderAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TabManagerAdapter</span>        <span class="nf">put:</span> <span class="ss">#MorphicTabManagerAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TabAdapter</span>               <span class="nf">put:</span> <span class="ss">#MorphicTabAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TextAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicTextAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TextInputFieldAdapter</span>    <span class="nf">put:</span> <span class="ss">#MorphicTextInputFieldAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeAdapter</span>              <span class="nf">put:</span> <span class="ss">#MorphicTreeAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeColumnAdapter</span>        <span class="nf">put:</span> <span class="ss">#MorphicTreeColumnAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#TreeNodeAdapter</span>          <span class="nf">put:</span> <span class="ss">#MorphicTreeNodeAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#WindowAdapter</span>            <span class="nf">put:</span> <span class="ss">#MorphicWindowAdapter</span><span class="p">;</span>
+           <span class="nf">at:</span> <span class="ss">#DialogWindowAdapter</span>      <span class="nf">put:</span> <span class="ss">#MorphicDialogWindowAdapter</span><span class="p">;</span>
+           <span class="nf">yourself</span></code></pre></figure>
+
+<p>Once this is done, the bindings should be re-initialized by running the following snippet of code: 
+<code>SpecInterpreter hardResetBindings</code>.
+
+
+<p>For creating a specific binding, the class 
+<strong>SpecAdapterBindings</strong> needs to be overriden as well as its method 
+<code>initializeBindings</code>.
+
+<p>Then during the process of computing a <emph>Spec</emph> model and its layout into a framework specific UI element, the binding can be changed to change the output framework.
+The binding is managed by the <strong>SpecInterpreter</strong>.
+The next example shows how to do so.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">SpecInterpreter</span> <span class="nf">bindings:</span> <span class="nc">MyOwnBindingClass</span> <span class="nb">new</span><span class="p">.</span></code></pre></figure>
+
+<div class="hint_box hint">
+      <div class="hint_box_row">
+    <div class="hint_box_icon fa-stack fa-lg hint-icon">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-info fa-stack-1x hint-overlay"></i>
+    </div>
+    <div class="hint_box_text hint-text"><p>The <strong>SpecInterpreter</strong> bindings are reset after each execution.</p>
+</div>
+
+<p></div></div></p>
+
+					<div class="section-nav">
+	<div class="btn-group">
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Back
+		</a>
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/interpreter/">Next
+		</a>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+				</article>
+			</div>
+		</section>
+		<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			
+			<h4>Getting Started</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/home/">Welcome</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/quickstart/">Quick start</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/installation/">Installation</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/example/">Example</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Your UI</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/starting/">Where to start?</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Instantiating sub&nbsp;widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">Defining the layout</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/open/">Opening your UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub&nbsp;widgets interaction</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/dynamic/">Dynamic UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/use-pharo-window/">Using Pharo window</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/insert-morph/">Inserting a Morph</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Inside Spec</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Where to find what I want</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item current"><a href="//benjamin.vanryseghem.com/projects/spec/docs/own-model/">Creating new basic widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interpreter/">Spec Interpreter</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Tutorials</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/drag_n_drop/">Drag'n'Drop between two lists</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>More</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/repositories/">Repositories</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+		</aside>
+	</div>
+</div>
+
+		<div class="clear"></div>
+	</div>	  
+</div>
+
+<script>
+$(function () {
+	var currentHash = "remove_me";
+	
+	function changeHash(hash){
+		var parent = $(".news_title");
+		var elt = parent.find(".current");
+		elt.removeClass('current');
+		if(hash){
+			hash = decodeURI(hash);
+			var id = "";
+			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+			for ( var i = 0; i < hash.length; i++ ){
+				var each = hash.charAt(i);
+				if ((each !== ' ') && (iChars.indexOf(each) === -1)){
+					id += each;
+				}
+			};
+			elt = parent.find("."+id);
+			elt.addClass('current');
+		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
+	});
+	
+	$(document).scroll(function (e) {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
+				if(hash === "remove_me"){
+					if(history.replaceState) {
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
+					}
+					else {
+					    location.hash = "";
+					}
+				} else {
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
+				}
+				currentHash = hash;
+				changeHash(hash);
+			}
+		});
+	});
+});
+</script>
+
+
+
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	<footer id="footer">
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p class="footer-text">
+		  The contents of this website are &copy;&nbsp;2014 <a href="http://benjamin.vanryseghem.com">Benjamin Van Ryseghem</a><br/>
+		  under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)</a>.
+	  </p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+</body>
+</html>

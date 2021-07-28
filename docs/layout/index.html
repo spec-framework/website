@@ -1,0 +1,2915 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/jquery-1.11.0.js"></script>
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/bootstrap.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/spec.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/figures.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stickyfooter.css">
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/ArchitectsDaughter.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Vollkorn.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Lobster.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/OpenSans.css">
+		
+		<link rel="alternate" type="application/rss+xml" title="Spec" href="//benjamin.vanryseghem.com/projects/spec/feed.xml"> 
+		
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+
+	<title>Spec • A new Smalltalk framework</title>
+	<head profile="http://www.w3.org/2005/10/profile">
+		<link rel="icon" type="image/png" href="//benjamin.vanryseghem.com/projects/spec/favicon.png">
+	</head>
+
+
+<body>
+  <div class="wrapper">
+
+	<a name="remove_me" class="hash">
+<header>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="//benjamin.vanryseghem.com/projects/spec/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="//benjamin.vanryseghem.com/projects/spec/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/" class="nav-a">Overview</a>
+  </li>
+  <li class="active">
+	<a href="//benjamin.vanryseghem.com/projects/spec/docs/home" class="nav-a">Documentation</a>
+  </li>
+  <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/news" class="nav-a">News</a>
+  </li>
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
+	</div>
+  </nav>
+
+</header>
+
+
+	<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
+			<div>
+				<article>
+					<h1>Defining the layout</h1>
+					<p>This method specifies the layout of the different widgets in the UI.
+It also specifies how a widget reacts when the window is resized.</p>
+
+<p>For the same UI multiple layouts can be described, and when the UI is built a specific layout to use can be specified.
+If no such specific layout is given, the following lookup mechanism will be used to obtain the layout method:</p>
+
+<ol>
+<li>Search on class side, throughout the whole class hierarchy, for a method with the pragma <code>&lt;spec: #default&gt;</code>.</li>
+<li>If multiple such methods exist, the first one found is used.</li>
+<li>If none such methods exist and if there is exactly one method with the pragma <code>&lt;spec&gt;</code>, this method is used.</li>
+<li>No layout method is found, an error is raised.</li>
+</ol>
+
+<p>This method is on class side because it returns a value that usually is the same for all the instances.
+Put differently, usually all the instances of the same user interface have the same layout and hence this can be considered as being a class-side accessor for a class variable.
+Note that the lookup for the spec method to use starts on instance side, which allows a UI to have a more specific layout depending on the state of the instance.</p>
+
+<p>The simpliest example of such a method is laying out just one widget.
+The example following presents such a layout.
+It returns a layout in which just one widget is added: the widget contained in <code>theList</code> instance variable.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span>    <span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+        <span class="nf">add:</span> <span class="ss">#theList</span><span class="p">;</span>
+        <span class="nf">yourself</span></code></pre></figure>
+
+<p>The symbol <code>theList</code> refers to an instance side method returning a widget.
+This is because as instance variables are private, the layout class needs to use an accessor to obtain it when building the UI.
+Note that by default, a widget will take all the space available.</p>
+
+<p>As said above, multiple layouts can be described for the same user interface.
+In order to retrieve the correct method to apply, these methods need to be flagged with a pragma.
+The pragma can be either <code>&lt;spec: default&gt;</code> for the layout to use by default, or <code>&lt;spec&gt;</code> for the other layouts.</p>
+
+<div class="hint_box alertbox">
+      <div class="hint_box_row">
+    <div class="hint_box_icon fa-stack fa-lg alert-icon">
+      <i class="fa fa-exclamation-triangle fa-2x"></i>
+    </div>
+    <div class="hint_box_text alert-text"><p>Specifying this method is <strong>mandatory</strong>, as without it the UI would show no widgets to the user.</p>
+</div>
+
+<p></div></div></p>
+
+<p><a name="examples" class="hash"></a></p>
+
+<h2>Layout Examples <a href="#examples" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>As layouts can become quite complex, this section provides a list of examples of the construction of layouts.
+First two examples are given of the use of <a href="#rows_columns">rows and columns</a>.
+This is followed by two examples that explain how to set a <a href="#pixels">fixed size</a> for rows and columns.
+Next is an example that explains how to specify a widget <a href="#percentage">proportionally</a>.
+The last example presents the <a href="#expert">expert</a> mode in case everything else fails.
+To conclude, this section ends with a little <a href="#specify_layout">explanation</a> of how to specify which layout to use and where to find the complete API.</p>
+
+<p><a name="rows_columns" class="hash"></a></p>
+
+<h3>Rows and Columns <a href="#rows_columns" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h3>
+
+<p>Often the layout of user interfaces can be described in rows and columns, and <strong>Spec</strong> provides for an easy way to specify such layouts.
+The following example shows how to build a row of widgets.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">row</span> <span class="o">|</span>
+        <span class="nv">row</span>
+            <span class="nf">add:</span> <span class="ss">#theList</span><span class="p">;</span>
+            <span class="nf">add:</span> <span class="ss">#theButton</span>
+    ]<span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p>Having the widgets rendered as a column is similar, as shown in this example</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span>
+        <span class="nv">column</span>
+            <span class="nf">add:</span> <span class="ss">#theList</span><span class="p">;</span>
+            <span class="nf">add:</span> <span class="ss">#theButton</span>
+    ]<span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p>Rows and columns can be combined to build more complex layouts, and splitters between cells can be added.
+The example shows how to create a 3 columns layout, containing three buttons in each column.
+This example also shows the <code>addSplitter</code> message, which adds a splitter between the element added before it and the element added after.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">row</span> <span class="o">|</span>
+        <span class="nv">row</span>
+            <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span> 
+                 <span class="nv">column</span>
+                    <span class="nf">add:</span> <span class="ss">#button1</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button2</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button3</span> 
+            ]<span class="p">;</span>
+            <span class="nf">addSplitter</span><span class="p">;</span>
+            <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span> 
+                 <span class="nv">column</span>
+                    <span class="nf">add:</span> <span class="ss">#button4</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button5</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button6</span> 
+            ]<span class="p">;</span>
+            <span class="nf">addSplitter</span><span class="p">;</span>
+            <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span> 
+                 <span class="nv">column</span>
+                    <span class="nf">add:</span> <span class="ss">#button7</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button8</span><span class="p">;</span>
+                    <span class="nf">add:</span> <span class="ss">#button9</span> 
+            ]<span class="p">;</span>
+    ]<span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p><a name="pixels" class="hash"></a></p>
+
+<h3>Set size in pixels <a href="#pixels" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h3>
+
+<p>The height of rows as well as the width of columns can be specified, to prevent them to take all the available space.
+The first example shows how to specify the height of a row in pixels while the second example is about how to specify the column width.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">row</span> <span class="o">|</span>
+        <span class="nv">row</span>
+            <span class="nf">add:</span> <span class="ss">#theList</span><span class="p">;</span>
+            <span class="nf">add:</span> <span class="ss">#theButton</span>
+    ] <span class="nf">height:</span> <span class="m">30</span><span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span>
+        <span class="nv">column</span>
+            <span class="nf">add:</span> <span class="ss">#theList</span><span class="p">;</span>
+            <span class="nf">add:</span> <span class="ss">#theButton</span>
+    ] <span class="nf">width:</span> <span class="m">30</span><span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p>Note that it is generally considered a bad habit to hardcode the size of the widgets.
+Methods are available on <em>ComposableModel</em> providing sensible default sizes, like the width of a button.
+When specifying custom widget sizes, care should be taken to take in account the current font size.</p>
+
+<p><a name="percentage" class="hash"></a></p>
+
+<h3>Set proportional size <a href="#percentage" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h3>
+
+<p>It is also possible to specify the percentage of the container, e.g. the window, that a widget should occupy.
+As a result of this, the widget size will change accordingly when the container is resized.
+To do so, the proportional position of the four sides of a widget can be specified, as shown in this example.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">add:</span> <span class="ss">#theButton</span> <span class="nf">top:</span> <span class="m">0.25</span> <span class="nf">bottom:</span> <span class="m">0.25</span> <span class="nf">left:</span> <span class="m">0.25</span> <span class="nf">right:</span> <span class="m">0.25</span><span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p>For each edge, the proportion indicates at what percentage of the overall container the edge should be placed.
+Zero percent is the container edge, 100 percent is the opposite container edge.
+For example, for the top edge, the percentage is counted from the top down: 0 is the top edge, and 1 is the bottom edge.</p>
+
+<p>Also, the argument can be an integer if the offset has to be a fixed number of pixels.
+The number of pixels should be positive, as it indicates a distance from the corresponding edge, going to the opposite edge.</p>
+
+<p><a name="expert" class="hash"></a></p>
+
+<h3>Expert layouting <a href="#expert" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h3>
+
+<p>The previous examples should cover most of the cases of layout of widgets.
+For the remaining cases there is a last way to specify a widget by specifying its position.</p>
+
+<p>The method <code>add: origin: corner:</code> of <strong>SpecLayout</strong> specifies the layout of a widget, percentage-wise from the origin point to the corner point.
+These two points represent respectively the top left corner and the bottom right corner of the widget.
+The arguments express a percentage of the container, so these <strong>must</strong> be between <em>0@0</em> and <em>1@1</em> .</p>
+
+<p>In addition to those points, two offsets can be also be specified, using the method <code>add: origin: corner: offsetOrigin: offsetCorner:</code>.
+The offsets specify the number of pixels that the origin and the corner should be moved.</p>
+
+<p>Contrary to the previous way to define layouts, while using <code>add: origin: corner:  offsetOrigin: offsetCorner:</code> the offset can be negative.
+The offset expresses the number of pixels from the corresponding corner, in the classical computer graphics coordinate system where the origin is in the top left corner.
+Note that this approach is similar to the ProportionalLayout of <strong>Morphic</strong>.</p>
+
+<p>The following example shows how to add a widget as a toolbar.
+It specifies that the widget in the <code>toolbar</code> instance variable should take all the window width, but should be only 30 pixels in height.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">add:</span> <span class="ss">#toolbar</span> <span class="nf">origin:</span> <span class="m">0</span><span class="nf">@</span><span class="m">0</span> <span class="nf">corner:</span> <span class="m">1</span><span class="nf">@</span><span class="m">0</span> <span class="nf">offsetOrigin:</span> <span class="m">0</span><span class="nf">@</span><span class="m">0</span> <span class="nf">offsetCorner:</span> <span class="m">0</span><span class="nf">@</span><span class="m">30</span><span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+<p><a name="specify_layout" class="hash"></a></p>
+
+<h3>Specify the layout <a href="#specify_layout" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h3>
+
+<p>All the methods for adding sub widgets can be found in the <em>commands</em> and <em>commands-advanced</em> protocols of <strong>SpecLayout</strong>.</p>
+
+<p>As explained at the beginning of this page, a UI can have multiple layouts.
+So when the layout of a widget that is composed of multiple sub-widgets is defined, and this widget contains multiple layout methods that determine the layout of its sub-widgets, the layout method to use can be specified.</p>
+
+<p>All the methods seen in the previous examples come with a variant used to specify which selector to use for the layout method.
+By example, for the <code>add:</code> method the variant is  <code>add:withSpec:</code>.</p>
+
+<p>For example, consider a widget <strong>MyWidget</strong> defining a first layout method <code>firstLayout</code> as the default layout and another layout method called <code>anotherLayout</code>.
+The following example shows how to add an instance of <strong>MyUserInterface</strong> using its <code>anotherLayout</code> layout method.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">add:</span> <span class="ss">#MyUserInterface</span> <span class="nf">withSpec:</span> <span class="ss">#anotherLayout</span><span class="p">;</span>
+    <span class="nf">yourself</span></code></pre></figure>
+
+					<div class="section-nav">
+	<div class="btn-group">
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Back
+		</a>
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/open/">Next
+		</a>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+				</article>
+			</div>
+		</section>
+		<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			
+			<h4>Getting Started</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/home/">Welcome</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/quickstart/">Quick start</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/installation/">Installation</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/example/">Example</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Your UI</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/starting/">Where to start?</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Instantiating sub&nbsp;widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item current"><a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">Defining the layout</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/open/">Opening your UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub&nbsp;widgets interaction</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/dynamic/">Dynamic UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/use-pharo-window/">Using Pharo window</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/insert-morph/">Inserting a Morph</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Inside Spec</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Where to find what I want</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/own-model/">Creating new basic widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interpreter/">Spec Interpreter</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Tutorials</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/drag_n_drop/">Drag'n'Drop between two lists</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>More</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/repositories/">Repositories</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+		</aside>
+	</div>
+</div>
+
+		<div class="clear"></div>
+	</div>	  
+</div>
+
+<script>
+$(function () {
+	var currentHash = "remove_me";
+	
+	function changeHash(hash){
+		var parent = $(".news_title");
+		var elt = parent.find(".current");
+		elt.removeClass('current');
+		if(hash){
+			hash = decodeURI(hash);
+			var id = "";
+			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+			for ( var i = 0; i < hash.length; i++ ){
+				var each = hash.charAt(i);
+				if ((each !== ' ') && (iChars.indexOf(each) === -1)){
+					id += each;
+				}
+			};
+			elt = parent.find("."+id);
+			elt.addClass('current');
+		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
+	});
+	
+	$(document).scroll(function (e) {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
+				if(hash === "remove_me"){
+					if(history.replaceState) {
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
+					}
+					else {
+					    location.hash = "";
+					}
+				} else {
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
+				}
+				currentHash = hash;
+				changeHash(hash);
+			}
+		});
+	});
+});
+</script>
+
+
+
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	<footer id="footer">
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p class="footer-text">
+		  The contents of this website are &copy;&nbsp;2014 <a href="http://benjamin.vanryseghem.com">Benjamin Van Ryseghem</a><br/>
+		  under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)</a>.
+	  </p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+</body>
+</html>

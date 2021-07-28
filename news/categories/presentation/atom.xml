@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: presentation | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/presentation/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Spec presentation]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/presentation/reuse/2015/02/21/Presentation.html"/>
+    <updated>2015-02-21T02:15:29+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/presentation/reuse/2015/02/21/Presentation</id>
+    <content type="html"><![CDATA[<p>A couple of days ago, <a href="http://pleiad.cl/people/jfabry">Johan Fabry</a> did an amazing presentation
+about Spec and its key principle <strong>reuse</strong>.</p>
+
+<p>Before I spoil the fun, go watch the video on YouTube<sup><a href="http://youtu.be/OL23s9ZUIR0"><i class='fa fa-youtube-play'></i></a></sup>.</p>
+
+<p>The slides of the presentation can be found on SlideShare<sup><a href="http://www.slideshare.net/pharoproject/pharodays-2015-spec"><i class='fa fa-slideshare'></i></a></sup>.</p>
+
+<p>Thanks again Johan <i class="fa fa-smile-o"></i>!</p>
+]]></content>
+  </entry>
+  
+</feed>

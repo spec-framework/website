@@ -1,0 +1,2973 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/jquery-1.11.0.js"></script>
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/bootstrap.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/spec.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/figures.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stickyfooter.css">
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/ArchitectsDaughter.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Vollkorn.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Lobster.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/OpenSans.css">
+		
+		<link rel="alternate" type="application/rss+xml" title="Spec" href="//benjamin.vanryseghem.com/projects/spec/feed.xml"> 
+		
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+
+	<title>Spec • A new Smalltalk framework</title>
+	<head profile="http://www.w3.org/2005/10/profile">
+		<link rel="icon" type="image/png" href="//benjamin.vanryseghem.com/projects/spec/favicon.png">
+	</head>
+
+
+<body>
+  <div class="wrapper">
+
+	<a name="remove_me" class="hash">
+<header>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="//benjamin.vanryseghem.com/projects/spec/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="//benjamin.vanryseghem.com/projects/spec/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/" class="nav-a">Overview</a>
+  </li>
+  <li class="active">
+	<a href="//benjamin.vanryseghem.com/projects/spec/docs/home" class="nav-a">Documentation</a>
+  </li>
+  <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/news" class="nav-a">News</a>
+  </li>
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
+	</div>
+  </nav>
+
+</header>
+
+
+	<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
+			<div>
+				<article>
+					<h1>Dynamic UI</h1>
+					<p>Having an user interface with a well known number of sub widgets and a static layout is not always sufficient. 
+A user interface is often more than just that, for example here are two situations where more is needed: 
+First, when the layout of the user interface needs to be changed at runtime to match the execution context of the software.
+Second, sub widgets are added or removed at runtime and therefore the programmer needs to be able to parametrize those new sub widgets on the fly.</p>
+
+<p><em>Spec</em> also provides support for such dynamic user interfaces.
+In this section we show how to use 
+<em>Spec</em> in these situations.</p>
+
+<p>To be able to compose dynamic user interfaces at run time, a new method has been introduced.
+This method is 
+<code>assign:to:</code> and take a model instance as a first argument, and a unique symbol as a second argument.
+This way composing dynamic model is as simple as composing any other user interface.</p>
+
+<p>First, we talk about making dynamic modifications of the layout of widgets, and second we discuss the dynamic adding and removing of subwidgets.
+Third and last we show how the dynamic features can be used to quickly prototype a user interface.</p>
+
+<p><a name="layout"></a></p>
+
+<h2>Dynamic modification of the layout <a href="#layout" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>Changing the layout of widgets at runtime is straightforward, as we will see here.
+Such changes basically consist of three steps:</p>
+
+<ol>
+<li> creating the new layout,</li>
+<li> setting a flag to prohibit the creation of a new UI element (and instead reuse the existing one),</li>
+<li> building the UI again with the newly created layout.</li>
+</ol>
+
+<p>The following code is an example of rebuilding a widget with a new layout.
+First, a helper method is used to obtain a 
+<code>SpecLayout</code> object that determines the new layout.
+Second, the 
+<code>needRebuild</code> flag is set to 
+<code>false</code> such that the existing UI element is reused.
+This leads to the replacement of the content of the current container instead of just instantiating a new UI element.
+Third, the rebuilding of the user interface is performed.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">rebuildWithNewLayout</span>
+    <span class="o">|</span><span class="nv"> newLayout </span><span class="o">|</span>
+
+    <span class="nv">newLayout</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newLayoutCreatedDynamically</span><span class="p">.</span>
+    <span class="bp">self</span> <span class="nf">needRebuild:</span> <span class="bp">false</span><span class="p">.</span> <span class="c">&quot;tells the interpreter to keep my current UI element&quot;</span>
+    <span class="bp">self</span> <span class="nf">buildWithSpecLayout:</span> <span class="nv">newLayout</span><span class="p">.</span> <span class="c">&quot;rebuilds me with the new layout&quot;</span></code></pre></figure>
+
+<p>One widget can also keep the UI elements of its sub widgets which do not need to be rebuilt.
+The message 
+<code>needRebuild: false</code> needs to be sent to any of those sub widgets.
+For example, if a model comprising a 
+<em>button</em> and a 
+<em>list</em> just wants to rearrange the position of these UI elements, there is no need to rebuild them, i.e. instantiate new UI elements for them.
+To prevent this, the message 
+<code>needRebuild: false</code> should be send to them, as shown in the following example.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">rebuildWithNewLayout</span>
+    <span class="o">|</span><span class="nv"> newLayout </span><span class="o">|</span>
+
+    <span class="nv">newLayout</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newLayoutCreatedDynamically</span><span class="p">.</span>
+    <span class="bp">self</span> <span class="nf">needRebuild:</span> <span class="bp">false</span><span class="p">.</span>
+    <span class="nv">theButton</span> <span class="nf">needRebuild:</span> <span class="bp">false</span><span class="p">.</span>
+    <span class="nv">theList</span> <span class="nf">needRebuild:</span> <span class="bp">false</span><span class="p">.</span>
+    <span class="bp">self</span> <span class="nf">buildWithSpecLayout:</span> <span class="nv">newLayout</span><span class="p">.</span></code></pre></figure>
+
+<p><a name="adding_removing"></a></p>
+
+<h2>Dynamic adding and removal of subwidgets <a href="#adding_removing" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>If a user interface needs a varying number of subwidgets, the amount of which cannot be established at compilation time, then another approach is needed.
+In this scenario, 
+<code>DynamicComposableModel</code> is the model that needs to be subclassed, as this class provides support for the required kind of dynamic behavior.
+Amongst others, this class adds the method <code>assign:to:</code>, which takes a model instance as a first argument, and a unique symbol as a second argument.</p>
+
+<p>This method is used to assign an already instantiated model as sub widget, instead of the method <code>instantiateModels:</code> that takes a class name as argument and instantiates a new model.</p>
+
+<p>When using 
+<code>DynamicComposableModel</code>, the instantiation of the sub widgets is a bit different from normal use.
+In the 
+<code>instantiateWidgets</code> method, instead of instantiating each widget separately, 
+<code>instantiateModels:</code> should be used to instantiate them.
+This method takes as argument an array of pairs, where each pair is composed of the unique name of the widget as key, and the name of the widget class as value.
+This allows for a widget to be accessed by sending a message whose selector is the widget name to the model.</p>
+
+<p>By example, if a widget named 
+<code>button</code> is created, then this widget can be accessed by calling 
+<code>self button</code> as shown in the following example.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span>    <span class="bp">self</span> <span class="nf">instantiateModels:</span> <span class="ss">#(</span> <span class="ss">button</span> <span class="ss">ButtonModel</span> <span class="ss">)</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">button</span> <span class="nf">label:</span> <span class="s">&#39;Click me&#39;</span><span class="p">.</span></code></pre></figure>
+
+<p><a name="examples"></a></p>
+
+<h2>Examples: Prototyping a UI <a href="#examples" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>Thanks to the capability of 
+<em>Spec</em> to dynamically instantiate widgets, it is also possible to prototype a user interface from within any workspace.
+The following examples show how 
+<em>Spec</em> can be used to prototype quickly a user interace.</p>
+
+<p>The first example explains how to design by prototyping a user interface.
+The second example introduce the composition of dynamic models.</p>
+
+<p><a name="popup"></a></p>
+
+<h2>Designing a pop up <a href="#popup" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>This example shows how to easily and quickly design a popup window asking for an input.</p>
+
+<p>First we create a simple model with two sub widgets, a label and a text field, as shown by the following snippet.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">view</span> <span class="o">:=</span> <span class="nc">DynamicComposableModel</span> <span class="nb">new</span>
+    <span class="nf">instantiateModels:</span> <span class="ss">#(label</span> <span class="ss">LabelModel</span> <span class="ss">text</span> <span class="ss">TextInputFieldModel)</span><span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span></code></pre></figure>
+
+<p>We can then specify the title and the initial size of the widget, adding the following code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">view</span> <span class="nf">extent:</span> <span class="m">300</span><span class="nf">@</span><span class="m">90</span><span class="p">;</span>
+    <span class="nf">title:</span> <span class="s">&#39;Choose your project&#39;</span><span class="p">.</span></code></pre></figure>
+
+<p>Then we specify the UI element layout.
+It will be only one row with the label and the text field.
+The following snippet shows the layout definition.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">layout</span> <span class="o">:=</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">add:</span> <span class="ss">#label</span> <span class="nf">width:</span> <span class="m">75</span><span class="p">;</span> <span class="nf">add:</span> <span class="ss">#text</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span></code></pre></figure>
+
+<p>To have a first idea of the resulting UI, we can already open it as follows: 
+<code>view openWithSpecLayout: layout</code>.
+This UI however does not have any sub widget state or behavior so there is not much to see or do at this point.</p>
+
+<p>The next step is to set up the sub widget state and behavior.
+We set the text of the label as well as the ghost text of the textfield.
+We also specify here that the text field should automatically accept the text on each keystroke, such that it does not show the yellow &#39;edited&#39; triangle on the top right.
+This is shown in the code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">view</span> <span class="nf">label</span> <span class="nf">text:</span> <span class="s">&#39;Packages:&#39;</span><span class="p">.</span>
+
+<span class="nv">view</span> <span class="nf">text</span>
+    <span class="nf">autoAccept:</span> <span class="bp">true</span><span class="p">;</span>
+    <span class="nf">entryCompletion:</span> <span class="bp">nil</span><span class="p">;</span>
+    <span class="nf">ghostText:</span> <span class="s">&#39;.*&#39;</span><span class="p">.</span></code></pre></figure>
+
+<p>Opening the UI again (
+<code>view openWithSpecLayout: layout</code>) now shows the text of the label and the ghost text of the text field.</p>
+
+<p>As we want the widget to be a popup with a single button 
+<em>Ok</em>, the toolbar to use should be defined explicitly (the default toolbar has an 
+<em>Ok</em> button and a 
+<em>Cancel</em> button).
+We also set the toolbar action for when 
+<em>Ok</em> is clicked: the current text of the text field will be saved in the instance variable 
+<em>regex</em>.
+The following code shows how to do it.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">toolbar</span> <span class="o">:=</span> <span class="nc">OkToolbar</span> <span class="nb">new</span>
+    <span class="nf">okAction:</span> [ <span class="nv">regex</span> <span class="o">:=</span> <span class="nv">view</span> <span class="nf">text</span> <span class="nf">text</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span></code></pre></figure>
+
+<p>We can also add a shortcut to the text field on 
+<em>Enter</em> to simulate the click on 
+<em>Ok</em>.
+The following code illustrates how to set up such a shortcut.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">view</span> <span class="nf">text</span> 
+    <span class="nf">bindKeyCombination:</span> <span class="nc">Character</span> <span class="nf">cr</span> <span class="nf">asKeyCombination</span> 
+    <span class="nf">toAction:</span> [ <span class="nv">toolbar</span> <span class="nf">triggerOkAction</span> ]<span class="p">.</span></code></pre></figure>
+
+<p>This completes the specification of the UI.
+As a final step, when opening it we pass it the toolbar and configure it to be centered in the Pharo window and modal.
+The final version of the code is:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">view</span> <span class="o">:=</span> <span class="nc">DynamicComposableModel</span> <span class="nb">new</span>
+    <span class="nf">instantiateModels:</span> <span class="ss">#(label</span> <span class="ss">LabelModel</span> <span class="ss">text</span> <span class="ss">TextInputFieldModel)</span><span class="p">;</span>
+    <span class="nf">extent:</span> <span class="m">300</span><span class="nf">@</span><span class="m">90</span><span class="p">;</span>
+    <span class="nf">title:</span> <span class="s">&#39;Choose your project&#39;</span>
+    <span class="nf">yourself</span><span class="p">.</span>
+    
+<span class="nv">view</span> <span class="nf">label</span> <span class="nf">text:</span> <span class="s">&#39;Packages:&#39;</span><span class="p">.</span>
+
+<span class="nv">layout</span> <span class="o">:=</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">add:</span> <span class="ss">#label</span> <span class="nf">width:</span> <span class="m">75</span><span class="p">;</span> <span class="nf">add:</span> <span class="ss">#text</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span>
+
+<span class="nv">view</span> <span class="nf">text</span>
+    <span class="nf">autoAccept:</span> <span class="bp">true</span><span class="p">;</span>
+    <span class="nf">entryCompletion:</span> <span class="bp">nil</span><span class="p">;</span>
+    <span class="nf">ghostText:</span> <span class="s">&#39;.*&#39;</span><span class="p">.</span>
+    
+<span class="nv">toolbar</span> <span class="o">:=</span> <span class="nc">OkToolbar</span> <span class="nb">new</span>
+    <span class="nf">okAction:</span> [ <span class="nv">regex</span> <span class="o">:=</span> <span class="nv">view</span> <span class="nf">text</span> <span class="nf">text</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span>
+    
+<span class="nv">view</span> <span class="nf">text</span> 
+    <span class="nf">bindKeyCombination:</span> <span class="nc">Character</span> <span class="nf">cr</span> <span class="nf">asKeyCombination</span> 
+    <span class="nf">toAction:</span> [ <span class="nv">toolbar</span> <span class="nf">triggerOkAction</span> ]<span class="p">.</span>
+    
+(<span class="nv">view</span> <span class="nf">openDialogWithSpecLayout:</span> <span class="nv">layout</span>)
+    <span class="nf">toolbar:</span> <span class="nv">toolbar</span><span class="p">;</span>
+    <span class="nf">centered</span><span class="p">;</span>
+    <span class="nf">modalRelativeTo:</span> <span class="nc">World</span><span class="p">.</span></code></pre></figure>
+
+<p>The result can be seen in Figure 
+<a href="#fig_popup">1.1</a>.</p>
+
+<p><a name="fig_popup"></a><p class="figure"><img src="//benjamin.vanryseghem.com/projects/spec/figures/Popup.png" alt="fig_popup" title="Prototype of a popup"></p></p>
+
+<p><a name="composing"></a></p>
+
+<h2>Composing dynamic models <a href="#composing" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>This exemple shows in three parts how to buid a simple code browser.</p>
+
+<p>First a simple list widget is created displaying all the subclasses of AstractWidgetModel.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">m</span> <span class="o">:=</span> <span class="nc">DynamicComposableModel</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">m</span> <span class="nf">instantiateModels:</span> <span class="ss">#(</span> <span class="ss">list</span> <span class="ss">ListModel</span> <span class="ss">)</span><span class="p">.</span>
+<span class="nv">m</span> <span class="nf">list</span> <span class="nf">items:</span> (<span class="nc">AbstractWidgetModel</span> <span class="nf">allSubclasses</span> <span class="nf">sorted:</span> [<span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">name</span> <span class="nf">&lt;</span> <span class="nv">b</span> <span class="nf">name</span> ])<span class="p">.</span>
+<span class="nv">m</span> <span class="nf">layout:</span> (<span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">add:</span> <span class="ss">#list</span><span class="p">;</span>
+    <span class="nf">yourself</span>)<span class="p">.</span>
+<span class="nv">m</span> <span class="nf">openWithSpec</span><span class="p">.</span></code></pre></figure>
+
+<p>Then the list widget is reused to build a viewer widget displaying the protocol methods of the selected class.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">m2</span> <span class="o">:=</span> <span class="nc">DynamicComposableModel</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">m2</span> <span class="nf">assign:</span> <span class="nv">m</span> <span class="nf">to:</span> <span class="ss">#classes</span><span class="p">.</span>
+<span class="nv">m2</span> <span class="nf">instantiateModels:</span> <span class="ss">#(</span> <span class="ss">methods</span> <span class="ss">ListModel</span> <span class="ss">)</span><span class="p">.</span>
+<span class="nv">m</span> <span class="nf">list</span> <span class="nf">whenSelectedItemChanged:</span> [ <span class="o">:</span><span class="nv">item</span> <span class="o">|</span> 
+    <span class="nv">item</span> 
+        <span class="nf">ifNil:</span> [ <span class="nv">m2</span> <span class="nf">methods:</span> <span class="ss">#()</span> ]
+        <span class="nf">ifNotNil:</span> [ <span class="nv">m2</span> <span class="nf">methods</span> <span class="nf">items:</span> ((<span class="nv">item</span> <span class="nf">selectorsInProtocol:</span> <span class="s">&#39;protocol&#39;</span>) <span class="nf">sorted</span>) ] ]<span class="p">.</span>
+<span class="nv">m2</span> <span class="nf">layout:</span> (<span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">add:</span> <span class="ss">#classes</span><span class="p">;</span> <span class="nf">add:</span> <span class="ss">#methods</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span>)<span class="p">.</span>
+<span class="nv">m2</span> <span class="nf">openWithSpec</span><span class="p">.</span></code></pre></figure>
+
+<p>Finally the last widget is defined with the viewer previously created.
+In addition, a text zone is edited to show the selected method source code.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nv">m3</span> <span class="o">:=</span> <span class="nc">DynamicComposableModel</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">m3</span> <span class="nf">assign:</span> <span class="nv">m2</span> <span class="nf">to:</span> <span class="ss">#top</span><span class="p">.</span>
+<span class="nv">m3</span> <span class="nf">instantiateModels:</span> <span class="ss">#(</span> <span class="ss">text</span> <span class="ss">TextModel</span> <span class="ss">)</span><span class="p">.</span>
+<span class="nv">m2</span> <span class="nf">methods</span> <span class="nf">whenSelectedItemChanged:</span> [ <span class="o">:</span><span class="nv">selector</span> <span class="o">|</span> 
+    <span class="nv">selector</span> <span class="nf">ifNil:</span> [ <span class="nv">m3</span> <span class="nf">text</span> <span class="nf">text:</span> <span class="s">&#39;&#39;</span> ] <span class="nf">ifNotNil:</span> [ <span class="nv">m3</span> <span class="nf">text</span> <span class="nf">text:</span> (<span class="nv">m</span> <span class="nf">list</span> <span class="nf">selectedItem</span> <span class="nf">&gt;&gt;</span> <span class="nv">selector</span> ) <span class="nf">sourceCode</span> ] ]<span class="p">.</span>
+<span class="nv">m3</span> <span class="nf">layout:</span> (<span class="nc">SpecLayout</span> <span class="nf">composed</span>
+    <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> <span class="nv">c</span> <span class="nf">add:</span> <span class="ss">#top</span><span class="p">;</span> <span class="nf">add:</span> <span class="ss">#text</span> ]<span class="p">;</span>
+    <span class="nf">yourself</span>)<span class="p">.</span>
+    
+<span class="nv">m3</span> <span class="nf">openWithSpec</span><span class="p">.</span>
+<span class="nv">m3</span> <span class="nf">title:</span> <span class="s">&#39;Protocol browser&#39;</span></code></pre></figure>
+
+<p>The final result looks like the Figure 
+<a href="#ex_browser">1.2</a>.</p>
+
+<p><a name="ex_browser"></a><p class="figure"><img src="//benjamin.vanryseghem.com/projects/spec/figures/Dyn_Protocol_Browser.png" alt="ex_browser" title="Prototype of Protocol Browser"></p></p>
+
+					<div class="section-nav">
+	<div class="btn-group">
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Back
+		</a>
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/use-pharo-window/">Next
+		</a>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+				</article>
+			</div>
+		</section>
+		<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			
+			<h4>Getting Started</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/home/">Welcome</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/quickstart/">Quick start</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/installation/">Installation</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/example/">Example</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Your UI</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/starting/">Where to start?</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Instantiating sub&nbsp;widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">Defining the layout</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/open/">Opening your UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub&nbsp;widgets interaction</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item current"><a href="//benjamin.vanryseghem.com/projects/spec/docs/dynamic/">Dynamic UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/use-pharo-window/">Using Pharo window</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/insert-morph/">Inserting a Morph</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Inside Spec</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Where to find what I want</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/own-model/">Creating new basic widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interpreter/">Spec Interpreter</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Tutorials</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/drag_n_drop/">Drag'n'Drop between two lists</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>More</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/repositories/">Repositories</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+		</aside>
+	</div>
+</div>
+
+		<div class="clear"></div>
+	</div>	  
+</div>
+
+<script>
+$(function () {
+	var currentHash = "remove_me";
+	
+	function changeHash(hash){
+		var parent = $(".news_title");
+		var elt = parent.find(".current");
+		elt.removeClass('current');
+		if(hash){
+			hash = decodeURI(hash);
+			var id = "";
+			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+			for ( var i = 0; i < hash.length; i++ ){
+				var each = hash.charAt(i);
+				if ((each !== ' ') && (iChars.indexOf(each) === -1)){
+					id += each;
+				}
+			};
+			elt = parent.find("."+id);
+			elt.addClass('current');
+		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
+	});
+	
+	$(document).scroll(function (e) {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
+				if(hash === "remove_me"){
+					if(history.replaceState) {
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
+					}
+					else {
+					    location.hash = "";
+					}
+				} else {
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
+				}
+				currentHash = hash;
+				changeHash(hash);
+			}
+		});
+	});
+});
+</script>
+
+
+
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	<footer id="footer">
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p class="footer-text">
+		  The contents of this website are &copy;&nbsp;2014 <a href="http://benjamin.vanryseghem.com">Benjamin Van Ryseghem</a><br/>
+		  under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)</a>.
+	  </p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+</body>
+</html>

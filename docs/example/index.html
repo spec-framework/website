@@ -1,0 +1,3111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/jquery-1.11.0.js"></script>
+		<script src="//benjamin.vanryseghem.com/projects/spec/js/bootstrap.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/print.css" media="print" />
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/bootstrap-theme.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/font-awesome.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/spec.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/figures.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/stickyfooter.css">
+		
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/ArchitectsDaughter.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Vollkorn.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/Lobster.css">
+		<link rel="stylesheet" type="text/css" href="//benjamin.vanryseghem.com/projects/spec/stylesheets/OpenSans.css">
+		
+		<link rel="alternate" type="application/rss+xml" title="Spec" href="//benjamin.vanryseghem.com/projects/spec/feed.xml"> 
+		
+
+		<!--[if lt IE 9]>
+			<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+			<![endif]-->
+
+	<title>Spec • A new Smalltalk framework</title>
+	<head profile="http://www.w3.org/2005/10/profile">
+		<link rel="icon" type="image/png" href="//benjamin.vanryseghem.com/projects/spec/favicon.png">
+	</head>
+
+
+<body>
+  <div class="wrapper">
+
+	<a name="remove_me" class="hash">
+<header>
+
+  <nav class="navbar navbar-static-top" role="banner">
+	<div class="container spec-container">
+
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="//benjamin.vanryseghem.com/projects/spec/" class="navbar-brand">
+		  <span class="title">Spec</span>
+		  <img class="flake" src="//benjamin.vanryseghem.com/projects/spec/images/flake72.png" width="72" height="72" alt="">
+		</a>
+	  </div>
+
+	  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
+		<ul class="nav navbar-nav">
+		    <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/" class="nav-a">Overview</a>
+  </li>
+  <li class="active">
+	<a href="//benjamin.vanryseghem.com/projects/spec/docs/home" class="nav-a">Documentation</a>
+  </li>
+  <li class="">
+	<a href="//benjamin.vanryseghem.com/projects/spec/news" class="nav-a">News</a>
+  </li>
+		</ul>
+
+		<ul class="nav navbar nav-right">
+		  <li>
+			<a href="https://github.com/spec-framework" class="button"><small>Follow Spec on </small>GitHub</a>
+		  </li>
+		</ul>
+
+	  </div>
+	</div>
+  </nav>
+
+</header>
+
+
+	<div id="content-wrapper">
+	<div class="inner clearfix">
+		<section id="main-content">
+			<div>
+				<article>
+					<h1>Example</h1>
+					<p>This section introduces an example of how to define and reuse 
+<em>Spec</em> user interfaces. The example UI that is built will serve to browse the public API of all the basic widgets offered by 
+<em>Spec</em>.
+This API is further documented in the page 
+<a href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Where to find what I want</a>.
+In this section we do not detail the different parts of 
+<em>Spec</em> yet, for a more in-depth discussion on the heart of 
+<em>Spec</em>  we refer to 
+<a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Instantiating sub widgets</a> and <a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">Defining the layout</a>.</p>
+
+<p>The example is structured in four parts.
+First, a list UI named  <strong>ModelList</strong> that is dedicated to render the subclasses of the <em>AbstractWidgetModel</em> class is created.
+Second, a UI composed of a list and a label is defined and named <strong>ProtocolList</strong>.
+Third, a protocol viewer is defined by combining a <strong>ModelList</strong> with two <strong>ProtocolList</strong> to browse the <em>protocol</em> and <em>protocol-events</em> methods.
+Finally a protocol browser is made by reusing a protocol viewer and adding a text zone.</p>
+
+<p><a name="modelList" class="hash"></a></p>
+
+<h2>The ModelList <a href="#modelList" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>Creating a specific UI always starts with the subclassing of 
+<strong>ComposableModel</strong>.
+Each sub widget is stored into an instance variable of the newly created class.
+The following snippet shows the definition of this ModelList class.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ComposableModel</span> <span class="nf">subclass:</span> <span class="ss">#ModelList</span>
+    <span class="nf">instanceVariableNames:</span> <span class="s">&#39;list&#39;</span>
+    <span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+    <span class="nf">category:</span> <span class="s">&#39;Spec-Examples&#39;</span></code></pre></figure>
+
+<p>The first required step then is to instantiate and define the sub widgets.
+This step is done in the method 
+<code>initializeWidgets</code> as shown in the following code. It creates the list and populates it with the required classes, in alphabetical order.
+More details on the use of the 
+<code>initializeWidgets</code> method are given <a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">here</a>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeWidgets</span>
+
+    <span class="nv">list</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newList</span><span class="p">.</span>
+    
+    <span class="nv">list</span> <span class="nf">items:</span> (<span class="nc">AbstractWidgetModel</span> <span class="nf">allSubclasses</span> 
+        <span class="nf">sorted:</span> [<span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">name</span> <span class="nf">&lt;</span> <span class="nv">b</span> <span class="nf">name</span> ])<span class="p">.</span>
+        
+    <span class="bp">self</span> <span class="nf">focusOrder</span> <span class="nf">add:</span> <span class="nv">list</span></code></pre></figure>
+
+<p>The second required step is to define a layout, which is done on the class side.
+Since there is here only one sub widget, the layout is quite simple, as shown in the following code.
+It simply returns a layout that contains only the list.
+More details on the use of this method are given <a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">here</a>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ModelList</span> <span class="nf">class&gt;&gt;</span><span class="ss">#defaultSpec</span>
+    <span class="nf">&lt;</span><span class="err">spec:</span> <span class="ss">#default</span><span class="nf">&gt;</span>
+    
+    <span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+        <span class="nf">add:</span> <span class="ss">#list</span><span class="p">;</span>
+        <span class="nf">yourself</span></code></pre></figure>
+
+<p>The three last methods to define on ModelList are a getter, a method to display the UI title and a method to register to list selection changes.
+This code shows the implementation of these three methods and their protocols:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="c">&quot;accessing&quot;</span>
+<span class="nf">list</span>
+    <span class="o">^</span> <span class="nv">list</span>
+    
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">title</span>
+
+    <span class="err">^</span> <span class="err">&#39;</span><span class="nf">Widgets</span><span class="err">&#39;</span>
+    
+<span class="c">&quot;protocol-events&quot;</span>
+<span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span>
+
+    <span class="nf">list</span> <span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span></code></pre></figure>
+
+<p>The first UI is now done.
+The result can be seen by executing the following snippet of code: 
+<code>ModelList new openWithSpec</code>.</p>
+
+<p><a name="protocolList" class="hash"></a></p>
+
+<h2>The ProtocolList <a href="#protocolList" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>The next user interface is the protocol list.
+This UI combines two sub widgets: a list and a label.
+The class definition is similar to the code above:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ComposableModel</span> <span class="nf">subclass:</span> <span class="ss">#ProtocolList</span>
+    <span class="nf">instanceVariableNames:</span> <span class="s">&#39;label protocols&#39;</span>
+    <span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+    <span class="nf">category:</span> <span class="s">&#39;Spec-Examples&#39;</span></code></pre></figure>
+
+<p>The 
+<code>initializeWidgets</code> method for this UI is quite similar to the method in ModelList:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeWidgets</span>
+
+    <span class="nv">protocols</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newList</span><span class="p">.</span>
+    <span class="nv">label</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newLabel</span><span class="p">.</span>
+    
+    <span class="nv">label</span> <span class="nf">text:</span> <span class="s">&#39;Protocol&#39;</span><span class="p">.</span>
+    <span class="nv">protocols</span>   <span class="nf">displayBlock:</span> [ <span class="o">:</span><span class="nv">m</span> <span class="o">|</span> <span class="nv">m</span> <span class="nf">selector</span> ]<span class="p">.</span>
+    
+    <span class="bp">self</span> <span class="nf">focusOrder</span> <span class="nf">add:</span> <span class="nv">protocols</span></code></pre></figure>
+
+<p>The layout method is quite different though.
+Now the sub widgets need to be placed more specifically than in the previous example.
+The following code shows how to build a column with the label on top and the list taking all the space that is left.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">defaultSpec</span>
+    &lt;<span class="k">spec:</span> #default&gt;
+
+    <span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+        <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span>
+            <span class="nv">column</span>
+                <span class="nf">add:</span> <span class="ss">#label</span>
+                <span class="nf">height:</span> <span class="bp">self</span> <span class="nf">toolbarHeight</span><span class="p">;</span>
+                <span class="nf">add:</span> <span class="ss">#protocols</span> ]<span class="p">;</span>
+        <span class="nf">yourself</span></code></pre></figure>
+
+<p>The remaining methods are getters, sub widget delegation methods, a method to display the title, and a method to register to list selection changes.
+The following code shows the implementations of these methods as well as their protocol.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="c">&quot;accessing&quot;</span>
+<span class="nf">label</span>
+    <span class="o">^</span> <span class="nv">label</span>
+    
+<span class="c">&quot;accessing&quot;</span>
+<span class="nf">protocols</span>
+    <span class="err">^</span> <span class="nf">protocols</span>
+    
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">items:</span> <span class="nv">aCollection</span>
+
+    <span class="nf">protocols</span> <span class="nf">items:</span> <span class="nv">aCollection</span>
+    
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">label:</span> <span class="nv">aText</span>
+
+    <span class="nf">label</span> <span class="nf">text:</span> <span class="nv">aText</span>
+    
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">resetSelection</span>
+
+    <span class="nf">protocols</span> <span class="nf">resetSelection</span>
+    
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">title</span>
+
+    <span class="err">^</span> <span class="err">&#39;</span><span class="nf">Protocol</span> <span class="nf">widget</span><span class="err">&#39;</span>
+    
+<span class="c">&quot;protocol-events&quot;</span>
+<span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span>
+
+    <span class="nf">protocols</span> <span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span></code></pre></figure>
+
+<p>The 
+<strong>ProtocolList</strong> UI can be seen by evaluating <code>ProtocolList new openWithSpec</code>.</p>
+
+<p><a name="protocolViewer" class="hash"></a></p>
+
+<h2>The ProtocolViewer <a href="#protocolViewer" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>The third user interface is a composition of the two previous user interfaces.
+It is composed of a 
+<strong>ModelList</strong> and two 
+<strong>ProtocolList</strong>.
+When a model class is selected, the methods in the protocol 
+<em>protocol</em> and in the protocol 
+<em>protocol-events</em> are listed.</p>
+
+<p>The class has now three instance variables: 
+<code>models</code> to store the 
+<strong>ModelList</strong>, 
+<code>protocols</code> to store the 
+<strong>ProtocolList</strong> for the protocol 
+<em>protocol</em>, and 
+<code>events</code> to store the 
+<strong>ProtocolList</strong> for protocol 
+<em>protocol-events</em>.
+The following code in shows the definition of the class 
+<strong>ProtocolViewer</strong>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ComposableModel</span> <span class="nf">subclass:</span> <span class="ss">#ProtocolViewer</span>
+    <span class="nf">instanceVariableNames:</span> <span class="s">&#39;models protocols events&#39;</span>
+    <span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+    <span class="nf">category:</span> <span class="s">&#39;Spec-Examples&#39;</span></code></pre></figure>
+
+<p>The 
+<code>initializeWidgets</code> method now uses a different way to initialize the sub-widgets of the UI. 
+This is because it does not use basic widgets but instead reuses the user interfaces we defines previously.
+The remainder of the method is quite similar to the previous implementation:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeWidgets</span>
+
+    <span class="nv">models</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">instantiate:</span> <span class="nc">ModelList</span><span class="p">.</span>
+    <span class="nv">protocols</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">instantiate:</span> <span class="nc">ProtocolList</span><span class="p">.</span>
+    <span class="nv">events</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">instantiate:</span> <span class="nc">ProtocolList</span><span class="p">.</span>
+    
+    <span class="nv">protocols</span>   <span class="nf">label:</span> <span class="s">&#39;protocol&#39;</span><span class="p">.</span>
+    <span class="nv">events</span> <span class="nf">label:</span> <span class="s">&#39;protocol-events&#39;</span><span class="p">.</span>
+        
+    <span class="bp">self</span> <span class="nf">focusOrder</span> 
+        <span class="nf">add:</span> <span class="nv">models</span><span class="p">;</span>
+        <span class="nf">add:</span> <span class="nv">protocols</span><span class="p">;</span>
+        <span class="nf">add:</span> <span class="nv">events</span></code></pre></figure>
+
+<p>The layout puts the sub widgets in one column, with all sub widgets taking the same amount of space.
+The implementation of this layout is:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">defaultSpec</span>
+    &lt;<span class="k">spec:</span> #default&gt;
+    
+    <span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+        <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">column</span> <span class="o">|</span>
+            <span class="nv">column</span> 
+                <span class="nf">add:</span> <span class="ss">#models</span><span class="p">;</span> 
+                <span class="nf">add:</span> <span class="ss">#protocols</span><span class="p">;</span> 
+                <span class="nf">add:</span> <span class="ss">#events</span> ]<span class="p">;</span>
+        <span class="nf">yourself</span></code></pre></figure>
+
+<p>To describe the interactions between the sub widgets, the method 
+<code>initializePresenter</code> needs to be defined.
+Here, it specifies that when a class is selected, the selections in the protocol list are reset and both protocol lists are populated.
+Additionally, when a method is selected in one protocol list, the selection in the other list is reset.
+The implementation of this method is exposed in the following code.
+More details on the 
+<code>initializePresenter</code> method are given in 
+<a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub widgets interaction</a>.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializePresenter</span>
+
+    <span class="nv">models</span> <span class="nf">whenSelectedItemChanged:</span> [ <span class="o">:</span><span class="nv">class</span> <span class="o">|</span>
+        <span class="bp">self</span> <span class="nf">resetProtocolSelection</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">resetEventSelection</span><span class="p">.</span>
+        <span class="nv">class</span>
+            <span class="nf">ifNil:</span> [ 
+                <span class="nv">protocols</span> <span class="nf">items:</span> <span class="ss">#()</span><span class="p">.</span>
+                <span class="nv">events</span> <span class="nf">items:</span> <span class="ss">#()</span> ]
+            <span class="nf">ifNotNil:</span> [ 
+                <span class="nv">protocols</span> <span class="nf">items:</span> (<span class="bp">self</span> <span class="nf">methodsIn:</span> <span class="nv">class</span> <span class="nf">for:</span> <span class="s">&#39;protocol&#39;</span>)<span class="p">.</span>
+                <span class="nv">events</span> <span class="nf">items:</span> (<span class="bp">self</span> <span class="nf">methodsIn:</span> <span class="nv">class</span> <span class="nf">for:</span> <span class="s">&#39;protocol-events&#39;</span>) ] ]<span class="p">.</span>
+    
+    <span class="nv">protocols</span> <span class="nf">whenSelectedItemChanged:</span> [ <span class="o">:</span><span class="nv">method</span> <span class="o">|</span> <span class="nv">method</span> <span class="nf">ifNotNil:</span> [ <span class="bp">self</span> <span class="nf">resetEventSelection</span> ] ]<span class="p">.</span>
+    <span class="nv">events</span> <span class="nf">whenSelectedItemChanged:</span> [ <span class="o">:</span><span class="nv">method</span> <span class="o">|</span> <span class="nv">method</span> <span class="nf">ifNotNil:</span> [ <span class="bp">self</span> <span class="nf">resetProtocolSelection</span> ] ]<span class="p">.</span></code></pre></figure>
+
+<p>The remaining methods are getters, methods to delegate to sub widgets, one method to compute the methods in a specific class for a specific protocol, and methods to register to sub widget events.
+Those methods are given in this code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="c">&quot;accessing&quot;</span>
+<span class="nf">events</span>
+    <span class="o">^</span> <span class="nv">events</span>
+
+<span class="c">&quot;accessing&quot;</span>
+<span class="nf">models</span>
+    <span class="err">^</span> <span class="nf">models</span>
+
+<span class="c">&quot;accessing&quot;</span>
+<span class="nf">protocols</span>
+    <span class="err">^</span> <span class="nf">protocols</span>
+
+<span class="c">&quot;private&quot;</span>
+<span class="nf">methodsIn:</span> <span class="nv">class</span> <span class="nf">for:</span> <span class="nv">protocol</span>
+
+    <span class="err">^</span> (<span class="nv">class</span> <span class="nf">methodsInProtocol:</span> <span class="nv">protocol</span>)
+        <span class="nf">sorted:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">selector</span> <span class="nf">&lt;</span> <span class="nv">b</span> <span class="nf">selector</span> ]
+
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">resetEventSelection</span>
+
+    <span class="nf">events</span> <span class="nf">resetSelection</span>
+
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">resetProtocolSelection</span>
+
+    <span class="nf">protocols</span> <span class="nf">resetSelection</span>
+
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">title</span>
+
+    <span class="err">^</span> <span class="err">&#39;</span><span class="nf">Protocol</span> <span class="nf">viewer</span><span class="err">&#39;</span>
+
+<span class="c">&quot;protocol-events&quot;</span>
+<span class="nf">whenClassChanged:</span> <span class="nv">aBlock</span>
+
+    <span class="nf">models</span> <span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span>
+
+<span class="c">&quot;protocol-events&quot;</span>
+<span class="nf">whenEventChangedDo:</span> <span class="nv">aBlock</span>
+
+    <span class="nf">events</span> <span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span>
+
+<span class="c">&quot;protocol-events&quot;</span>
+<span class="nf">whenProtocolChangedDo:</span> <span class="nv">aBlock</span>
+
+    <span class="nf">protocols</span> <span class="nf">whenSelectedItemChanged:</span> <span class="nv">aBlock</span></code></pre></figure>
+
+<p>As previously, the result can be seen by executing the following snippet of code: 
+<code>ProtocolViewer new openWithSpec</code>.</p>
+
+<p><a name="protocolEditor" class="hash"></a></p>
+
+<h2>Protocol Editor <a href="#protocolEditor" class="permalink" title="Permalink"><i class='fa fa-link'></i></a></h2>
+
+<p>The last user interface reuses a 
+<strong>ProtocolViewer</strong> with a different layout and adds a text zone to edit the source code of the selected method.
+The class definition is:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nc">ComposableModel</span> <span class="nf">subclass:</span> <span class="ss">#ProtocolEditor</span>
+    <span class="nf">instanceVariableNames:</span> <span class="s">&#39;viewer text&#39;</span>
+    <span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+    <span class="nf">category:</span> <span class="s">&#39;Spec-Examples&#39;</span></code></pre></figure>
+
+<p>The 
+<code>initializeWidgets</code> implementation is shown in the code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializeWidgets</span>
+
+    <span class="nv">text</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">newText</span><span class="p">.</span>
+    <span class="nv">viewer</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">instantiate:</span> <span class="nc">ProtocolViewer</span><span class="p">.</span>
+    
+    <span class="nv">text</span> <span class="nf">aboutToStyle:</span> <span class="bp">true</span><span class="p">.</span>
+
+    <span class="bp">self</span> <span class="nf">focusOrder</span> 
+        <span class="nf">add:</span> <span class="nv">viewer</span><span class="p">;</span>
+        <span class="nf">add:</span> <span class="nv">text</span></code></pre></figure>
+
+<p>The layout is more complex than the previous layouts.
+Now the user interface mainly lays out widgets that are contained in its <code>viewer</code> sub widget (the list of models and the two protocol browsers).
+The layout is based on a column whose first row is divided in columns.
+The implementation of this method is shown in the following code:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">defaultSpec</span>
+    &lt;<span class="k">spec:</span> #default&gt;
+    
+    <span class="o">^</span> <span class="nc">SpecLayout</span> <span class="nf">composed</span>
+        <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">col</span> <span class="o">|</span> 
+            <span class="nv">col</span> 
+                <span class="nf">newRow:</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+                    <span class="nv">r</span> 
+                        <span class="nf">add:</span> <span class="ss">#(viewer</span> <span class="ss">models)</span><span class="p">;</span>
+                        <span class="nf">newColumn:</span> [ <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
+                            <span class="nv">c</span> 
+                                <span class="nf">add:</span> <span class="ss">#(viewer</span> <span class="ss">protocols)</span><span class="p">;</span>
+                                <span class="nf">add:</span> <span class="ss">#(viewer</span> <span class="ss">events)</span> ] ]<span class="p">;</span>
+                <span class="nf">add:</span> <span class="ss">#text</span>
+        ]<span class="p">;</span>
+        <span class="nf">yourself</span></code></pre></figure>
+
+<p>The 
+<code>initalizePresenter</code> method is used to make the text zone react to a selection in the lists.
+When a method is seleted, the text zone updates its contents to show the source code  of the selected method.
+The implementation of this method is detailled in the following code.</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="nf">initializePresenter</span>
+
+    <span class="nv">viewer</span> <span class="nf">whenClassChanged:</span> [ <span class="o">:</span><span class="nv">class</span> <span class="o">|</span> <span class="nv">text</span> <span class="nf">behavior:</span> <span class="nv">class</span> ]<span class="p">.</span>
+
+    <span class="nv">viewer</span> <span class="nf">whenProtocolChangedDo:</span> [ <span class="o">:</span><span class="nv">item</span> <span class="o">|</span> 
+        <span class="nv">item</span> 
+            <span class="nf">ifNil:</span> [ <span class="nv">text</span> <span class="nf">text:</span> <span class="s">&#39;&#39;</span> ]
+            <span class="nf">ifNotNil:</span> [ <span class="nv">text</span> <span class="nf">text:</span> <span class="nv">item</span> <span class="nf">sourceCode</span> ] ]<span class="p">.</span>
+    <span class="nv">viewer</span> <span class="nf">whenEventChangedDo:</span> [ <span class="o">:</span><span class="nv">item</span> <span class="o">|</span> 
+        <span class="nv">item</span> 
+            <span class="nf">ifNil:</span> [ <span class="nv">text</span> <span class="nf">text:</span> <span class="s">&#39;&#39;</span> ]
+            <span class="nf">ifNotNil:</span> [ <span class="nv">text</span> <span class="nf">text:</span> <span class="nv">item</span> <span class="nf">sourceCode</span> ] ]</code></pre></figure>
+
+<p>The other methods are two getters, a method to set the default size, and a method to set the UI title.
+Their implemenations are detailled in:</p>
+
+<figure class="highlight"><pre><code class="language-smalltalk" data-lang="smalltalk"><span></span><span class="c">&quot;accessing&quot;</span>
+<span class="nf">text</span>
+    <span class="o">^</span> <span class="nv">text</span>
+
+<span class="c">&quot;accessing&quot;</span>
+<span class="nf">viewer</span>
+    <span class="err">^</span> <span class="nf">viewer</span>
+
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">initialExtent</span>
+
+    <span class="err">^</span> <span class="nf">750</span><span class="err">@</span><span class="m">600</span>
+
+<span class="c">&quot;protocol&quot;</span>
+<span class="nf">title</span>
+
+    <span class="err">^</span> <span class="err">&#39;</span><span class="nf">Protocols</span> <span class="nf">browser</span><span class="err">&#39;</span></code></pre></figure>
+
+<p>This finishes the protocol browser.
+The final user interface can be opened with the following snippet: 
+<code>ProtocolBrowser new openWithSpec</code>.
+The result can be seen in figure 
+<a href="#fig_protocol_browser">1.1</a>.</p>
+
+<p><a name="fig_protocol_browser"></a><p class="figure"><img src="//benjamin.vanryseghem.com/projects/spec/figures/Protocol_Browser.png" alt="fig_protocol_browser" title="Protocol Browser"></p></p>
+
+					<div class="section-nav">
+	<div class="btn-group">
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/installation/">Back
+		</a>
+		<a class="btn btn-default nav-btn " href="//benjamin.vanryseghem.com/projects/spec/docs/starting/">Next
+		</a>
+	</div>
+	<div class="clear">
+	</div>
+</div>
+				</article>
+			</div>
+		</section>
+		<div id="commentWrapper">
+	<div id="comment">
+		<aside id="sidebar">
+			
+			<h4>Getting Started</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/home/">Welcome</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/quickstart/">Quick start</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/installation/">Installation</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item current"><a href="//benjamin.vanryseghem.com/projects/spec/docs/example/">Example</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Your UI</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/starting/">Where to start?</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/initializing/">Instantiating sub&nbsp;widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/layout/">Defining the layout</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/open/">Opening your UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interactions/">Sub&nbsp;widgets interaction</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/dynamic/">Dynamic UI</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/use-pharo-window/">Using Pharo window</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/insert-morph/">Inserting a Morph</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Inside Spec</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/api/">Where to find what I want</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/own-model/">Creating new basic widgets</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/interpreter/">Spec Interpreter</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>Tutorials</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/drag_n_drop/">Drag'n'Drop between two lists</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+			<h4>More</h4>
+			
+
+<ul>
+
+  
+
+  
+
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+      <li class="sidebar_item "><a href="//benjamin.vanryseghem.com/projects/spec/docs/repositories/">Repositories</a></li>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+
+
+</ul>
+			
+		</aside>
+	</div>
+</div>
+
+		<div class="clear"></div>
+	</div>	  
+</div>
+
+<script>
+$(function () {
+	var currentHash = "remove_me";
+	
+	function changeHash(hash){
+		var parent = $(".news_title");
+		var elt = parent.find(".current");
+		elt.removeClass('current');
+		if(hash){
+			hash = decodeURI(hash);
+			var id = "";
+			var iChars = "~`!#$%^&*+=-[]\\\';,/{}|\":<>?";
+			for ( var i = 0; i < hash.length; i++ ){
+				var each = hash.charAt(i);
+				if ((each !== ' ') && (iChars.indexOf(each) === -1)){
+					id += each;
+				}
+			};
+			elt = parent.find("."+id);
+			elt.addClass('current');
+		}
+	}
+	
+	$(window).on('hashchange', function() {
+		changeHash(window.location.hash);
+	});
+	
+	$(document).scroll(function (e) {
+		$('.hash').each(function () {
+			var top = window.pageYOffset;
+			var distance = top - $(this).offset().top;
+			var hash = $(this).attr('name');
+			// 30 is an arbitrary padding choice, 
+			// if you want a precise check then use distance===0
+			if (distance < 30 && distance > -30 && ( currentHash != hash || (hash === "" && currentHash === "remove_me" ))) { 
+				if(hash === "remove_me"){
+					if(history.replaceState) {
+						history.pushState('', document.title, window.location.pathname);
+					    e.preventDefault();
+					}
+					else {
+					    location.hash = "";
+					}
+				} else {
+					if(history.replaceState) {
+					    history.replaceState(null, null, '#'+hash);
+					}
+					else {
+					    location.hash = hash;
+					}
+				}
+				currentHash = hash;
+				changeHash(hash);
+			}
+		});
+	});
+});
+</script>
+
+
+
+	<div class="push"></div>
+  </div>
+
+  <div class="footer">
+	<footer id="footer">
+  <div class="grid">
+    <div class="unit one-third center-on-mobiles">
+      <p class="footer-text">
+		  The contents of this website are &copy;&nbsp;2014 <a href="http://benjamin.vanryseghem.com">Benjamin Van Ryseghem</a><br/>
+		  under the terms of the <a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)</a>.
+	  </p>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+</body>
+</html>

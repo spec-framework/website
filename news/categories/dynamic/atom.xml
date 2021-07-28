@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dynamic | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/dynamic/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Improvements in DynamicComposableModel]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/improvement/dynamic/composition/2014/01/21/dynamic_composition.html"/>
+    <updated>2014-01-21T12:52:52+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/improvement/dynamic/composition/2014/01/21/dynamic_composition</id>
+    <content type="html"><![CDATA[<p>Right now it is easy to prototype a UI in a workspace or to dynamically build a model on demand at run time, but this prototype can not be reused for composition.</p>
+
+<p>Because of this, the prototyping is quite limited.</p>
+
+<p>But the latest Spec commit<sup><a href="https://github.com/SpecForPharo/spec/commit/5d28c1f293bb1654e7395c18a2ea733fbd551d10"><i class='fa fa-github-alt'></i></a></sup> introduces few changes on <code>DynamicComposableModel</code> to tackle this issue.</p>
+
+<p>The problem was double: no way to add an instanciated model as a sub widget, and the lookup for the layout was looking for a selector on class side.</p>
+
+<p>The first problem was actually just a method missing since the <code>DynamicComposableModel</code> class manage the widgets in a dictionary.</p>
+
+<p>The second problem was slighty more tedious. To work, it requires from the embedded sub widget to have a layout defined. A new instance variable <code>layout</code> has been introduce to hold the <strong>SpecLayout</strong> instance used to position the sub widgets. This way, when a layout is requested for the dynamic model, this layout is returned (<em>regardless of the selector requested</em>).</p>
+
+<p>These two fixes add support for a better composition in the dynamic context <i class='fa fa-smile-o fa-2x'></i>.</p>
+
+<p>If you want to try, this <a href="https://gist.github.com/BenjaminVanRyseghem/cd02f2dc61f350a6495f">snippet</a> gives you an example of how to build such unser interface.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: website | ]]></title>
+  <link href="//benjamin.vanryseghem.com/projects/spec/news/categories/website/atom.xml" rel="self"/>
+  <link href="//benjamin.vanryseghem.com/projects/spec/"/>
+  <updated>2021-07-28T13:49:52+02:00</updated>
+  <id>//benjamin.vanryseghem.com/projects/spec/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First Release]]></title>
+    <link href="//benjamin.vanryseghem.com/projects/spec/release/website/2014/01/17/first_release.html"/>
+    <updated>2014-01-17T21:41:09+01:00</updated>
+    <id>//benjamin.vanryseghem.com/projects/spec/release/website/2014/01/17/first_release</id>
+    <content type="html"><![CDATA[<p>I am glad to announce this super website dedicated to Spec and the things related to this cool framework <i class="fa fa-smile-o"></i>.</p>
+
+<p>You will find here the Spec documentation as well as a news feed about Spec progresses.</p>
+
+<p>If you want to collaborate, the website can be found on <a href="https://github.com/SpecForPharo/website"><i class="fa fa-github-alt fa-2x"></i></a>.</p>
+
+<p>Thank you all!</p>
+]]></content>
+  </entry>
+  
+</feed>
